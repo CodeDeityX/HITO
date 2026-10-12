@@ -1,0 +1,2590 @@
+{
+  "kind": "HITO_P1_LOCAL_VSCODE_BRIDGE",
+  "ide": {
+    "kind": "HITO_PRE_C9_HOST_NEUTRAL_IDE_PAYLOAD",
+    "version": "hito-pre-c9-ide-host-v1",
+    "protocolVersion": "hito-pre-c9-host-protocol-v1",
+    "authority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / HOST_PROJECTION_ONLY",
+    "payloadIdentity": "hito_pre_c9_ide_a4497566596abb5735491dda6af75e12d8da225d52e39e5f54b68d7431ecc3c1",
+    "mode": "GUIDED",
+    "source": {
+      "c7CompositionIdentity": "hito_c7_composition_e78bbc663ff35280b3cb9623ed15ac8646271cdf945f9fb53c515b6156667ac8",
+      "c6CompositionIdentity": "hito_c6_composition_aa321918a9e022c914486b6d47b5ccf5b59aceccc25f263cdbe2592fca4cb881",
+      "g15EnvelopeIdentity": "hito_g15_envelope_3d91a9091dc40f4aae3d4d6902b309da2e60725b43deec911e4a742afbd0eb55",
+      "semanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+      "g16AssessmentIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+      "phase3PulseIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+      "phase3MriIdentity": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e",
+      "selectedViewIdentity": "hito_g15_view_92a31bddee057abf5d5b048f44231f2362f988ba19840e25550c10f3fb339a9b"
+    },
+    "surfaces": {
+      "projectPulse": {
+        "value": {
+          "phase3Pulse": {
+            "kind": "PROJECT_PULSE",
+            "source": {
+              "modelRevision": 2,
+              "historySequence": 3,
+              "evidenceSequence": 1,
+              "derivedOutput": {
+                "derivedOutputId": "derived_project_pulse_2_phase3-pulse-mri-v1",
+                "kind": "PROJECT_PULSE",
+                "sourceModelRevision": 2,
+                "sourceHistoryHead": {
+                  "sequence": 3,
+                  "eventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3"
+                },
+                "sourceEvidenceHead": {
+                  "sequence": 1,
+                  "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+                },
+                "rulesetVersion": "phase3-pulse-mri-v1",
+                "generatedAt": "1970-01-01T00:00:00.000Z",
+                "generatingVersion": "maat-phase3",
+                "provenance": {
+                  "inputEntityIds": [
+                    "project_maat_phase0",
+                    "subsystem_constitution",
+                    "cap_persistence_contract",
+                    "cap_schema_contract",
+                    "cap_security_contract",
+                    "cap_verification_contract",
+                    "runtime_phase0_persistence",
+                    "runtime_phase0_schema",
+                    "runtime_phase0_security",
+                    "runtime_phase0_verification"
+                  ],
+                  "evidenceIds": [
+                    "evidence_phase0_fixture"
+                  ],
+                  "ruleIds": [
+                    "phase3-pulse-mri-v1"
+                  ],
+                  "derivationSteps": [
+                    "validated-canonical-model",
+                    "pulse-projection"
+                  ]
+                },
+                "stalenessState": "FRESH"
+              },
+              "semanticHash": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f"
+            },
+            "project": {
+              "projectId": "project_maat_phase0",
+              "name": "MAAT Phase 0",
+              "projectType": "typescript-node-package",
+              "modelRevision": 2,
+              "lastScanId": null,
+              "governedState": "Constitution and Canonical Schema Contract: IMPLEMENTING"
+            },
+            "capabilityCounts": {
+              "PROPOSED": 0,
+              "APPROVED": 0,
+              "IMPLEMENTING": 0,
+              "LIVE": 4,
+              "PARTIAL": 0,
+              "BLOCKED": 0,
+              "DEGRADED": 0,
+              "UNKNOWN": 0,
+              "NOT_FOUND": 0,
+              "DEPRECATED": 0,
+              "SUPERSEDED": 0,
+              "RETIRED": 0
+            },
+            "runtime": {
+              "currentHomeIds": [
+                "runtime_phase0_persistence",
+                "runtime_phase0_schema",
+                "runtime_phase0_security",
+                "runtime_phase0_verification"
+              ],
+              "historicalHomeIds": [],
+              "runtimeGapCapabilityIds": [],
+              "unresolvedCapabilityIds": [],
+              "ambiguityCount": 0,
+              "conflictCount": 0
+            },
+            "evidence": {
+              "EXPLICIT": 5,
+              "OBSERVED": 0,
+              "RECONCILED": 0,
+              "INFERRED": 0,
+              "UNKNOWN": 0
+            },
+            "conditions": [],
+            "unknowns": [],
+            "truthBoundary": "Project Pulse is a deterministic derived projection of the validated canonical model and evidence references. It does not execute the project, infer runtime proof from source presence, mutate canonical state, or recommend a next action."
+          },
+          "status": "BOUNDED_ATTENTION",
+          "currentClaim": {
+            "bounded": true,
+            "freshnessWatermarkId": "hito_g15_freshness_9cd1de2e2ee80c24c120abf5ef67bf7adaea2a2484503c78eee386cc3abcc0e4",
+            "freshnessState": "CURRENT"
+          },
+          "materialStateGroups": [
+            {
+              "groupId": "hito_g15_material_group_d71031200a697c2f12b9c4ac82d967bce3be0ba16a731f8519967c41680351fb",
+              "category": "PROTECTED_AUTHORITY",
+              "severity": "NOTICE",
+              "scope": {
+                "kind": "SUBJECT",
+                "identity": "cap_schema_contract",
+                "globalImpact": false
+              },
+              "count": 1,
+              "materialStateIds": [
+                "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a"
+              ],
+              "sourceAuthorities": [
+                "PHASE4_DO_NOT_TOUCH"
+              ],
+              "headline": "Protected authority and do-not-touch boundaries apply"
+            }
+          ],
+          "materialStateCount": 1,
+          "answers": {
+            "whereAmI": "MAAT Phase 0 is at canonical model revision 2; bounded status is BOUNDED_ATTENTION.",
+            "whatAmITryingToDo": "Represent and validate MAAT canonical engineering truth deterministically.",
+            "whatIsMissing": "1 material state(s) remain visible across 1 affected scope group(s).",
+            "whatNext": "Verify the existing canonical capability against its named evidence boundary.",
+            "why": "Existing live canonical capability must be verified before any construction.",
+            "whatIsSafeToChange": "derived Phase 4 report, phase0/contracts/canonical-model.schema.json, phase0/contracts/model.ts, phase0/contracts/validation.ts",
+            "whatShouldINotTouch": "canonical .maat/evidence-manifest.json, canonical .maat/history.jsonl, canonical .maat/model.json, governed target execution, Phase 0-3 locked evidence",
+            "whenIsThisDone": "Proof projection is NOT_STARTED; bounded observed-result projection is COMPLETE. Neither grants deployment or execution authority."
+          }
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+            "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+            "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          },
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "NONE"
+          },
+          {
+            "sourcePath": "snapshot.c6.g15.projections.GUIDED",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_view_92a31bddee057abf5d5b048f44231f2362f988ba19840e25550c10f3fb339a9b",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "next": {
+        "value": {
+          "nextStep": {
+            "state": "PHASE4_NEXT_SAFE_MUTATION",
+            "sourcePhase4DecisionIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+            "nextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+            "projection": {
+              "mutation": {
+                "mutationId": "phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                "reason": "A current canonical capability candidate exists with a resolved current runtime home.",
+                "affectedEntityIds": [
+                  "cap_schema_contract",
+                  "project_maat_phase0"
+                ],
+                "expectedEffect": "Verify the existing canonical capability against its named evidence boundary.",
+                "proposal": "Verify the existing canonical capability against its named evidence boundary.",
+                "risk": "Derived Phase 4 output is not permission to mutate; canonical and target authority remain protected.",
+                "rollbackPath": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+                "proofPlan": [
+                  "evidence_phase0_fixture",
+                  "Re-run deterministic Phase 4 analysis",
+                  "Validate canonical model, history, and evidence heads"
+                ],
+                "status": "PROPOSED",
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "provenance": {
+                  "observationClass": "RECONCILED",
+                  "source": "hito:phase4:deterministic-semantic-decision-engine",
+                  "sourceRef": "phase4:proposal:phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                  "confidence": 1,
+                  "observedAt": "1970-01-01T00:00:00.000Z",
+                  "modelRevision": 2
+                }
+              },
+              "plainLanguageAction": "Verify the existing canonical capability against its named evidence boundary.",
+              "reasonNextSafe": "Existing live canonical capability must be verified before any construction.",
+              "affectedPromiseId": "promise_phase0",
+              "affectedCapabilityId": "cap_schema_contract",
+              "affectedSubsystemId": "subsystem_constitution",
+              "affectedRuntimePath": "phase0/contracts",
+              "expectedFiles": [
+                "phase0/contracts/canonical-model.schema.json",
+                "phase0/contracts/model.ts",
+                "phase0/contracts/validation.ts"
+              ],
+              "expectedApis": [],
+              "expectedStateAuthorities": [],
+              "expectedEventAuthorities": [],
+              "expectedConfiguration": [],
+              "expectedDependencies": [],
+              "safeZone": [
+                "derived Phase 4 report",
+                "phase0/contracts/canonical-model.schema.json",
+                "phase0/contracts/model.ts",
+                "phase0/contracts/validation.ts"
+              ],
+              "unsafeZone": [
+                "canonical .maat/evidence-manifest.json",
+                "canonical .maat/history.jsonl",
+                "canonical .maat/model.json",
+                "governed target execution",
+                "Phase 0-3 locked evidence"
+              ],
+              "userVisibleEffect": "No user-facing change is executed; the output explains one evidence-bounded next safe action.",
+              "expectedRuntimeEffect": "None until a separately approved and executed mutation has named runtime evidence.",
+              "expectedEvidence": [
+                "evidence_phase0_fixture",
+                "Re-run deterministic Phase 4 analysis",
+                "Validate canonical model, history, and evidence heads"
+              ],
+              "regressionScope": [
+                "cap_schema_contract",
+                "cap_verification_contract"
+              ],
+              "rollbackRecoveryPlan": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+              "doNotTouch": {
+                "protectedCapabilityIds": [
+                  "cap_schema_contract"
+                ],
+                "currentRuntimeHomeIds": [
+                  "runtime_phase0_persistence",
+                  "runtime_phase0_schema",
+                  "runtime_phase0_security",
+                  "runtime_phase0_verification"
+                ],
+                "stateAuthorities": [],
+                "eventAuthorities": [],
+                "persistenceAuthorities": [],
+                "evidenceAuthorityIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "redZones": [
+                  "canonical .maat/evidence-manifest.json",
+                  "canonical .maat/history.jsonl",
+                  "canonical .maat/model.json",
+                  "governed target execution",
+                  "Phase 0-3 locked evidence"
+                ],
+                "unaffectedCapabilityIds": [
+                  "cap_persistence_contract",
+                  "cap_security_contract",
+                  "cap_verification_contract"
+                ]
+              },
+              "approvalExecutionStatus": "NON_EXECUTING_PROPOSAL"
+            },
+            "exactSourceAuthorityBound": true,
+            "executionAuthority": false
+          },
+          "actionRoute": {
+            "state": "GOVERNED_HANDOFF_AVAILABLE",
+            "routeId": "hito_g15_action_route_94b56a43fdc36caa649883d389881cf946f8e47bf19b7038b3bb1d81497de770",
+            "sourceNextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+            "destination": "SEPARATE_GOVERNED_ACTION_WORKFLOW",
+            "mutatingCommand": null,
+            "semanticAuthority": false,
+            "executionAuthority": false
+          },
+          "explanation": "Verify the existing canonical capability against its named evidence boundary.",
+          "mutatingCommand": null
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.nextStep",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+            "presentationTransform": "NONE"
+          },
+          {
+            "sourcePath": "snapshot.c6.g15.projections.GUIDED",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_view_92a31bddee057abf5d5b048f44231f2362f988ba19840e25550c10f3fb339a9b",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "why": {
+        "value": {
+          "explanation": "Existing live canonical capability must be verified before any construction.",
+          "materialStateGroups": [
+            {
+              "groupId": "hito_g15_material_group_d71031200a697c2f12b9c4ac82d967bce3be0ba16a731f8519967c41680351fb",
+              "category": "PROTECTED_AUTHORITY",
+              "severity": "NOTICE",
+              "scope": {
+                "kind": "SUBJECT",
+                "identity": "cap_schema_contract",
+                "globalImpact": false
+              },
+              "count": 1,
+              "materialStateIds": [
+                "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a"
+              ],
+              "sourceAuthorities": [
+                "PHASE4_DO_NOT_TOUCH"
+              ],
+              "headline": "Protected authority and do-not-touch boundaries apply"
+            }
+          ],
+          "materialStates": [
+            {
+              "materialStateId": "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a",
+              "category": "PROTECTED_AUTHORITY",
+              "severity": "NOTICE",
+              "scope": {
+                "kind": "SUBJECT",
+                "identity": "cap_schema_contract",
+                "globalImpact": false
+              },
+              "sourceAuthority": "PHASE4_DO_NOT_TOUCH",
+              "sourceIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+              "summary": "Protected authority and do-not-touch boundaries apply",
+              "reasonCodes": [
+                "Phase 0-3 locked evidence",
+                "canonical .maat/evidence-manifest.json",
+                "canonical .maat/history.jsonl",
+                "canonical .maat/model.json",
+                "governed target execution"
+              ]
+            }
+          ],
+          "semanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395"
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "NONE"
+          },
+          {
+            "sourcePath": "snapshot.c6.g15.projections.GUIDED",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_view_92a31bddee057abf5d5b048f44231f2362f988ba19840e25550c10f3fb339a9b",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "mri": {
+        "value": {
+          "kind": "ENGINEERING_MRI",
+          "source": {
+            "modelRevision": 2,
+            "historySequence": 3,
+            "evidenceSequence": 1,
+            "derivedOutput": {
+              "derivedOutputId": "derived_mri_verdict_2_phase3-pulse-mri-v1",
+              "kind": "MRI_VERDICT",
+              "sourceModelRevision": 2,
+              "sourceHistoryHead": {
+                "sequence": 3,
+                "eventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3"
+              },
+              "sourceEvidenceHead": {
+                "sequence": 1,
+                "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+              },
+              "rulesetVersion": "phase3-pulse-mri-v1",
+              "generatedAt": "1970-01-01T00:00:00.000Z",
+              "generatingVersion": "maat-phase3",
+              "provenance": {
+                "inputEntityIds": [
+                  "project_maat_phase0",
+                  "subsystem_constitution",
+                  "cap_persistence_contract",
+                  "cap_schema_contract",
+                  "cap_security_contract",
+                  "cap_verification_contract",
+                  "runtime_phase0_persistence",
+                  "runtime_phase0_schema",
+                  "runtime_phase0_security",
+                  "runtime_phase0_verification"
+                ],
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "ruleIds": [
+                  "phase3-pulse-mri-v1"
+                ],
+                "derivationSteps": [
+                  "validated-canonical-model",
+                  "mri-projection"
+                ]
+              },
+              "stalenessState": "FRESH"
+            },
+            "semanticHash": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e"
+          },
+          "nodes": [
+            {
+              "nodeId": "cap_persistence_contract",
+              "kind": "CAPABILITY",
+              "label": "Canonical Persistence Contract",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "purpose": "Persist canonical state with deterministic integrity, atomicity, recovery, and divergence handling.",
+                "owningSubsystemId": "subsystem_constitution",
+                "runtimeHomeId": "runtime_phase0_persistence",
+                "runtimeGap": false,
+                "historicalRuntimeHomeIds": [],
+                "implementationRefs": [
+                  "phase0/contracts/persistence.ts",
+                  "phase0/contracts/utils.ts"
+                ],
+                "dependencies": [
+                  "cap_schema_contract"
+                ],
+                "lineageEventIds": [
+                  "lineage_persistence_introduced"
+                ],
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "verificationState": "TEST_VERIFIED",
+                "runtimeTruthLevel": "TEST_VERIFIED",
+                "currentRuntimeTenureCount": 1
+              }
+            },
+            {
+              "nodeId": "cap_schema_contract",
+              "kind": "CAPABILITY",
+              "label": "Canonical Schema Contract",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "purpose": "Define and validate MAAT canonical engineering truth. C8 browser parity successor semantics.",
+                "owningSubsystemId": "subsystem_constitution",
+                "runtimeHomeId": "runtime_phase0_schema",
+                "runtimeGap": false,
+                "historicalRuntimeHomeIds": [],
+                "implementationRefs": [
+                  "phase0/contracts/canonical-model.schema.json",
+                  "phase0/contracts/model.ts",
+                  "phase0/contracts/validation.ts"
+                ],
+                "dependencies": [],
+                "lineageEventIds": [
+                  "lineage_schema_introduced"
+                ],
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "verificationState": "TEST_VERIFIED",
+                "runtimeTruthLevel": "TEST_VERIFIED",
+                "currentRuntimeTenureCount": 1
+              }
+            },
+            {
+              "nodeId": "cap_security_contract",
+              "kind": "CAPABILITY",
+              "label": "Local Security Contract",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "purpose": "Define fail-closed local API, permission, session, CSRF, origin, and root-confinement boundaries.",
+                "owningSubsystemId": "subsystem_constitution",
+                "runtimeHomeId": "runtime_phase0_security",
+                "runtimeGap": false,
+                "historicalRuntimeHomeIds": [],
+                "implementationRefs": [
+                  "phase0/contracts/security.ts"
+                ],
+                "dependencies": [
+                  "cap_schema_contract"
+                ],
+                "lineageEventIds": [
+                  "lineage_security_introduced"
+                ],
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "verificationState": "TEST_VERIFIED",
+                "runtimeTruthLevel": "TEST_VERIFIED",
+                "currentRuntimeTenureCount": 1
+              }
+            },
+            {
+              "nodeId": "cap_verification_contract",
+              "kind": "CAPABILITY",
+              "label": "Phase 0 Verification Contract",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "purpose": "Generate deterministic fixtures and evidence that prove the bounded Phase 0 contract surface.",
+                "owningSubsystemId": "subsystem_constitution",
+                "runtimeHomeId": "runtime_phase0_verification",
+                "runtimeGap": false,
+                "historicalRuntimeHomeIds": [],
+                "implementationRefs": [
+                  "phase0/fixtures/factory.ts",
+                  "phase0/tests/run-tests.ts",
+                  "phase0/tools/generate-fixture.ts"
+                ],
+                "dependencies": [
+                  "cap_persistence_contract",
+                  "cap_schema_contract",
+                  "cap_security_contract"
+                ],
+                "lineageEventIds": [
+                  "lineage_verification_introduced"
+                ],
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "verificationState": "TEST_VERIFIED",
+                "runtimeTruthLevel": "TEST_VERIFIED",
+                "currentRuntimeTenureCount": 1
+              }
+            },
+            {
+              "nodeId": "project_maat_phase0",
+              "kind": "PROJECT",
+              "label": "MAAT Phase 0",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "projectType": "typescript-node-package",
+                "modelRevision": 2
+              }
+            },
+            {
+              "nodeId": "runtime_phase0_persistence",
+              "kind": "RUNTIME_HOME",
+              "label": "phase0/contracts",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "kind": "MODULE",
+                "locator": "phase0/contracts",
+                "entryPoints": [
+                  "persistence.ts",
+                  "utils.ts"
+                ],
+                "current": true,
+                "effectiveFromRevision": 1,
+                "effectiveToRevision": "OPEN"
+              }
+            },
+            {
+              "nodeId": "runtime_phase0_schema",
+              "kind": "RUNTIME_HOME",
+              "label": "phase0/contracts",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "kind": "MODULE",
+                "locator": "phase0/contracts",
+                "entryPoints": [
+                  "canonical-model.schema.json",
+                  "model.ts",
+                  "validation.ts"
+                ],
+                "current": true,
+                "effectiveFromRevision": 1,
+                "effectiveToRevision": "OPEN"
+              }
+            },
+            {
+              "nodeId": "runtime_phase0_security",
+              "kind": "RUNTIME_HOME",
+              "label": "phase0/contracts",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "kind": "MODULE",
+                "locator": "phase0/contracts",
+                "entryPoints": [
+                  "security.ts"
+                ],
+                "current": true,
+                "effectiveFromRevision": 1,
+                "effectiveToRevision": "OPEN"
+              }
+            },
+            {
+              "nodeId": "runtime_phase0_verification",
+              "kind": "RUNTIME_HOME",
+              "label": "phase0/tests",
+              "lifecycleStatus": "LIVE",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "kind": "MODULE",
+                "locator": "phase0/tests",
+                "entryPoints": [
+                  "run-tests.ts"
+                ],
+                "current": true,
+                "effectiveFromRevision": 1,
+                "effectiveToRevision": "OPEN"
+              }
+            },
+            {
+              "nodeId": "subsystem_constitution",
+              "kind": "SUBSYSTEM",
+              "label": "Constitution &amp; Canonical Schema",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "details": {
+                "responsibility": "Own the canonical model, invariants, truth boundaries, persistence, security contracts, and Phase 0 evidence.",
+                "capabilityIds": [
+                  "cap_persistence_contract",
+                  "cap_schema_contract",
+                  "cap_security_contract",
+                  "cap_verification_contract"
+                ]
+              }
+            }
+          ],
+          "edges": [
+            {
+              "edgeId": "derived:depends:cap_persistence_contract:cap_schema_contract",
+              "sourceId": "cap_persistence_contract",
+              "targetId": "cap_schema_contract",
+              "relationship": "DEPENDS_ON",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:depends:cap_security_contract:cap_schema_contract",
+              "sourceId": "cap_security_contract",
+              "targetId": "cap_schema_contract",
+              "relationship": "DEPENDS_ON",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:depends:cap_verification_contract:cap_persistence_contract",
+              "sourceId": "cap_verification_contract",
+              "targetId": "cap_persistence_contract",
+              "relationship": "DEPENDS_ON",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:depends:cap_verification_contract:cap_schema_contract",
+              "sourceId": "cap_verification_contract",
+              "targetId": "cap_schema_contract",
+              "relationship": "DEPENDS_ON",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:depends:cap_verification_contract:cap_security_contract",
+              "sourceId": "cap_verification_contract",
+              "targetId": "cap_security_contract",
+              "relationship": "DEPENDS_ON",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:homes:cap_persistence_contract:runtime_phase0_persistence",
+              "sourceId": "cap_persistence_contract",
+              "targetId": "runtime_phase0_persistence",
+              "relationship": "HOMES",
+              "status": "CURRENT",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": []
+            },
+            {
+              "edgeId": "derived:homes:cap_schema_contract:runtime_phase0_schema",
+              "sourceId": "cap_schema_contract",
+              "targetId": "runtime_phase0_schema",
+              "relationship": "HOMES",
+              "status": "CURRENT",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": []
+            },
+            {
+              "edgeId": "derived:homes:cap_security_contract:runtime_phase0_security",
+              "sourceId": "cap_security_contract",
+              "targetId": "runtime_phase0_security",
+              "relationship": "HOMES",
+              "status": "CURRENT",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": []
+            },
+            {
+              "edgeId": "derived:homes:cap_verification_contract:runtime_phase0_verification",
+              "sourceId": "cap_verification_contract",
+              "targetId": "runtime_phase0_verification",
+              "relationship": "HOMES",
+              "status": "CURRENT",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture:runtime-home",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": []
+            },
+            {
+              "edgeId": "derived:owns:project_maat_phase0:subsystem_constitution",
+              "sourceId": "project_maat_phase0",
+              "targetId": "subsystem_constitution",
+              "relationship": "OWNS",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": []
+            },
+            {
+              "edgeId": "derived:owns:subsystem_constitution:cap_persistence_contract",
+              "sourceId": "subsystem_constitution",
+              "targetId": "cap_persistence_contract",
+              "relationship": "OWNS",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:owns:subsystem_constitution:cap_schema_contract",
+              "sourceId": "subsystem_constitution",
+              "targetId": "cap_schema_contract",
+              "relationship": "OWNS",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:owns:subsystem_constitution:cap_security_contract",
+              "sourceId": "subsystem_constitution",
+              "targetId": "cap_security_contract",
+              "relationship": "OWNS",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            },
+            {
+              "edgeId": "derived:owns:subsystem_constitution:cap_verification_contract",
+              "sourceId": "subsystem_constitution",
+              "targetId": "cap_verification_contract",
+              "relationship": "OWNS",
+              "status": "CANONICAL",
+              "provenance": {
+                "observationClass": "EXPLICIT",
+                "source": "phase0:fixture",
+                "confidence": 1,
+                "observedAt": "2026-08-19T00:00:00.000Z",
+                "modelRevision": 1
+              },
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ]
+            }
+          ],
+          "ambiguities": [],
+          "conflicts": [],
+          "truthBoundary": "Engineering MRI is a deterministic, read-only relationship projection. Its edges come only from canonical ownership, runtime-home, dependency, interface, or edge records; absent relationships are not rendered as edges."
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.mri",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "mermaid": {
+        "value": {
+          "kind": "HITO_PRE_C9_DERIVED_MERMAID_MRI",
+          "version": "hito-pre-c9-mermaid-mri-v1",
+          "diagramIdentity": "hito_pre_c9_mermaid_20c904360c44f8edd5c2cd4a2c540b048d66a505900549aa93825f584baa3e58",
+          "sourceMriIdentity": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e",
+          "sourceSemanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "mermaid": "flowchart LR\n  subgraph HITO_MRI[\"Engineering MRI - derived, noncanonical\"]\n    mri_a1f253ab73c23f4b005d9c02e9f61b35940a763ff6581b1c668e78e611443916[\"Canonical Persistence Contract - CAPABILITY / LIVE\"]:::hito_current\n    mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2[\"Canonical Schema Contract - CAPABILITY / LIVE\"]:::hito_current\n    mri_846a502a70d140c8f63080d94b1fcd9870187ff3bf4b3cf46e37540a3b987662[\"Local Security Contract - CAPABILITY / LIVE\"]:::hito_current\n    mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595[\"Phase 0 Verification Contract - CAPABILITY / LIVE\"]:::hito_current\n    mri_9d73f4e9aef9d9e21dbb51eeae1cd7ff41a348494f39e37fe07136af83a05ffa[\"MAAT Phase 0 - PROJECT\"]:::hito_current\n    mri_ec2b1a35b087be30a05fea506d791712352531c1ba4d18eab9f521fe49e0d267[\"phase0/contracts - RUNTIME_HOME / LIVE\"]:::hito_runtime\n    mri_3a81bf75b2bba37f9962f99ef4d5eb916e12fedaf54d8a4ddc4df2543b857b11[\"phase0/contracts - RUNTIME_HOME / LIVE\"]:::hito_runtime\n    mri_3860b3b785be168840c85ab18eac8d9bd8c06b4b7326c6cfda6aea640709982b[\"phase0/contracts - RUNTIME_HOME / LIVE\"]:::hito_runtime\n    mri_36b25bb0406d67525c50e8cd7fbd80f3ca3054bb589f0221553905d1f909db7b[\"phase0/tests - RUNTIME_HOME / LIVE\"]:::hito_runtime\n    mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552[\"Constitution &amp;amp; Canonical Schema - SUBSYSTEM\"]:::hito_current\n    mri_a1f253ab73c23f4b005d9c02e9f61b35940a763ff6581b1c668e78e611443916 ==>|CANONICAL DEPENDS_ON| mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2\n    mri_846a502a70d140c8f63080d94b1fcd9870187ff3bf4b3cf46e37540a3b987662 ==>|CANONICAL DEPENDS_ON| mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2\n    mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595 ==>|CANONICAL DEPENDS_ON| mri_a1f253ab73c23f4b005d9c02e9f61b35940a763ff6581b1c668e78e611443916\n    mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595 ==>|CANONICAL DEPENDS_ON| mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2\n    mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595 ==>|CANONICAL DEPENDS_ON| mri_846a502a70d140c8f63080d94b1fcd9870187ff3bf4b3cf46e37540a3b987662\n    mri_a1f253ab73c23f4b005d9c02e9f61b35940a763ff6581b1c668e78e611443916 -->|CURRENT HOMES| mri_ec2b1a35b087be30a05fea506d791712352531c1ba4d18eab9f521fe49e0d267\n    mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2 -->|CURRENT HOMES| mri_3a81bf75b2bba37f9962f99ef4d5eb916e12fedaf54d8a4ddc4df2543b857b11\n    mri_846a502a70d140c8f63080d94b1fcd9870187ff3bf4b3cf46e37540a3b987662 -->|CURRENT HOMES| mri_3860b3b785be168840c85ab18eac8d9bd8c06b4b7326c6cfda6aea640709982b\n    mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595 -->|CURRENT HOMES| mri_36b25bb0406d67525c50e8cd7fbd80f3ca3054bb589f0221553905d1f909db7b\n    mri_9d73f4e9aef9d9e21dbb51eeae1cd7ff41a348494f39e37fe07136af83a05ffa ==>|CANONICAL OWNS| mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552\n    mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552 ==>|CANONICAL OWNS| mri_a1f253ab73c23f4b005d9c02e9f61b35940a763ff6581b1c668e78e611443916\n    mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552 ==>|CANONICAL OWNS| mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2\n    mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552 ==>|CANONICAL OWNS| mri_846a502a70d140c8f63080d94b1fcd9870187ff3bf4b3cf46e37540a3b987662\n    mri_fc0d824cb588eaf45282fb07a135fdd4f7dafe818bb70b5465f51d9ab340a552 ==>|CANONICAL OWNS| mri_ee17f5224aeb6164478afd905f1a32cee22da144dc9fae4b56993a4250572595\n  end\n  subgraph HITO_MATERIAL[\"Material HITO states - exact typed projection\"]\n    material_87cab4ea18d769111f9e362f74fb755b3e05eea6567833994635d7f4f8d42325[\"PROTECTED_AUTHORITY - Protected authority and do-not-touch boundaries apply\"]:::hito_protected\n    material_87cab4ea18d769111f9e362f74fb755b3e05eea6567833994635d7f4f8d42325 -. SUBJECT .-> mri_03d09d060209231a359e56798b14ea25ea5812453c79db1e697cac5e6e6dbcd2\n  end\n  classDef hito_current fill:#102a24,stroke:#70d7a7,color:#e8fff4\n  classDef hito_runtime fill:#13263a,stroke:#6aa9ff,color:#eef6ff\n  classDef hito_conflict fill:#3a1717,stroke:#ff7474,color:#fff0f0\n  classDef hito_unknown fill:#352d17,stroke:#f5bd4f,color:#fff7dc\n  classDef hito_indeterminate fill:#30233a,stroke:#c895ff,color:#faf0ff\n  classDef hito_protected fill:#182d38,stroke:#64c7df,color:#effcff\n  classDef hito_stale fill:#302918,stroke:#d7a94e,color:#fff7e1\n  classDef hito_desynchronized fill:#392018,stroke:#ef8a5f,color:#fff2eb\n  classDef hito_missing fill:#341c2c,stroke:#ec78b3,color:#fff0f8\n  classDef hito_limited fill:#262932,stroke:#8998aa,color:#f0f3f7\n",
+          "ordering": "UNICODE_CODE_POINT_BY_UPSTREAM_ID",
+          "completeness": {
+            "complete": true,
+            "completenessClaimed": true,
+            "truncationApplied": false,
+            "totalMriNodes": 10,
+            "includedMriNodes": 10,
+            "omittedMriNodes": 0,
+            "totalMriEdges": 14,
+            "includedMriEdges": 14,
+            "omittedMriEdges": 0,
+            "totalMaterialStates": 1,
+            "includedMaterialStates": 1,
+            "reasonCodes": []
+          },
+          "governanceBoundary": {
+            "derivedOnly": true,
+            "canonicalAuthority": false,
+            "graphStoreCreated": false,
+            "historyStoreCreated": false,
+            "layoutSemanticInference": false,
+            "rawHtmlAllowed": false,
+            "executionAuthority": false
+          }
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.mri",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "history": {
+        "value": {
+          "kind": "HITO_G15_G10_HISTORY_REUSE_PROJECTION",
+          "sourceProjectionId": "hito_g10_history_diff_b0061870678cdf795097582a87974022f1dd59b06c9a87ea88ae5f02f85786a2",
+          "diffAssessment": "SEMANTIC_DIFFERENCE",
+          "causalRelation": "PREDECESSOR_OF_SUCCESSOR",
+          "positions": [
+            {
+              "eventHash": "85e286fa922b1ffafd954fb18ca59f93981d53b73d277dcbdeb9175835015d9b",
+              "previousEventHash": "99077845401da4b893862a281971a9878f2b3114f9ade34486cee22f9f95be10",
+              "sequence": 2,
+              "eventType": "intent.confirmed",
+              "revisionBinding": null,
+              "roles": [
+                "PREDECESSOR_HEAD"
+              ]
+            },
+            {
+              "eventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3",
+              "previousEventHash": "85e286fa922b1ffafd954fb18ca59f93981d53b73d277dcbdeb9175835015d9b",
+              "sequence": 3,
+              "eventType": "mutation.completed",
+              "revisionBinding": 2,
+              "roles": [
+                "SUCCESSOR_HEAD"
+              ]
+            }
+          ],
+          "causalEdges": [
+            {
+              "predecessorEventHash": "85e286fa922b1ffafd954fb18ca59f93981d53b73d277dcbdeb9175835015d9b",
+              "successorEventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3"
+            }
+          ],
+          "semanticCoordinateDeltas": [
+            {
+              "coordinate": "/capabilities/1/purpose",
+              "kind": "CHANGED",
+              "predecessorValueIdentity": "f656a1e64ab08e5fd00200deeb98b37baeb9abdc75e925772142ddbe9474f568",
+              "successorValueIdentity": "602efde21044a7227273f56220ccfe428ea3fe8afa06e3029db28efce085332c"
+            }
+          ],
+          "secondHistoryStoreCreated": false,
+          "canonicalAuthority": false
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.history",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g10_history_diff_b0061870678cdf795097582a87974022f1dd59b06c9a87ea88ae5f02f85786a2",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "evidence": {
+        "value": {
+          "phase3EvidenceClasses": {
+            "EXPLICIT": 5,
+            "OBSERVED": 0,
+            "RECONCILED": 0,
+            "INFERRED": 0,
+            "UNKNOWN": 0
+          },
+          "checks": {
+            "kind": "HITO_G15_BOUNDED_CHECK_PROJECTION",
+            "checks": [
+              {
+                "checkId": "canonical-source-binding",
+                "state": "SATISFIED",
+                "scope": {
+                  "kind": "PROJECT",
+                  "identity": "project_maat_phase0"
+                },
+                "detail": "The projection is bound to the supplied validated canonical model identity."
+              },
+              {
+                "checkId": "freshness-watermark",
+                "state": "SATISFIED",
+                "scope": {
+                  "kind": "PROJECT",
+                  "identity": "project_maat_phase0"
+                },
+                "detail": "Freshness state is CURRENT."
+              },
+              {
+                "checkId": "semantic-conflict",
+                "state": "SATISFIED",
+                "scope": {
+                  "kind": "PROJECT",
+                  "identity": "project_maat_phase0"
+                },
+                "detail": "No upstream bounded conflict is present in this snapshot."
+              },
+              {
+                "checkId": "protected-authority",
+                "state": "ATTENTION",
+                "scope": {
+                  "kind": "PROJECT",
+                  "identity": "project_maat_phase0"
+                },
+                "detail": "Protected authority remains visible and nonexecuting."
+              },
+              {
+                "checkId": "observation-coverage",
+                "state": "SATISFIED",
+                "scope": {
+                  "kind": "TARGET",
+                  "identity": "cap_schema_contract"
+                },
+                "detail": "Bounded observation coverage is BOUND_COMPLETE."
+              },
+              {
+                "checkId": "execution-authority",
+                "state": "NOT_APPLICABLE",
+                "scope": {
+                  "kind": "ACTION",
+                  "identity": "project_maat_phase0"
+                },
+                "detail": "G15 and its CLI grant no execution authority."
+              }
+            ],
+            "executionPerformed": false,
+            "canonicalAuthority": false
+          },
+          "evidenceHead": {
+            "sequence": 1,
+            "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+          },
+          "evidenceApplicability": "NOT_REQUESTED"
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+            "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+            "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          },
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.check",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "protectedAuthorities": {
+        "value": [
+          {
+            "materialStateId": "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a",
+            "category": "PROTECTED_AUTHORITY",
+            "severity": "NOTICE",
+            "scope": {
+              "kind": "SUBJECT",
+              "identity": "cap_schema_contract",
+              "globalImpact": false
+            },
+            "sourceAuthority": "PHASE4_DO_NOT_TOUCH",
+            "sourceIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+            "summary": "Protected authority and do-not-touch boundaries apply",
+            "reasonCodes": [
+              "Phase 0-3 locked evidence",
+              "canonical .maat/evidence-manifest.json",
+              "canonical .maat/history.jsonl",
+              "canonical .maat/model.json",
+              "governed target execution"
+            ]
+          }
+        ],
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.materialStates[category=PROTECTED_AUTHORITY]",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "EXACT_TYPED_SUBSET"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "runtimeState": {
+        "value": {
+          "phase3Runtime": {
+            "currentHomeIds": [
+              "runtime_phase0_persistence",
+              "runtime_phase0_schema",
+              "runtime_phase0_security",
+              "runtime_phase0_verification"
+            ],
+            "historicalHomeIds": [],
+            "runtimeGapCapabilityIds": [],
+            "unresolvedCapabilityIds": [],
+            "ambiguityCount": 0,
+            "conflictCount": 0
+          },
+          "operationalMode": {
+            "allowedModes": [
+              "UNATTACHED",
+              "OBSERVATION_DISCOVERY",
+              "GOVERNED_ATTACHED",
+              "RECOVERY",
+              "EMERGENCY_CONTINUITY",
+              "RECONCILIATION"
+            ],
+            "classification": "OPERATIONAL_MODE_NOT_ONTOLOGY",
+            "requested": "GOVERNED_ATTACHED",
+            "previous": "GOVERNED_ATTACHED",
+            "effective": "GOVERNED_ATTACHED",
+            "transitionState": "NO_CHANGE",
+            "authorityIdentity": null,
+            "reasonCodes": [
+              "IDEMPOTENT_OPERATIONAL_MODE_ASSESSMENT"
+            ]
+          },
+          "discovery": {
+            "observation": null,
+            "observationAuthority": false,
+            "genesisTrustState": "NOT_OBSERVED",
+            "declaredIntentImported": false,
+            "externalTerritoryBounded": true
+          },
+          "reconciliation": {
+            "state": "NOT_REQUIRED",
+            "acceptedSemanticContinuityIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "observedPhysicalStateIdentity": null,
+            "observedPhysicalStateLegitimized": false,
+            "sourceTruthReuse": "G8_THROUGH_G15_EXACT_SAME_CALL",
+            "nextGovernanceStep": {
+              "state": "PHASE4_NEXT_SAFE_MUTATION",
+              "sourcePhase4DecisionIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+              "nextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+              "projection": {
+                "mutation": {
+                  "mutationId": "phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                  "reason": "A current canonical capability candidate exists with a resolved current runtime home.",
+                  "affectedEntityIds": [
+                    "cap_schema_contract",
+                    "project_maat_phase0"
+                  ],
+                  "expectedEffect": "Verify the existing canonical capability against its named evidence boundary.",
+                  "proposal": "Verify the existing canonical capability against its named evidence boundary.",
+                  "risk": "Derived Phase 4 output is not permission to mutate; canonical and target authority remain protected.",
+                  "rollbackPath": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+                  "proofPlan": [
+                    "evidence_phase0_fixture",
+                    "Re-run deterministic Phase 4 analysis",
+                    "Validate canonical model, history, and evidence heads"
+                  ],
+                  "status": "PROPOSED",
+                  "evidenceIds": [
+                    "evidence_phase0_fixture"
+                  ],
+                  "provenance": {
+                    "observationClass": "RECONCILED",
+                    "source": "hito:phase4:deterministic-semantic-decision-engine",
+                    "sourceRef": "phase4:proposal:phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                    "confidence": 1,
+                    "observedAt": "1970-01-01T00:00:00.000Z",
+                    "modelRevision": 2
+                  }
+                },
+                "plainLanguageAction": "Verify the existing canonical capability against its named evidence boundary.",
+                "reasonNextSafe": "Existing live canonical capability must be verified before any construction.",
+                "affectedPromiseId": "promise_phase0",
+                "affectedCapabilityId": "cap_schema_contract",
+                "affectedSubsystemId": "subsystem_constitution",
+                "affectedRuntimePath": "phase0/contracts",
+                "expectedFiles": [
+                  "phase0/contracts/canonical-model.schema.json",
+                  "phase0/contracts/model.ts",
+                  "phase0/contracts/validation.ts"
+                ],
+                "expectedApis": [],
+                "expectedStateAuthorities": [],
+                "expectedEventAuthorities": [],
+                "expectedConfiguration": [],
+                "expectedDependencies": [],
+                "safeZone": [
+                  "derived Phase 4 report",
+                  "phase0/contracts/canonical-model.schema.json",
+                  "phase0/contracts/model.ts",
+                  "phase0/contracts/validation.ts"
+                ],
+                "unsafeZone": [
+                  "canonical .maat/evidence-manifest.json",
+                  "canonical .maat/history.jsonl",
+                  "canonical .maat/model.json",
+                  "governed target execution",
+                  "Phase 0-3 locked evidence"
+                ],
+                "userVisibleEffect": "No user-facing change is executed; the output explains one evidence-bounded next safe action.",
+                "expectedRuntimeEffect": "None until a separately approved and executed mutation has named runtime evidence.",
+                "expectedEvidence": [
+                  "evidence_phase0_fixture",
+                  "Re-run deterministic Phase 4 analysis",
+                  "Validate canonical model, history, and evidence heads"
+                ],
+                "regressionScope": [
+                  "cap_schema_contract",
+                  "cap_verification_contract"
+                ],
+                "rollbackRecoveryPlan": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+                "doNotTouch": {
+                  "protectedCapabilityIds": [
+                    "cap_schema_contract"
+                  ],
+                  "currentRuntimeHomeIds": [
+                    "runtime_phase0_persistence",
+                    "runtime_phase0_schema",
+                    "runtime_phase0_security",
+                    "runtime_phase0_verification"
+                  ],
+                  "stateAuthorities": [],
+                  "eventAuthorities": [],
+                  "persistenceAuthorities": [],
+                  "evidenceAuthorityIds": [
+                    "evidence_phase0_fixture"
+                  ],
+                  "redZones": [
+                    "canonical .maat/evidence-manifest.json",
+                    "canonical .maat/history.jsonl",
+                    "canonical .maat/model.json",
+                    "governed target execution",
+                    "Phase 0-3 locked evidence"
+                  ],
+                  "unaffectedCapabilityIds": [
+                    "cap_persistence_contract",
+                    "cap_security_contract",
+                    "cap_verification_contract"
+                  ]
+                },
+                "approvalExecutionStatus": "NON_EXECUTING_PROPOSAL"
+              },
+              "exactSourceAuthorityBound": true,
+              "executionAuthority": false
+            },
+            "targetRepairExecuted": false,
+            "scopedTerritories": [],
+            "reasonCodes": [
+              "NO_RECONCILIATION_TRIGGER_OBSERVED"
+            ]
+          },
+          "compatibility": {
+            "state": "COMPATIBLE",
+            "engineProtocolIdentity": "hito-engine-protocol-c7-v1",
+            "g16RulesetIdentity": "hito-installability-migration-recovery-v1",
+            "canonicalSchemaVersion": "0.1.0",
+            "observed": {
+              "engineProtocolIdentity": "hito-engine-protocol-c7-v1",
+              "producingRulesetVersion": "hito-installability-migration-recovery-v1",
+              "canonicalSchemaVersion": "0.1.0",
+              "evidenceIdentity": "evidence-c8-engine-ruleset-schema",
+              "historicalBindings": [
+                {
+                  "recordIdentity": "history-c7-final-closure",
+                  "producingRulesetVersion": "hito-installability-migration-recovery-v1",
+                  "semanticIdentity": "semantic-c7-final-closure"
+                }
+              ]
+            },
+            "authorityBearing": true,
+            "reconciliationRequired": false,
+            "historicalBindingsPreserved": true,
+            "historicalReinterpretationPerformed": false,
+            "reasonCodes": [
+              "ENGINE_RULESET_SCHEMA_EXACTLY_COMPATIBLE"
+            ]
+          },
+          "migration": {
+            "state": "SPECIFIED_BUT_NOT_AUTHORIZED",
+            "sourceNamespace": ".maat/",
+            "targetNamespace": ".hito/",
+            "eligibility": "PLAN_ELIGIBLE",
+            "plan": [
+              "ASSESS_SOURCE_COMPATIBILITY",
+              "REQUIRE_SEPARATE_MIGRATION_AUTHORITY",
+              "VERIFY_POST_MIGRATION_BEFORE_PROMOTION"
+            ],
+            "executionAuthorized": false,
+            "hitoNamespaceCreationAuthorized": false,
+            "dualWriteAuthorized": false,
+            "migrationCompleted": false,
+            "reasonCodes": [
+              "PLAN_ONLY_ELIGIBLE_SEPARATE_AUTHORIZATION_STILL_REQUIRED"
+            ]
+          }
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+            "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+            "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          },
+          {
+            "sourcePath": "snapshot.g16",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+            "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "freshness": {
+        "value": {
+          "watermarkId": "hito_g15_freshness_9cd1de2e2ee80c24c120abf5ef67bf7adaea2a2484503c78eee386cc3abcc0e4",
+          "state": "CURRENT",
+          "snapshotReadKind": "VALIDATED_CANONICAL",
+          "realityRevisionObserved": 2,
+          "canonicalModelIntegrityHash": "2e705f9ac10dbff40fa18feffe9dbb1681300470794e3e657bd6164660a6c395",
+          "historyHead": {
+            "sequence": 3,
+            "eventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3"
+          },
+          "evidenceHead": {
+            "sequence": 1,
+            "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+          },
+          "observationProjectionIdentity": "hito_g14_observation_af0de5a33afaf24265a8ff507eabe9ed4ea0b71826b77abacdc69594a32ad2c6",
+          "observationApplicability": "APPLICABLE",
+          "evidenceApplicability": "NOT_REQUESTED",
+          "observationCoverage": "BOUND_COMPLETE",
+          "causalPositionIdentity": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3",
+          "reasonCodes": [],
+          "currentClaimBounded": true
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.freshnessWatermark",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_freshness_9cd1de2e2ee80c24c120abf5ef67bf7adaea2a2484503c78eee386cc3abcc0e4",
+            "presentationTransform": "NONE"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "coverage": {
+        "value": {
+          "observationCoverage": "BOUND_COMPLETE",
+          "observationApplicability": "APPLICABLE",
+          "evidenceApplicability": "NOT_REQUESTED",
+          "coverageMaterialStates": [],
+          "support": {
+            "declarations": [],
+            "vocabulary": [
+              "SUPPORTED",
+              "PARTIALLY_SUPPORTED",
+              "UNQUALIFIED",
+              "UNSUPPORTED",
+              "INDETERMINATE"
+            ],
+            "universalPlatformParityClaimed": false,
+            "universalLanguageParityClaimed": false,
+            "enterpriseScaleQualified": false,
+            "scaleStatus": "PARTIAL_C7_OPERATING_ENVELOPE_ONLY"
+          },
+          "enforcementCoverage": {
+            "declarations": [],
+            "unmanagedExecutionPreventedUniversally": false,
+            "productionCredentialsRequired": false
+          }
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "NONE"
+          },
+          {
+            "sourcePath": "snapshot.g16",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+            "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      "intentProvenance": {
+        "value": {
+          "governedAndPresentedIntents": [
+            {
+              "intentProjectionId": "hito_g15_intent_e7cf879a6f5ffbfdd1c4948ea3796f246c124f24097f629877ed01e72e55c255",
+              "recordKind": "CANONICAL_INTENT_RECORD",
+              "sourceAuthority": "DECLARED_INTENT",
+              "displayedRole": "DECLARED_GOVERNED_INTENT",
+              "executionAuthority": false,
+              "scope": {
+                "kind": "PROJECT",
+                "identity": "project_maat_phase0"
+              },
+              "text": "Represent and validate MAAT canonical engineering truth deterministically.",
+              "provenance": "phase0:fixture"
+            }
+          ],
+          "extractedIntentCandidates": [],
+          "declaredIntentImported": false
+        },
+        "provenance": [
+          {
+            "sourcePath": "snapshot.c6.g15.governedTruth.intents",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+            "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+            "presentationTransform": "NONE"
+          },
+          {
+            "sourcePath": "snapshot.g16",
+            "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+            "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+            "presentationTransform": "G15_SANITIZED_COPY"
+          }
+        ],
+        "semanticAuthority": false,
+        "executionAuthority": false
+      }
+    },
+    "ux": {
+      "whereAmI": "MAAT Phase 0 is at canonical model revision 2; bounded status is BOUNDED_ATTENTION.",
+      "whatAmITryingToDo": "Represent and validate MAAT canonical engineering truth deterministically.",
+      "whatIsMissing": "1 material state(s) remain visible across 1 affected scope group(s).",
+      "whatNext": "Verify the existing canonical capability against its named evidence boundary.",
+      "why": "Existing live canonical capability must be verified before any construction.",
+      "whatIsSafeToChange": "derived Phase 4 report, phase0/contracts/canonical-model.schema.json, phase0/contracts/model.ts, phase0/contracts/validation.ts",
+      "whatShouldINotTouch": "canonical .maat/evidence-manifest.json, canonical .maat/history.jsonl, canonical .maat/model.json, governed target execution, Phase 0-3 locked evidence",
+      "whenIsThisDone": "Proof projection is NOT_STARTED; bounded observed-result projection is COMPLETE. Neither grants deployment or execution authority."
+    },
+    "navigationRoutes": [
+      {
+        "routeId": "hito-host-reveal-project-pulse",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "PROJECT_PULSE",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-next",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "NEXT",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-why",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "WHY",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-mri",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "MRI",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-evidence",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "EVIDENCE",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-history",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "HISTORY",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      },
+      {
+        "routeId": "hito-host-reveal-protected-authority",
+        "kind": "REVEAL_HOST_SURFACE",
+        "target": "PROTECTED_AUTHORITY",
+        "mutatingCommand": null,
+        "semanticAuthority": false,
+        "executionAuthority": false
+      }
+    ],
+    "hostCapabilities": {
+      "thinWrapperReady": true,
+      "hostSpecificOntology": false,
+      "presentationHostDependency": false,
+      "semanticRecomputationRequired": false
+    },
+    "governanceBoundary": {
+      "hostNeutral": true,
+      "derivedOnly": true,
+      "readOnly": true,
+      "canonicalAuthority": false,
+      "ontologyAuthority": false,
+      "nextStepAuthority": false,
+      "realityJudgeAuthority": false,
+      "executionAuthority": false,
+      "browserDependency": false,
+      "modelProviderDependency": false,
+      "navigationIsMutationAuthority": false,
+      "shellMutationCommandGenerated": false
+    },
+    "zeroEffectCounters": {
+      "canonicalWrites": 0,
+      "hitoStateWrites": 0,
+      "targetMutations": 0,
+      "targetExecutions": 0,
+      "providerModelCalls": 0,
+      "unauthorizedNetworkCalls": 0,
+      "gitMutations": 0,
+      "hitoNamespaceCreations": 0,
+      "namespaceMigrations": 0
+    }
+  },
+  "agentContext": {
+    "kind": "HITO_PRE_C9_HOST_NEUTRAL_AGENT_CONTEXT",
+    "version": "hito-pre-c9-agent-context-v1",
+    "protocolVersion": "hito-pre-c9-host-protocol-v1",
+    "authority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / HOST_PROJECTION_ONLY",
+    "contextIdentity": "hito_pre_c9_agent_3a37bea9d6015cfca83c1de354bafb7e4a0e97bd7a77e57173b405af1fd2a803",
+    "mode": "ENGINEER",
+    "source": {
+      "c7CompositionIdentity": "hito_c7_composition_e78bbc663ff35280b3cb9623ed15ac8646271cdf945f9fb53c515b6156667ac8",
+      "c6CompositionIdentity": "hito_c6_composition_aa321918a9e022c914486b6d47b5ccf5b59aceccc25f263cdbe2592fca4cb881",
+      "g15EnvelopeIdentity": "hito_g15_envelope_3d91a9091dc40f4aae3d4d6902b309da2e60725b43deec911e4a742afbd0eb55",
+      "semanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+      "g16AssessmentIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+      "phase3PulseIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+      "phase3MriIdentity": "2bf1a325981dbd548ac03b3b75e1f01dd8e8a2b8967762618149c157aafd675e",
+      "selectedViewIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e"
+    },
+    "project": {
+      "value": {
+        "projectIdentity": "project_maat_phase0",
+        "whereAmI": "MAAT Phase 0 is at canonical model revision 2; bounded status is BOUNDED_ATTENTION."
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "reality": {
+      "value": {
+        "c7CompositionIdentity": "hito_c7_composition_e78bbc663ff35280b3cb9623ed15ac8646271cdf945f9fb53c515b6156667ac8",
+        "c6CompositionIdentity": "hito_c6_composition_aa321918a9e022c914486b6d47b5ccf5b59aceccc25f263cdbe2592fca4cb881",
+        "semanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+        "g8RealityIdentity": "hito_g8_semantic_reality_eb9784e06e64940592736844be49dd175cc7556d6ed07537c38dad302662189d",
+        "g16AssessmentIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+        "overallStatus": "BOUNDED_ATTENTION"
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "protocolRulesets": {
+      "value": {
+        "c7": "hito-1.0-c7-g16-installability-migration-recovery-v1",
+        "g16": "hito-installability-migration-recovery-v1",
+        "c6": "hito-1.0-c6-g15-universal-protocol-projection-v1",
+        "g15": "hito-universal-protocol-projection-v1-repair1"
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "operationalMode": {
+      "value": {
+        "allowedModes": [
+          "UNATTACHED",
+          "OBSERVATION_DISCOVERY",
+          "GOVERNED_ATTACHED",
+          "RECOVERY",
+          "EMERGENCY_CONTINUITY",
+          "RECONCILIATION"
+        ],
+        "classification": "OPERATIONAL_MODE_NOT_ONTOLOGY",
+        "requested": "GOVERNED_ATTACHED",
+        "previous": "GOVERNED_ATTACHED",
+        "effective": "GOVERNED_ATTACHED",
+        "transitionState": "NO_CHANGE",
+        "authorityIdentity": null,
+        "reasonCodes": [
+          "IDEMPOTENT_OPERATIONAL_MODE_ASSESSMENT"
+        ]
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.g16",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+          "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "intent": {
+      "value": {
+        "records": [
+          {
+            "intentProjectionId": "hito_g15_intent_e7cf879a6f5ffbfdd1c4948ea3796f246c124f24097f629877ed01e72e55c255",
+            "recordKind": "CANONICAL_INTENT_RECORD",
+            "sourceAuthority": "DECLARED_INTENT",
+            "displayedRole": "DECLARED_GOVERNED_INTENT",
+            "executionAuthority": false,
+            "scope": {
+              "kind": "PROJECT",
+              "identity": "project_maat_phase0"
+            },
+            "text": "Represent and validate MAAT canonical engineering truth deterministically.",
+            "provenance": "phase0:fixture"
+          }
+        ],
+        "extractedCandidates": [],
+        "declaredIntentImported": false,
+        "agentProposalCanonicalAuthority": false,
+        "recommendationIsCommitment": false,
+        "commitmentIsExecutionAuthority": false
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth.intents",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.g16",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+          "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "currentObjective": {
+      "value": "Represent and validate MAAT canonical engineering truth deterministically.",
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "exactNextSafeMutation": {
+      "value": {
+        "nextStep": {
+          "state": "PHASE4_NEXT_SAFE_MUTATION",
+          "sourcePhase4DecisionIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+          "nextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+          "projection": {
+            "mutation": {
+              "mutationId": "phase4_mutation_855996f9835a6500a166a134d84f4a87",
+              "reason": "A current canonical capability candidate exists with a resolved current runtime home.",
+              "affectedEntityIds": [
+                "cap_schema_contract",
+                "project_maat_phase0"
+              ],
+              "expectedEffect": "Verify the existing canonical capability against its named evidence boundary.",
+              "proposal": "Verify the existing canonical capability against its named evidence boundary.",
+              "risk": "Derived Phase 4 output is not permission to mutate; canonical and target authority remain protected.",
+              "rollbackPath": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+              "proofPlan": [
+                "evidence_phase0_fixture",
+                "Re-run deterministic Phase 4 analysis",
+                "Validate canonical model, history, and evidence heads"
+              ],
+              "status": "PROPOSED",
+              "evidenceIds": [
+                "evidence_phase0_fixture"
+              ],
+              "provenance": {
+                "observationClass": "RECONCILED",
+                "source": "hito:phase4:deterministic-semantic-decision-engine",
+                "sourceRef": "phase4:proposal:phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                "confidence": 1,
+                "observedAt": "1970-01-01T00:00:00.000Z",
+                "modelRevision": 2
+              }
+            },
+            "plainLanguageAction": "Verify the existing canonical capability against its named evidence boundary.",
+            "reasonNextSafe": "Existing live canonical capability must be verified before any construction.",
+            "affectedPromiseId": "promise_phase0",
+            "affectedCapabilityId": "cap_schema_contract",
+            "affectedSubsystemId": "subsystem_constitution",
+            "affectedRuntimePath": "phase0/contracts",
+            "expectedFiles": [
+              "phase0/contracts/canonical-model.schema.json",
+              "phase0/contracts/model.ts",
+              "phase0/contracts/validation.ts"
+            ],
+            "expectedApis": [],
+            "expectedStateAuthorities": [],
+            "expectedEventAuthorities": [],
+            "expectedConfiguration": [],
+            "expectedDependencies": [],
+            "safeZone": [
+              "derived Phase 4 report",
+              "phase0/contracts/canonical-model.schema.json",
+              "phase0/contracts/model.ts",
+              "phase0/contracts/validation.ts"
+            ],
+            "unsafeZone": [
+              "canonical .maat/evidence-manifest.json",
+              "canonical .maat/history.jsonl",
+              "canonical .maat/model.json",
+              "governed target execution",
+              "Phase 0-3 locked evidence"
+            ],
+            "userVisibleEffect": "No user-facing change is executed; the output explains one evidence-bounded next safe action.",
+            "expectedRuntimeEffect": "None until a separately approved and executed mutation has named runtime evidence.",
+            "expectedEvidence": [
+              "evidence_phase0_fixture",
+              "Re-run deterministic Phase 4 analysis",
+              "Validate canonical model, history, and evidence heads"
+            ],
+            "regressionScope": [
+              "cap_schema_contract",
+              "cap_verification_contract"
+            ],
+            "rollbackRecoveryPlan": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+            "doNotTouch": {
+              "protectedCapabilityIds": [
+                "cap_schema_contract"
+              ],
+              "currentRuntimeHomeIds": [
+                "runtime_phase0_persistence",
+                "runtime_phase0_schema",
+                "runtime_phase0_security",
+                "runtime_phase0_verification"
+              ],
+              "stateAuthorities": [],
+              "eventAuthorities": [],
+              "persistenceAuthorities": [],
+              "evidenceAuthorityIds": [
+                "evidence_phase0_fixture"
+              ],
+              "redZones": [
+                "canonical .maat/evidence-manifest.json",
+                "canonical .maat/history.jsonl",
+                "canonical .maat/model.json",
+                "governed target execution",
+                "Phase 0-3 locked evidence"
+              ],
+              "unaffectedCapabilityIds": [
+                "cap_persistence_contract",
+                "cap_security_contract",
+                "cap_verification_contract"
+              ]
+            },
+            "approvalExecutionStatus": "NON_EXECUTING_PROPOSAL"
+          },
+          "exactSourceAuthorityBound": true,
+          "executionAuthority": false
+        },
+        "actionRoute": {
+          "state": "GOVERNED_HANDOFF_AVAILABLE",
+          "routeId": "hito_g15_action_route_94b56a43fdc36caa649883d389881cf946f8e47bf19b7038b3bb1d81497de770",
+          "sourceNextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+          "destination": "SEPARATE_GOVERNED_ACTION_WORKFLOW",
+          "mutatingCommand": null,
+          "semanticAuthority": false,
+          "executionAuthority": false
+        },
+        "explanation": "Verify the existing canonical capability against its named evidence boundary.",
+        "mutatingCommand": null
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth.nextStep",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "why": {
+      "value": {
+        "explanation": "Existing live canonical capability must be verified before any construction. Semantic verdict identity: hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395.",
+        "materialStateGroups": [
+          {
+            "groupId": "hito_g15_material_group_d71031200a697c2f12b9c4ac82d967bce3be0ba16a731f8519967c41680351fb",
+            "category": "PROTECTED_AUTHORITY",
+            "severity": "NOTICE",
+            "scope": {
+              "kind": "SUBJECT",
+              "identity": "cap_schema_contract",
+              "globalImpact": false
+            },
+            "count": 1,
+            "materialStateIds": [
+              "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a"
+            ],
+            "sourceAuthorities": [
+              "PHASE4_DO_NOT_TOUCH"
+            ],
+            "headline": "Protected authority and do-not-touch boundaries apply"
+          }
+        ],
+        "materialStates": [
+          {
+            "materialStateId": "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a",
+            "category": "PROTECTED_AUTHORITY",
+            "severity": "NOTICE",
+            "scope": {
+              "kind": "SUBJECT",
+              "identity": "cap_schema_contract",
+              "globalImpact": false
+            },
+            "sourceAuthority": "PHASE4_DO_NOT_TOUCH",
+            "sourceIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+            "summary": "Protected authority and do-not-touch boundaries apply",
+            "reasonCodes": [
+              "Phase 0-3 locked evidence",
+              "canonical .maat/evidence-manifest.json",
+              "canonical .maat/history.jsonl",
+              "canonical .maat/model.json",
+              "governed target execution"
+            ]
+          }
+        ],
+        "semanticVerdictIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395"
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "blockers": {
+      "value": [],
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "contradictionsAndConflicts": {
+      "value": [],
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "unknownOrIndeterminate": {
+      "value": [],
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "protectedAuthorities": {
+      "value": [
+        {
+          "materialStateId": "hito_g15_material_6cc27617eeec6406e3a289e8dbd62d015535c182f8c3f1cd17e2c347d0622c0a",
+          "category": "PROTECTED_AUTHORITY",
+          "severity": "NOTICE",
+          "scope": {
+            "kind": "SUBJECT",
+            "identity": "cap_schema_contract",
+            "globalImpact": false
+          },
+          "sourceAuthority": "PHASE4_DO_NOT_TOUCH",
+          "sourceIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+          "summary": "Protected authority and do-not-touch boundaries apply",
+          "reasonCodes": [
+            "Phase 0-3 locked evidence",
+            "canonical .maat/evidence-manifest.json",
+            "canonical .maat/history.jsonl",
+            "canonical .maat/model.json",
+            "governed target execution"
+          ]
+        }
+      ],
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth.materialStates[category=PROTECTED_AUTHORITY]",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "EXACT_TYPED_SUBSET"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "evidence": {
+      "value": {
+        "phase3EvidenceClasses": {
+          "EXPLICIT": 5,
+          "OBSERVED": 0,
+          "RECONCILED": 0,
+          "INFERRED": 0,
+          "UNKNOWN": 0
+        },
+        "checks": {
+          "kind": "HITO_G15_BOUNDED_CHECK_PROJECTION",
+          "checks": [
+            {
+              "checkId": "canonical-source-binding",
+              "state": "SATISFIED",
+              "scope": {
+                "kind": "PROJECT",
+                "identity": "project_maat_phase0"
+              },
+              "detail": "The projection is bound to the supplied validated canonical model identity."
+            },
+            {
+              "checkId": "freshness-watermark",
+              "state": "SATISFIED",
+              "scope": {
+                "kind": "PROJECT",
+                "identity": "project_maat_phase0"
+              },
+              "detail": "Freshness state is CURRENT."
+            },
+            {
+              "checkId": "semantic-conflict",
+              "state": "SATISFIED",
+              "scope": {
+                "kind": "PROJECT",
+                "identity": "project_maat_phase0"
+              },
+              "detail": "No upstream bounded conflict is present in this snapshot."
+            },
+            {
+              "checkId": "protected-authority",
+              "state": "ATTENTION",
+              "scope": {
+                "kind": "PROJECT",
+                "identity": "project_maat_phase0"
+              },
+              "detail": "Protected authority remains visible and nonexecuting."
+            },
+            {
+              "checkId": "observation-coverage",
+              "state": "SATISFIED",
+              "scope": {
+                "kind": "TARGET",
+                "identity": "cap_schema_contract"
+              },
+              "detail": "Bounded observation coverage is BOUND_COMPLETE."
+            },
+            {
+              "checkId": "execution-authority",
+              "state": "NOT_APPLICABLE",
+              "scope": {
+                "kind": "ACTION",
+                "identity": "project_maat_phase0"
+              },
+              "detail": "G15 and its CLI grant no execution authority."
+            }
+          ],
+          "executionPerformed": false,
+          "canonicalAuthority": false
+        },
+        "evidenceHead": {
+          "sequence": 1,
+          "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+        },
+        "evidenceApplicability": "NOT_REQUESTED"
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth.check",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "freshness": {
+      "value": {
+        "watermarkId": "hito_g15_freshness_9cd1de2e2ee80c24c120abf5ef67bf7adaea2a2484503c78eee386cc3abcc0e4",
+        "state": "CURRENT",
+        "snapshotReadKind": "VALIDATED_CANONICAL",
+        "realityRevisionObserved": 2,
+        "canonicalModelIntegrityHash": "2e705f9ac10dbff40fa18feffe9dbb1681300470794e3e657bd6164660a6c395",
+        "historyHead": {
+          "sequence": 3,
+          "eventHash": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3"
+        },
+        "evidenceHead": {
+          "sequence": 1,
+          "manifestHash": "47cc240879f55da58bfc4989a998eddf7305b3bb24881d95305aecde4e943443"
+        },
+        "observationProjectionIdentity": "hito_g14_observation_af0de5a33afaf24265a8ff507eabe9ed4ea0b71826b77abacdc69594a32ad2c6",
+        "observationApplicability": "APPLICABLE",
+        "evidenceApplicability": "NOT_REQUESTED",
+        "observationCoverage": "BOUND_COMPLETE",
+        "causalPositionIdentity": "ed3cd4d195420481026e5ae1857708a4d2f483e34771c84910d86fa497b6b6b3",
+        "reasonCodes": [],
+        "currentClaimBounded": true
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth.freshnessWatermark",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_freshness_9cd1de2e2ee80c24c120abf5ef67bf7adaea2a2484503c78eee386cc3abcc0e4",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "coverage": {
+      "value": {
+        "observationCoverage": "BOUND_COMPLETE",
+        "observationApplicability": "APPLICABLE",
+        "evidenceApplicability": "NOT_REQUESTED",
+        "coverageMaterialStates": [],
+        "support": {
+          "declarations": [],
+          "vocabulary": [
+            "SUPPORTED",
+            "PARTIALLY_SUPPORTED",
+            "UNQUALIFIED",
+            "UNSUPPORTED",
+            "INDETERMINATE"
+          ],
+          "universalPlatformParityClaimed": false,
+          "universalLanguageParityClaimed": false,
+          "enterpriseScaleQualified": false,
+          "scaleStatus": "PARTIAL_C7_OPERATING_ENVELOPE_ONLY"
+        },
+        "enforcementCoverage": {
+          "declarations": [],
+          "unmanagedExecutionPreventedUniversally": false,
+          "productionCredentialsRequired": false
+        }
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.g16",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+          "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "runtimeAndTerritory": {
+      "value": {
+        "phase3Runtime": {
+          "currentHomeIds": [
+            "runtime_phase0_persistence",
+            "runtime_phase0_schema",
+            "runtime_phase0_security",
+            "runtime_phase0_verification"
+          ],
+          "historicalHomeIds": [],
+          "runtimeGapCapabilityIds": [],
+          "unresolvedCapabilityIds": [],
+          "ambiguityCount": 0,
+          "conflictCount": 0
+        },
+        "operationalMode": {
+          "allowedModes": [
+            "UNATTACHED",
+            "OBSERVATION_DISCOVERY",
+            "GOVERNED_ATTACHED",
+            "RECOVERY",
+            "EMERGENCY_CONTINUITY",
+            "RECONCILIATION"
+          ],
+          "classification": "OPERATIONAL_MODE_NOT_ONTOLOGY",
+          "requested": "GOVERNED_ATTACHED",
+          "previous": "GOVERNED_ATTACHED",
+          "effective": "GOVERNED_ATTACHED",
+          "transitionState": "NO_CHANGE",
+          "authorityIdentity": null,
+          "reasonCodes": [
+            "IDEMPOTENT_OPERATIONAL_MODE_ASSESSMENT"
+          ]
+        },
+        "discovery": {
+          "observation": null,
+          "observationAuthority": false,
+          "genesisTrustState": "NOT_OBSERVED",
+          "declaredIntentImported": false,
+          "externalTerritoryBounded": true
+        },
+        "reconciliation": {
+          "state": "NOT_REQUIRED",
+          "acceptedSemanticContinuityIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "observedPhysicalStateIdentity": null,
+          "observedPhysicalStateLegitimized": false,
+          "sourceTruthReuse": "G8_THROUGH_G15_EXACT_SAME_CALL",
+          "nextGovernanceStep": {
+            "state": "PHASE4_NEXT_SAFE_MUTATION",
+            "sourcePhase4DecisionIdentity": "derived_drift_report_2_hito-phase4-semantic-decision-v1-repair2_c3f0707d1cc9ba3d98447b9c3b10ddcb",
+            "nextSafeMutationIdentity": "hito_g15_phase4_next_6e39e0ae9e413ab12f75f424e0f7560a79f3c0bd92599205436cc3b5e9ca4a05",
+            "projection": {
+              "mutation": {
+                "mutationId": "phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                "reason": "A current canonical capability candidate exists with a resolved current runtime home.",
+                "affectedEntityIds": [
+                  "cap_schema_contract",
+                  "project_maat_phase0"
+                ],
+                "expectedEffect": "Verify the existing canonical capability against its named evidence boundary.",
+                "proposal": "Verify the existing canonical capability against its named evidence boundary.",
+                "risk": "Derived Phase 4 output is not permission to mutate; canonical and target authority remain protected.",
+                "rollbackPath": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+                "proofPlan": [
+                  "evidence_phase0_fixture",
+                  "Re-run deterministic Phase 4 analysis",
+                  "Validate canonical model, history, and evidence heads"
+                ],
+                "status": "PROPOSED",
+                "evidenceIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "provenance": {
+                  "observationClass": "RECONCILED",
+                  "source": "hito:phase4:deterministic-semantic-decision-engine",
+                  "sourceRef": "phase4:proposal:phase4_mutation_855996f9835a6500a166a134d84f4a87",
+                  "confidence": 1,
+                  "observedAt": "1970-01-01T00:00:00.000Z",
+                  "modelRevision": 2
+                }
+              },
+              "plainLanguageAction": "Verify the existing canonical capability against its named evidence boundary.",
+              "reasonNextSafe": "Existing live canonical capability must be verified before any construction.",
+              "affectedPromiseId": "promise_phase0",
+              "affectedCapabilityId": "cap_schema_contract",
+              "affectedSubsystemId": "subsystem_constitution",
+              "affectedRuntimePath": "phase0/contracts",
+              "expectedFiles": [
+                "phase0/contracts/canonical-model.schema.json",
+                "phase0/contracts/model.ts",
+                "phase0/contracts/validation.ts"
+              ],
+              "expectedApis": [],
+              "expectedStateAuthorities": [],
+              "expectedEventAuthorities": [],
+              "expectedConfiguration": [],
+              "expectedDependencies": [],
+              "safeZone": [
+                "derived Phase 4 report",
+                "phase0/contracts/canonical-model.schema.json",
+                "phase0/contracts/model.ts",
+                "phase0/contracts/validation.ts"
+              ],
+              "unsafeZone": [
+                "canonical .maat/evidence-manifest.json",
+                "canonical .maat/history.jsonl",
+                "canonical .maat/model.json",
+                "governed target execution",
+                "Phase 0-3 locked evidence"
+              ],
+              "userVisibleEffect": "No user-facing change is executed; the output explains one evidence-bounded next safe action.",
+              "expectedRuntimeEffect": "None until a separately approved and executed mutation has named runtime evidence.",
+              "expectedEvidence": [
+                "evidence_phase0_fixture",
+                "Re-run deterministic Phase 4 analysis",
+                "Validate canonical model, history, and evidence heads"
+              ],
+              "regressionScope": [
+                "cap_schema_contract",
+                "cap_verification_contract"
+              ],
+              "rollbackRecoveryPlan": "No execution occurred. Discard the derived output and regenerate from validated current authority when needed.",
+              "doNotTouch": {
+                "protectedCapabilityIds": [
+                  "cap_schema_contract"
+                ],
+                "currentRuntimeHomeIds": [
+                  "runtime_phase0_persistence",
+                  "runtime_phase0_schema",
+                  "runtime_phase0_security",
+                  "runtime_phase0_verification"
+                ],
+                "stateAuthorities": [],
+                "eventAuthorities": [],
+                "persistenceAuthorities": [],
+                "evidenceAuthorityIds": [
+                  "evidence_phase0_fixture"
+                ],
+                "redZones": [
+                  "canonical .maat/evidence-manifest.json",
+                  "canonical .maat/history.jsonl",
+                  "canonical .maat/model.json",
+                  "governed target execution",
+                  "Phase 0-3 locked evidence"
+                ],
+                "unaffectedCapabilityIds": [
+                  "cap_persistence_contract",
+                  "cap_security_contract",
+                  "cap_verification_contract"
+                ]
+              },
+              "approvalExecutionStatus": "NON_EXECUTING_PROPOSAL"
+            },
+            "exactSourceAuthorityBound": true,
+            "executionAuthority": false
+          },
+          "targetRepairExecuted": false,
+          "scopedTerritories": [],
+          "reasonCodes": [
+            "NO_RECONCILIATION_TRIGGER_OBSERVED"
+          ]
+        },
+        "compatibility": {
+          "state": "COMPATIBLE",
+          "engineProtocolIdentity": "hito-engine-protocol-c7-v1",
+          "g16RulesetIdentity": "hito-installability-migration-recovery-v1",
+          "canonicalSchemaVersion": "0.1.0",
+          "observed": {
+            "engineProtocolIdentity": "hito-engine-protocol-c7-v1",
+            "producingRulesetVersion": "hito-installability-migration-recovery-v1",
+            "canonicalSchemaVersion": "0.1.0",
+            "evidenceIdentity": "evidence-c8-engine-ruleset-schema",
+            "historicalBindings": [
+              {
+                "recordIdentity": "history-c7-final-closure",
+                "producingRulesetVersion": "hito-installability-migration-recovery-v1",
+                "semanticIdentity": "semantic-c7-final-closure"
+              }
+            ]
+          },
+          "authorityBearing": true,
+          "reconciliationRequired": false,
+          "historicalBindingsPreserved": true,
+          "historicalReinterpretationPerformed": false,
+          "reasonCodes": [
+            "ENGINE_RULESET_SCHEMA_EXACTLY_COMPATIBLE"
+          ]
+        },
+        "migration": {
+          "state": "SPECIFIED_BUT_NOT_AUTHORIZED",
+          "sourceNamespace": ".maat/",
+          "targetNamespace": ".hito/",
+          "eligibility": "PLAN_ELIGIBLE",
+          "plan": [
+            "ASSESS_SOURCE_COMPATIBILITY",
+            "REQUIRE_SEPARATE_MIGRATION_AUTHORITY",
+            "VERIFY_POST_MIGRATION_BEFORE_PROMOTION"
+          ],
+          "executionAuthorized": false,
+          "hitoNamespaceCreationAuthorized": false,
+          "dualWriteAuthorized": false,
+          "migrationCompleted": false,
+          "reasonCodes": [
+            "PLAN_ONLY_ELIGIBLE_SEPARATE_AUTHORIZATION_STILL_REQUIRED"
+          ]
+        }
+      },
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.g16",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / BOUNDED OPERATIONAL ASSESSMENT / NON_ONTOLOGY / NONEXECUTING",
+          "sourceIdentity": "hito_g16_assessment_a2b192cb685ac7759576d8bb057bb7d8ffbcb791ce1fe4786d9ed47eff5d7538",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "safeToChange": {
+      "value": "derived Phase 4 report, phase0/contracts/canonical-model.schema.json, phase0/contracts/model.ts, phase0/contracts/validation.ts",
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "doneWhen": {
+      "value": "Proof projection is NOT_STARTED; bounded observed-result projection is COMPLETE. Neither grants deployment or execution authority.",
+      "provenance": [
+        {
+          "sourcePath": "snapshot.c6.c5.c4.c3.c2.c1.phase3.pulse",
+          "sourceAuthority": "PHASE3_DERIVED_OUTPUT",
+          "sourceIdentity": "c82e884cc4d667abac3d36f7948cc574ac58f27e91104711ce2d93371c35cc2f",
+          "presentationTransform": "G15_SANITIZED_COPY"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.governedTruth",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_semantic_verdict_d7b2cbb4d8567781ea523401774abd1bfc095647b495ba27f5f8559b2b08f395",
+          "presentationTransform": "NONE"
+        },
+        {
+          "sourcePath": "snapshot.c6.g15.projections.ENGINEER",
+          "sourceAuthority": "DERIVED / DETERMINISTIC / READ_ONLY / NON_CANONICAL / NONEXECUTING / PROJECTION_ONLY",
+          "sourceIdentity": "hito_g15_view_627fed30a67fb4c2c3899a6cbaf63480c88c8a7ef69a12251fe9ad75a773844e",
+          "presentationTransform": "NONE"
+        }
+      ],
+      "semanticAuthority": false,
+      "executionAuthority": false
+    },
+    "mutatingCommand": null,
+    "governanceBoundary": {
+      "hostNeutral": true,
+      "derivedOnly": true,
+      "readOnly": true,
+      "canonicalAuthority": false,
+      "ontologyAuthority": false,
+      "nextStepAuthority": false,
+      "realityJudgeAuthority": false,
+      "executionAuthority": false,
+      "browserDependency": false,
+      "modelProviderDependency": false,
+      "acceptsAgentProseAsIntent": false,
+      "acceptsCallerVerdict": false,
+      "acceptsCallerNextStep": false,
+      "acceptsCallerProtectedScope": false,
+      "createsCommitment": false,
+      "createsExecutionAuthority": false
+    },
+    "zeroEffectCounters": {
+      "canonicalWrites": 0,
+      "hitoStateWrites": 0,
+      "targetMutations": 0,
+      "targetExecutions": 0,
+      "providerModelCalls": 0,
+      "unauthorizedNetworkCalls": 0,
+      "gitMutations": 0,
+      "hitoNamespaceCreations": 0,
+      "namespaceMigrations": 0
+    }
+  }
+}

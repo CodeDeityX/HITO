@@ -1,0 +1,51 @@
+{
+  "name": "@maat/phase0",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MAAT Phase 0 constitution and canonical schema contract",
+  "main": "dist/contracts/index.js",
+  "types": "dist/contracts/index.d.ts",
+  "scripts": {
+    "build": "tsc && node dist/tools/copy-phase3-local-assets.js",
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm build && node dist/tests/run-tests.js && node dist/tests/run-phase4-tests.js",
+    "phase4:test": "pnpm build && node dist/tests/run-phase4-tests.js",
+    "phase5:test": "pnpm build && node dist/tests/run-phase5-tests.js",
+    "phase6:test": "pnpm build && node dist/tests/run-phase6-tests.js",
+    "phase6:package": "pnpm build && node dist/tools/phase6-package.js",
+    "phase6:package-repair1": "pnpm build && node dist/tools/phase6-package.js --repair1",
+    "phase6:package-repair1-ruleset-identity-closure-retry1": "pnpm build && node dist/tools/phase6-package.js --repair1-ruleset-identity-closure-retry1",
+    "phase5:package": "pnpm build && node dist/tools/phase5-package.js",
+    "phase5:package-repair1": "pnpm build && node dist/tools/phase5-package.js --repair1",
+    "phase4:package": "pnpm build && node dist/tools/phase4-package.js --repair2",
+    "phase4:repair1:package": "pnpm build && node dist/tools/phase4-package.js --repair1",
+    "phase4:repair2:package": "pnpm build && node dist/tools/phase4-package.js --repair2",
+    "generate-fixtures": "pnpm build && node dist/tools/generate-fixture.js",
+    "phase3:create-dogfood-fixture": "pnpm build && node dist/phase3/create-dogfood-fixture.js",
+    "phase3:serve-local": "pnpm build && node dist/phase3/local-host.js",
+    "phase3:generate-repair1-evidence": "pnpm build && node dist/tools/generate-phase3-repair1-evidence.js",
+    "phase3:generate-repair2-browser-inventory": "pnpm build && node dist/tools/generate-phase3-repair2-browser-inventory.js",
+    "phase3:generate-repair2-evidence": "pnpm build && node dist/tools/generate-phase3-repair2-evidence.js",
+    "phase3:scan-repair2-review-package": "pnpm build && node dist/tools/generate-phase3-repair2-review-package-scan.js",
+    "phase3:run-repair3-tests": "pnpm build && node dist/tests/run-phase3-repair3-tests.js",
+    "phase3:generate-repair3-evidence": "pnpm build && node dist/tools/generate-phase3-repair3-evidence.js",
+    "phase3:scan-repair3-review-package": "pnpm build && node dist/tools/generate-phase3-repair3-review-package-scan.js",
+    "verify": "pnpm test"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "typescript": "5.9.3"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "CodeDeityX",
+    "url": "https://github.com/CodeDeityX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeDeityX/HITO.git",
+    "directory": "core/phase0"
+  }
+}

@@ -1,0 +1,12 @@
+import type { CanonicalModel, EvidenceManifest, EntityProvenance, HistoryEvent, PersistenceSnapshot } from "../contracts";
+export declare const FIXTURE_TIMESTAMP = "2026-08-19T00:00:00.000Z";
+export declare const FIXTURE_EVIDENCE_PATH = "phase0/fixtures/phase0-evidence-artifact.txt";
+export declare const FIXTURE_EVIDENCE_BYTES = "MAAT_PHASE_0_FIXTURE_EVIDENCE\n";
+export declare const FIXTURE_EVIDENCE_HASH: string;
+export declare function fixtureProvenance(source: string, observationClass?: EntityProvenance["observationClass"]): EntityProvenance;
+export declare function createMinimalModel(): CanonicalModel;
+export declare function createHistory(): HistoryEvent[];
+export declare function createEvidenceManifest(): EvidenceManifest;
+export declare function createPreparedSnapshot(): PersistenceSnapshot;
+export declare function createPreparedModel(): CanonicalModel;
+export declare function createFixtureManifestHash(): string;

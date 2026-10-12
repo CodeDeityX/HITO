@@ -1,0 +1,11 @@
+{
+  "schema": "HITO_R9F_R2_BUNDLED_CONTROLS_V1",
+  "bundledControlsOnly": true,
+  "executedAgainstExactCandidate": false,
+  "candidateSha": null,
+  "finalArchiveShaClaim": false,
+  "VSIX_CONTENT_TYPES_PRESENT": true,
+  "VSIX_VERSION_UNIQUE": true,
+  "VSIX_INTERNAL_EXTERNAL_VERSION_PARITY": true,
+  "VSIX_REOPEN_VALID": true
+}

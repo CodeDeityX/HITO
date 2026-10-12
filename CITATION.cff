@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use HITO in research or engineering work, please cite this software."
+title: "HITO: Semantic Continuity for Engineering Projects"
+type: software
+authors:
+  - name: "CodeDeityX"
+version: "0.1.0"
+repository-code: "https://github.com/CodeDeityX/HITO"
+url: "https://github.com/CodeDeityX/HITO"
+license: "Apache-2.0"
+abstract: >-
+  HITO is a local-first Semantic Continuity System for preserving engineering
+  meaning, governed project state, evidence, unknowns, contradictions,
+  protected boundaries, and justified continuation across humans, AI agents,
+  sessions, and tools.

@@ -1,0 +1,164 @@
+{
+  "name": "@hito/vscode-compat",
+  "displayName": "HITO VS Code Compatibility Adapter",
+  "description": "Internal compatibility adapter retained for the host-neutral HITO projection path.",
+  "version": "0.1.0",
+  "publisher": "CodeDeityX",
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./dist/extension/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:hito.projectPulse",
+    "onView:hito.next",
+    "onView:hito.evidence",
+    "onView:hito.history",
+    "onView:hito.protected",
+    "onView:hito.runtime",
+    "onView:hito.agentContext",
+    "onCommand:hito.status",
+    "onCommand:hito.next",
+    "onCommand:hito.why",
+    "onCommand:hito.mri",
+    "onCommand:hito.map",
+    "onCommand:hito.evidence",
+    "onCommand:hito.history",
+    "onCommand:hito.protected",
+    "onCommand:hito.agentContext",
+    "onCommand:hito.refresh"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hito",
+          "title": "HITO",
+          "icon": "media/hito.svg"
+        }
+      ]
+    },
+    "views": {
+      "hito": [
+        {
+          "id": "hito.projectPulse",
+          "name": "Project Pulse"
+        },
+        {
+          "id": "hito.next",
+          "name": "HITO Next"
+        },
+        {
+          "id": "hito.evidence",
+          "name": "Evidence"
+        },
+        {
+          "id": "hito.history",
+          "name": "History"
+        },
+        {
+          "id": "hito.protected",
+          "name": "Protected / Do Not Touch"
+        },
+        {
+          "id": "hito.runtime",
+          "name": "Runtime"
+        },
+        {
+          "id": "hito.agentContext",
+          "name": "Agent Context"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hito.status",
+        "title": "HITO: Status",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.next",
+        "title": "HITO: Next",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.why",
+        "title": "HITO: Why",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.mri",
+        "title": "HITO: MRI",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.map",
+        "title": "HITO: Map",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.evidence",
+        "title": "HITO: Evidence",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.history",
+        "title": "HITO: History",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.protected",
+        "title": "HITO: Protected",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.agentContext",
+        "title": "HITO: Agent Context",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.refresh",
+        "title": "HITO: Refresh",
+        "category": "HITO",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hito.refresh",
+          "when": "view == hito.projectPulse || view == hito.next || view == hito.evidence || view == hito.history || view == hito.protected || view == hito.runtime || view == hito.agentContext",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "HITO",
+      "properties": {
+        "hito.localPayloadPath": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Workspace-relative path to an exact local HITO IDE host payload plus optional agent context. The wrapper reads this file only and never writes project state."
+        }
+      }
+    }
+  },
+  "author": {
+    "name": "CodeDeityX",
+    "url": "https://github.com/CodeDeityX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeDeityX/HITO.git",
+    "directory": "core/vscode-hito"
+  }
+}

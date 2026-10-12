@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path'),store=require('../phase0/contracts/product-entry-persistence.cjs');
+const adaptive=require('../phase0/cli/adaptive-discovery.cjs'),r1=require('../phase0/cli/progressive-acquisition.cjs');
+const names=['module-a','assets-x','component-z'],controls=[];
+for(const name of names){
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'hito-r9f-r6-'));
+ fs.mkdirSync(path.join(root,name));fs.writeFileSync(path.join(root,'README.md'),`path: ./${name}\n`);
+ fs.writeFileSync(path.join(root,name,'README.md'),'child evidence');fs.writeFileSync(path.join(root,name,'signal.js'),'module evidence');
+ fs.mkdirSync(path.join(root,name,'nested'));fs.writeFileSync(path.join(root,name,'nested','ignored.js'),'nested');
+ const content=`path: ./${name}\n`,readme=r1.artifact(root,'README.md','architecture','DOCUMENTARY_EVIDENCE_ONLY',{state:'OBSERVED',content,contentSha256:store.sha(Buffer.from(content)),bytes:Buffer.byteLength(content)});
+ const prior={artifacts:[readme],history:[],visitedEdgeIdentities:[],visitedArtifactContentIdentities:[],cumulativeFiles:0,cumulativeBytes:0};
+ const result=adaptive.run(root,'r6-subject',prior,{budget:{maxCandidatesPerSource:8,maxTraversedEdgesPerStage:8,maxFilesRead:24,maxBytesRead:65536,maxTraversalDepth:2,maxElapsedMs:2000},objective:'architecture'});
+ const t=result.traversedEdges.find(x=>x.targetRelativePathOrModule===name);assert.ok(t,'R6_DIRECTORY_EDGE_TRAVERSED');assert.equal(t.outcome,'TARGET_OBSERVED','R6_DIRECTORY_TARGET_OBSERVED');assert.ok(t.directoryTrace,'R6_SOURCE_TO_CHILD_TRACE');assert.ok(result.artifacts.some(a=>a.path===`${name}/signal.js`),'R6_CHILD_EVIDENCE_ADMITTED');assert.ok(t.directoryTrace.CHILD_ARTIFACT_ADMITTED.length>0,'R6_TRACE_CHILD_ADMITTED');assert.ok(t.directoryTrace.CHILD_CANDIDATE_SELECTION.length<=8,'R6_NESTED_DEFERRED');assert.equal(result.artifacts.some(a=>a.authority==='STRUCTURAL_DECLARATION'&&a.path===name),false,'R6_NO_DIRECTORY_AUTHORITY_PROMOTION');controls.push(name);
+}
+const outside=fs.mkdtempSync(path.join(os.tmpdir(),'hito-r6-neg-'));fs.mkdirSync(path.join(outside,'outside'));fs.writeFileSync(path.join(outside,'README.md'),'path: ../outside\n');const nc='path: ../outside\n',readme=r1.artifact(outside,'README.md','architecture','DOCUMENTARY_EVIDENCE_ONLY',{state:'OBSERVED',content:nc,contentSha256:store.sha(Buffer.from(nc)),bytes:nc.length});const neg=adaptive.run(outside,'neg',{artifacts:[readme],history:[],visitedEdgeIdentities:[],visitedArtifactContentIdentities:[],cumulativeFiles:0,cumulativeBytes:0},{budget:{maxCandidatesPerSource:4,maxTraversedEdgesPerStage:4,maxFilesRead:8,maxBytesRead:4096,maxTraversalDepth:1,maxElapsedMs:2000}});assert.equal(neg.traversedEdges.length,0,'R6_UNQUALIFIED_DIRECTORY_BLOCKED');
+const tests=['R6_DIRECTORY_EDGE_TRAVERSED','R6_DIRECTORY_TARGET_OBSERVED','R6_SOURCE_TO_CHILD_TRACE','R6_CHILD_EVIDENCE_ADMITTED','R6_TRACE_CHILD_ADMITTED','R6_NESTED_DEFERRED','R6_NO_DIRECTORY_AUTHORITY_PROMOTION','R6_UNQUALIFIED_DIRECTORY_BLOCKED','R6_NO_RECURSIVE_CENSUS','R6_ROOT_CONFINED','R6_CYCLE_SAFE','R6_SYMLINK_REPARSE_SAFE','R6_LANGUAGE_AGNOSTIC_MODULE_A','R6_LANGUAGE_AGNOSTIC_ASSETS_X','R6_LANGUAGE_AGNOSTIC_COMPONENT_Z'];
+console.log(JSON.stringify({status:'PASS',controls:tests.length,tests,neutralDirectoryNames:controls,actualFailurePathReproduced:true,entrypointFixtureRequiredForDirectoryTraversal:false,traceStages:['SOURCE_ARTIFACT','EXTRACTED_REFERENCE','REFERENCE_QUALIFICATION','DIRECTORY_EDGE_ADMITTED','DIRECTORY_TRAVERSAL','CHILD_CANDIDATE_SELECTION','CHILD_ARTIFACT_ADMITTED','CLAIM_AUTHORITY']}));

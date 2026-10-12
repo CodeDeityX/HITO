@@ -1,0 +1,22 @@
+name: Feature proposal
+description: Propose a bounded HITO improvement
+title: "[Proposal] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: falsification
+    attributes:
+      label: What result would show this feature is unnecessary?

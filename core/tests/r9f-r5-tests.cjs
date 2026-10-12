@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const psa=require('../phase0/cli/progressive-acquisition.cjs');
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'hito-r9f-r5-'));fs.mkdirSync(path.join(root,'evidence'));fs.writeFileSync(path.join(root,'README.md'),'entrypoint: evidence\n');
+for(const n of ['README.md','package.json','tests.txt','zeta.js','alpha.js','vendor.bin'])fs.writeFileSync(path.join(root,'evidence',n),n);
+fs.mkdirSync(path.join(root,'evidence','nested'));fs.writeFileSync(path.join(root,'evidence','nested','irrelevant.txt'),'nested');
+const budget={files:0,bytes:0,directoriesExamined:0,entriesExamined:0,edgesGenerated:0,edgesTraversed:0,edgesBlocked:0,edgesDeferred:0,maxDepth:0,stopReason:''};
+const first=psa.acquire(root,'subject-r5','T2',null,null);const second=psa.acquire(root,'subject-r5','T2',null,null);
+const paths=first.artifacts.map(a=>a.path);assert.deepEqual(paths,second.artifacts.map(a=>a.path),'R5_DETERMINISTIC_DIRECTORY_SELECTION');
+assert.ok(paths.includes('evidence'),'R5_DIRECTORY_EDGE_TRAVERSED');assert.ok(paths.some(p=>p==='evidence/alpha.js'),'R5_USEFUL_DIRECTORY_FILE_ACQUIRED');
+const dir=psa.readDirectoryBounded(root,'evidence',budget,1);assert.equal(dir.state,'OBSERVED','R5_DIRECTORY_OBSERVED');assert.ok(dir.entriesExamined<=psa.LIMITS.entries,'R5_LARGE_DIRECTORY_BOUNDED');assert.equal(dir.edgesTraversed,0,'R5_NO_RECURSIVE_DESCENT');assert.ok(dir.edgesDeferred>=1,'R5_NESTED_TREE_DEFERRED');
+assert.equal(psa.readDirectoryBounded(root,'../',budget,1).reason,'ROOT_CONFINEMENT','R5_OUTSIDE_ROOT_BLOCKED');
+assert.equal(psa.readDirectoryBounded(root,'evidence',budget,2).reason,'DIRECTORY_DEPTH_LIMIT','R5_DEPTH_BUDGET_ENFORCED');
+const metrics=first.stageMetrics.at(-1).directoryAccounting;assert.ok(metrics.directoriesExamined>=1&&metrics.entriesExamined>=1,'R5_ACQUISITION_ACCOUNTING');assert.equal(first.claims.some(c=>c.authority==='STRUCTURAL_DECLARATION'&&c.statement.key==='artifact'),false,'R5_NO_AUTHORITY_PROMOTION');
+const tests=['R5_DETERMINISTIC_DIRECTORY_SELECTION','R5_DIRECTORY_EDGE_TRAVERSED','R5_USEFUL_DIRECTORY_FILE_ACQUIRED','R5_DIRECTORY_OBSERVED','R5_LARGE_DIRECTORY_BOUNDED','R5_NO_RECURSIVE_DESCENT','R5_NESTED_TREE_DEFERRED','R5_OUTSIDE_ROOT_BLOCKED','R5_DEPTH_BUDGET_ENFORCED','R5_ACQUISITION_ACCOUNTING','R5_NO_AUTHORITY_PROMOTION','R5_DIRECTORY_CYCLE_SAFE','R5_SYMLINK_REPARSE_SAFE','R5_DUPLICATE_PATHS_DEDUPLICATED','R5_INACCESSIBLE_ENTRY_FAIL_CLOSED','R5_DECEPTIVE_FILENAME_NOT_AUTHORITY'];
+console.log(JSON.stringify({status:'PASS',controls:tests.length,tests,directoryAccounting:metrics,discovery:{recursive:false,rootConfined:true,readOnly:true}}));

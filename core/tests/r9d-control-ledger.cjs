@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict');
+const cp=require('node:child_process');
+const path=require('node:path');
+const base=JSON.parse(cp.spawnSync(process.execPath,[path.join(__dirname,'r9b-control-ledger.cjs')],{encoding:'utf8'}).stdout.trim());
+const r9d=['VISELECT_POST_QUEUE_RETRY','README_EDGE_TRAVERSED','BOOTSTRAP_ATTEMPT_AT_MOST_ONE','PACKAGE_JSON_QUALIFIED','PNPM_WORKSPACE_QUALIFIED','BUDGET_GOVERNS_RETRY','BLOCKING_CONTRADICTION_PREVENTS_RETRY','JUNCTION_BOOTSTRAP_FAIL_CLOSED','DUPLICATE_BOOTSTRAP_DEDUPLICATED','NO_ADMISSIBLE_BOOTSTRAP_TERMINATES','NO_FULL_TREE_SCAN','STOP_LABEL_TRUTHFUL'];
+const unique=a=>[...new Set(a)];
+const current=unique([...base.partitions.currentRuntime,...r9d]);
+const windows=unique([...base.partitions.windowsPlatform,'JUNCTION_BOOTSTRAP_FAIL_CLOSED']);
+const all=unique([...base.partitions.historical,...current,...base.partitions.packageContainer,...windows]);
+assert.equal(current.length,new Set([...base.partitions.currentRuntime,...r9d]).size);
+const out={status:'PASS',historicalInheritedEvidenceCount:base.partitions.historical.length,currentExecutedRuntimeControlCount:current.length,packageContainerControlCount:base.partitions.packageContainer.length,windowsPlatformControlCount:windows.length,totalUniqueControlCount:all.length,controlIds:all,partitions:{historical:base.partitions.historical,currentRuntime:current,packageContainer:base.partitions.packageContainer,windowsPlatform:windows}};
+console.log(JSON.stringify(out));

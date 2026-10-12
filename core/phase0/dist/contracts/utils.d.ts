@@ -1,0 +1,11 @@
+import type { CanonicalModel, EvidenceManifest, HistoryEvent } from "./model";
+export declare function canonicalize(value: unknown, omitPaths?: string[]): string;
+export declare function compareUnicodeCodePointKeys(left: string, right: string): number;
+export declare function sha256Bytes(bytes: Uint8Array): string;
+export declare function sha256Text(text: string): string;
+export declare function canonicalModelBytes(model: CanonicalModel): Buffer;
+export declare function computeModelHash(model: CanonicalModel): string;
+export declare function serializeHistory(events: HistoryEvent[]): Buffer;
+export declare function computeHistoryHash(events: HistoryEvent[]): string;
+export declare function computeEvidenceManifestHash(manifest: EvidenceManifest): string;
+export declare function cloneWithModelHash(model: CanonicalModel): CanonicalModel;

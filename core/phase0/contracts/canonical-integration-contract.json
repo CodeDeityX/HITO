@@ -1,0 +1,336 @@
+{
+  "schema": "hito.canonical-integration-contract.v1",
+  "architecture": {
+    "model": "MULTIPLE_COORDINATED_OWNERS",
+    "directionalContract": "Validated canonical model/G15 truth supplies the base semantic envelope and constraints to the bounded observational runtime. R2 persists only root-bound observations, provenance, and currentness evidence. R2 returns derived evidence projections and never writes the canonical model, history, or authority. Projections consume the composed envelope and do not reconstruct semantic truth.",
+    "owners": [
+      {
+        "id": "governed-semantic-runtime",
+        "role": "CANONICAL_SEMANTIC_OWNER",
+        "source": "phase0/dist/convergence/runtime.js",
+        "truthAuthority": true,
+        "canonicalModelWriter": false,
+        "canonicalModelReader": true
+      },
+      {
+        "id": "canonical-model-persistence",
+        "role": "CANONICAL_PERSISTENCE_ADAPTER",
+        "source": "phase0/contracts/persistence.ts",
+        "truthAuthority": false,
+        "canonicalModelWriter": true,
+        "canonicalModelReader": true
+      },
+      {
+        "id": "bounded-observation-state",
+        "role": "OBSERVATIONAL_STATE_OWNER",
+        "source": "phase0/cli/adaptive-discovery.cjs",
+        "truthAuthority": false,
+        "canonicalModelWriter": false,
+        "canonicalModelReader": true
+      },
+      {
+        "id": "phase2-canonical-construction",
+        "role": "CANONICAL_MODEL_CONSTRUCTION",
+        "source": "phase0/dist/phase2/reconciler.js",
+        "truthAuthority": false,
+        "canonicalModelWriter": false,
+        "canonicalModelReader": true
+      }
+    ]
+  },
+  "runtimeEntrypoints": [
+    "bin/hito.cjs",
+    "phase0/cli/product-entry.cjs"
+  ],
+  "wiring": [
+    {
+      "from": "bin/hito.cjs",
+      "to": "phase0/cli/product-entry.cjs",
+      "tokens": [
+        "require('../phase0/cli/product-entry.cjs')",
+        "execute(command,options)"
+      ]
+    },
+    {
+      "from": "bin/hito.cjs",
+      "to": "phase0/cli/human-output.cjs",
+      "tokens": [
+        "require('../phase0/cli/human-output.cjs')",
+        "render(command,x,format)"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/dist/convergence/runtime.js",
+      "tokens": [
+        "require('../dist/convergence/runtime.js')",
+        "readHitoRuntimeFromProjectRoot"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/dist/contracts/persistence.js",
+      "tokens": [
+        "require('../dist/contracts/persistence.js')",
+        "readCanonicalRevisionValidated"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/cli/adaptive-discovery.cjs",
+      "tokens": [
+        "require('./adaptive-discovery.cjs').apply",
+        "applied.truth"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/hosts/shared/product-entry-host.cjs",
+      "tokens": [
+        "require('../hosts/shared/product-entry-host.cjs')",
+        "story(applied.truth"
+      ]
+    },
+    {
+      "from": "phase0/cli/adaptive-discovery.cjs",
+      "to": "phase0/cli/qualified-semantic-extraction.cjs",
+      "tokens": [
+        "require('./qualified-semantic-extraction.cjs').extract"
+      ]
+    },
+    {
+      "from": "phase0/cli/adaptive-discovery.cjs",
+      "to": "phase0/cli/progressive-acquisition.cjs",
+      "tokens": [
+        "require('./progressive-acquisition.cjs')",
+        "r1.refresh"
+      ]
+    },
+    {
+      "from": "phase0/cli/adaptive-discovery.cjs",
+      "to": "phase0/contracts/r2-bounded-state.cjs",
+      "tokens": [
+        "require('../contracts/r2-bounded-state.cjs')",
+        "bounded.writeReceiptAtomically"
+      ]
+    },
+    {
+      "from": "phase0/cli/adaptive-discovery.cjs",
+      "to": "phase0/contracts/r2-provenance.cjs",
+      "tokens": [
+        "require('../contracts/r2-provenance.cjs')",
+        "r2p.validateReceipt"
+      ]
+    },
+    {
+      "from": "phase0/cli/adaptive-discovery.cjs",
+      "to": "phase0/cli/physical-currentness.cjs",
+      "tokens": [
+        "require('./physical-currentness.cjs')",
+        "physical.comparePhysicalIdentity"
+      ]
+    },
+    {
+      "from": "phase0/hosts/shared/product-entry-host.cjs",
+      "to": "phase0/cli/qualified-semantic-extraction.cjs",
+      "tokens": [
+        "truth.qualifiedSemanticFacts"
+      ]
+    },
+    {
+      "from": "phase0/cli/human-output.cjs",
+      "to": "phase0/cli/bounded-projection.cjs",
+      "tokens": [
+        "require('./bounded-projection.cjs').serializeMachineProjection"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/cli/continuity-capsule.cjs",
+      "tokens": [
+        "require('./continuity-capsule.cjs')",
+        "continuityCapsule.deriveContinuityCapsule"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/convergence/canonical-bootstrap.cjs",
+      "tokens": [
+        "require('../convergence/canonical-bootstrap.cjs').admit(root)"
+      ]
+    },
+    {
+      "from": "phase0/convergence/canonical-bootstrap.cjs",
+      "to": "phase0/dist/phase2/reconciler.js",
+      "tokens": [
+        "reconcilePhase2(scan",
+        "require('../dist/phase2/reconciler.js')"
+      ]
+    },
+    {
+      "from": "phase0/convergence/canonical-bootstrap.cjs",
+      "to": "phase0/dist/convergence/g16-installability-migration-recovery.js",
+      "tokens": [
+        "discoverG16ProjectForReconciliation"
+      ]
+    },
+    {
+      "from": "phase0/cli/product-entry.cjs",
+      "to": "phase0/cli/structural-how.cjs",
+      "tokens": [
+        "require('./structural-how.cjs').derive(root,state.canonicalModel)"
+      ]
+    },
+    {
+      "from": "phase0/cli/structural-how.cjs",
+      "to": "phase0/cli/esm-imports.cjs",
+      "tokens": [
+        "require('./esm-imports.cjs')",
+        "esm.scan(source.src)"
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "root-and-nested-module-observation",
+      "implementation": "phase0/cli/qualified-semantic-extraction.cjs",
+      "runtime": "phase0/cli/adaptive-discovery.cjs",
+      "persistence": "phase0/contracts/r2-bounded-state.cjs",
+      "currentness": "phase0/cli/progressive-acquisition.cjs",
+      "projections": [
+        "phase0/hosts/shared/product-entry-host.cjs",
+        "phase0/cli/human-output.cjs",
+        "phase0/cli/bounded-projection.cjs"
+      ],
+      "witness": "tests/r10j-ci-tests.cjs"
+    },
+    {
+      "id": "bounded-child-provenance",
+      "implementation": "phase0/cli/adaptive-discovery.cjs",
+      "runtime": "phase0/cli/adaptive-discovery.cjs",
+      "persistence": "phase0/contracts/r2-provenance.cjs",
+      "currentness": "phase0/cli/progressive-acquisition.cjs",
+      "projections": [
+        "phase0/hosts/shared/product-entry-host.cjs",
+        "phase0/cli/human-output.cjs",
+        "phase0/cli/bounded-projection.cjs"
+      ],
+      "witness": "tests/r10f-tests.cjs"
+    },
+    {
+      "id": "physical-byte-currentness",
+      "implementation": "phase0/cli/physical-currentness.cjs",
+      "runtime": "phase0/cli/adaptive-discovery.cjs",
+      "persistence": "phase0/contracts/r2-bounded-state.cjs",
+      "currentness": "phase0/cli/physical-currentness.cjs",
+      "projections": [
+        "phase0/hosts/shared/product-entry-host.cjs",
+        "phase0/cli/human-output.cjs",
+        "phase0/cli/bounded-projection.cjs"
+      ],
+      "witness": "tests/r10j-tests.cjs"
+    },
+    {
+      "id": "compact-canonical-continuity-projection",
+      "implementation": "phase0/cli/continuity-capsule.cjs",
+      "runtime": "phase0/cli/product-entry.cjs",
+      "persistence": "phase0/dist/contracts/persistence.js",
+      "currentness": "phase0/cli/adaptive-discovery.cjs",
+      "projections": [
+        "phase0/cli/continuity-capsule.cjs",
+        "phase0/cli/human-output.cjs",
+        "phase0/cli/bounded-projection.cjs"
+      ],
+      "witness": "tests/r10m-tests.cjs"
+    },
+    {
+      "id": "canonical-bootstrap-real-product-path",
+      "implementation": "phase0/convergence/canonical-bootstrap.cjs",
+      "runtime": "phase0/cli/product-entry.cjs",
+      "persistence": "phase0/dist/contracts/persistence.js",
+      "currentness": "phase0/convergence/canonical-bootstrap.cjs",
+      "projections": [
+        "phase0/cli/continuity-capsule.cjs"
+      ],
+      "witness": "tests/r10m-cb-tests.cjs"
+    },
+    {
+      "id": "provenance-bound-structural-how",
+      "implementation": "phase0/cli/structural-how.cjs",
+      "runtime": "phase0/cli/product-entry.cjs",
+      "persistence": "phase0/dist/phase2/reconciler.js",
+      "currentness": "phase0/cli/structural-how.cjs",
+      "projections": [
+        "phase0/cli/continuity-capsule.cjs"
+      ],
+      "witness": "tests/r10o-tests.cjs"
+    }
+  ],
+  "projections": [
+    {
+      "id": "human",
+      "source": "phase0/cli/human-output.cjs",
+      "derivedOnly": true,
+      "reconstructsSemanticTruth": false,
+      "forbiddenSemanticImports": [
+        "qualified-semantic-extraction.cjs",
+        "adaptive-discovery.cjs",
+        "persistence.js"
+      ]
+    },
+    {
+      "id": "machine",
+      "source": "phase0/cli/bounded-projection.cjs",
+      "derivedOnly": true,
+      "reconstructsSemanticTruth": false,
+      "forbiddenSemanticImports": [
+        "qualified-semantic-extraction.cjs",
+        "adaptive-discovery.cjs",
+        "persistence.js"
+      ]
+    },
+    {
+      "id": "story-host",
+      "source": "phase0/hosts/shared/product-entry-host.cjs",
+      "derivedOnly": true,
+      "reconstructsSemanticTruth": false,
+      "forbiddenSemanticImports": [
+        "qualified-semantic-extraction.cjs",
+        "adaptive-discovery.cjs",
+        "persistence.js"
+      ]
+    },
+    {
+      "id": "continuity-capsule",
+      "source": "phase0/cli/continuity-capsule.cjs",
+      "derivedOnly": true,
+      "reconstructsSemanticTruth": false,
+      "forbiddenSemanticImports": [
+        "qualified-semantic-extraction.cjs",
+        "adaptive-discovery.cjs",
+        "persistence.js"
+      ]
+    }
+  ],
+  "integrationWitness": {
+    "source": "tests/r10j-ci-tests.cjs",
+    "runtimeEntry": "bin/hito.cjs",
+    "requiredTokens": [
+      "product-entry.cjs",
+      "execute('intake'",
+      "execute('story'",
+      "execute('status'",
+      "execute('mri'"
+    ]
+  },
+  "productPathWitness": {
+    "source": "tests/r10m-cb-tests.cjs",
+    "entrypoint": "bin/hito.cjs",
+    "lifecycle": [
+      "init",
+      "intake --canonical",
+      "intake --canonical",
+      "story --continuity-capsule"
+    ]
+  }
+}

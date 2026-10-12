@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist"
+  },
+  "include": ["contracts/**/*.ts", "phase1/**/*.ts", "phase2/**/*.ts", "phase3/**/*.ts", "phase4/**/*.ts", "fixtures/**/*.ts", "tests/**/*.ts", "tools/**/*.ts"]
+}

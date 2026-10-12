@@ -1,0 +1,269 @@
+{
+  "name": "hito",
+  "displayName": "HITO",
+  "description": "Semantic continuity for engineering projects across humans, AI agents, sessions, and tools.",
+  "version": "0.1.0",
+  "publisher": "CodeDeityX",
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "main": "./live/live-extension.cjs",
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:hito.projectPulse",
+    "onView:hito.next",
+    "onView:hito.evidence",
+    "onView:hito.history",
+    "onView:hito.protected",
+    "onView:hito.runtime",
+    "onView:hito.agentContext",
+    "onCommand:hito.status",
+    "onCommand:hito.next",
+    "onCommand:hito.why",
+    "onCommand:hito.mri",
+    "onCommand:hito.map",
+    "onCommand:hito.evidence",
+    "onCommand:hito.history",
+    "onCommand:hito.protected",
+    "onCommand:hito.agentContext",
+    "onCommand:hito.refresh",
+    "onCommand:hito.guided",
+    "onCommand:hito.engineer",
+    "onCommand:hito.forensic",
+    "onCommand:hito.takeover",
+    "onCommand:hito.ask",
+    "onCommand:hito.overview"
+  ],
+  "scripts": {
+    "verify:public": "node scripts/public-release-smoke.cjs",
+    "test:core": "npm --prefix core test",
+    "test": "npm run verify:public && npm run test:projection-parity && npm run test:core",
+    "package:vsix": "npx --no-install @vscode/vsce package --pre-release --out dist-release/hito-0.1.0-rc.1.vsix",
+    "prepackage:vsix": "node -e \"require('fs').mkdirSync('dist-release',{recursive:true})\"",
+    "test:projection-parity": "node scripts/r5c-semantic-projection-parity.cjs"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hito",
+          "title": "HITO",
+          "icon": "media/hito.svg"
+        }
+      ]
+    },
+    "views": {
+      "hito": [
+        {
+          "id": "hito.projectPulse",
+          "name": "Guided Project"
+        },
+        {
+          "id": "hito.next",
+          "name": "HITO Next",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "hito.evidence",
+          "name": "Evidence",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "hito.history",
+          "name": "History",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "hito.protected",
+          "name": "Protected / Do Not Touch",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "hito.runtime",
+          "name": "Runtime",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "hito.agentContext",
+          "name": "Agent Context",
+          "visibility": "collapsed"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hito.status",
+        "title": "HITO: Status",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.next",
+        "title": "HITO: Next",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.why",
+        "title": "HITO: Why",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.mri",
+        "title": "HITO: MRI",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.map",
+        "title": "HITO: Map",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.evidence",
+        "title": "HITO: Evidence",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.history",
+        "title": "HITO: History",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.protected",
+        "title": "HITO: Protected",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.agentContext",
+        "title": "HITO: Agent Context",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.refresh",
+        "title": "HITO: Refresh",
+        "category": "HITO",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "hito.guided",
+        "title": "HITO: Guided Project",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.engineer",
+        "title": "HITO: Engineer Detail",
+        "category": "HITO",
+        "icon": "$(layout)"
+      },
+      {
+        "command": "hito.forensic",
+        "title": "HITO: Forensic Detail",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.takeover",
+        "title": "HITO: Takeover Receipt",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.ask",
+        "title": "HITO: Ask HITO",
+        "category": "HITO"
+      },
+      {
+        "command": "hito.overview",
+        "title": "HITO: Project Overview",
+        "category": "HITO",
+        "icon": "$(home)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hito.overview",
+          "when": "view == hito.projectPulse",
+          "group": "navigation@0"
+        },
+        {
+          "command": "hito.refresh",
+          "when": "view == hito.projectPulse || view == hito.next || view == hito.evidence || view == hito.history || view == hito.protected || view == hito.runtime || view == hito.agentContext",
+          "group": "navigation"
+        },
+        {
+          "command": "hito.guided",
+          "when": "view == hito.projectPulse",
+          "group": "navigation"
+        },
+        {
+          "command": "hito.engineer",
+          "when": "view == hito.projectPulse",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "HITO",
+      "properties": {
+        "hito.localPayloadPath": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Historical P1 setting retained for compatibility documentation; live workstation reads the bundled current core API."
+        },
+        "hito.root": {
+          "type": "string",
+          "default": "",
+          "scope": "window",
+          "description": "Explicit local project root. Empty uses the accepted core single-workspace selection; multiple roots require explicit selection."
+        },
+        "hito.composition": {
+          "type": "string",
+          "default": "",
+          "scope": "window",
+          "description": "Existing core composition input path for canonical continuation; no input is synthesized."
+        }
+      }
+    }
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "author": {
+    "name": "CodeDeityX",
+    "url": "https://github.com/CodeDeityX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeDeityX/HITO.git"
+  },
+  "homepage": "https://github.com/CodeDeityX/HITO#readme",
+  "bugs": {
+    "url": "https://github.com/CodeDeityX/HITO/issues"
+  },
+  "keywords": [
+    "semantic-continuity",
+    "software-engineering",
+    "ai-agents",
+    "project-governance",
+    "developer-tools",
+    "vscode",
+    "local-first"
+  ],
+  "dependencies": {
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "4.0.0"
+  },
+  "icon": "media/hito-128.png"
+}

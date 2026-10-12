@@ -1,0 +1,500 @@
+/**
+ * HITO Phase 7 PEG Repair 1 — bounded, local, derived, read-only, advisory,
+ * non-executing, non-mutating assessment. Readiness requirements are HITO-owned
+ * policy; observations are supplied bounded facts; callers identify action only.
+ */
+import { canonicalize, assertValidModel, derivedOutputInputsFromModel, evaluateStaleness, sha256Text } from "../contracts";
+import type { CanonicalModel } from "../contracts";
+import { derivePhase4Decision, PHASE4_RULESET_VERSION, type Phase4DecisionReport } from "../phase4/decision-engine";
+import { derivePhase5RealityJudge, evaluatePhase5JudgeStaleness, PHASE5_RULESET_VERSION, type Phase5ClaimRequest, type Phase5JudgeResult } from "../phase5/reality-judge";
+
+export const PHASE7_RULESET_VERSION = "hito-phase7-pre-effect-assessment-v1-repair5";
+export const PHASE7_CONTRACT_VERSION = "1.2.0";
+export const PHASE7_AUTHORITY = "DERIVED / READ_ONLY / ADVISORY / NON_EXECUTING / NON_MUTATING" as const;
+
+export type EffectClass = "CREATE" | "MODIFY" | "CONNECT" | "DISCONNECT" | "CONFIGURE" | "VERIFY" | "EXECUTE_COMMAND" | "MOVE" | "REPLACE" | "DELETE" | "RECOVER" | "MIGRATE" | "OTHER_BOUNDED";
+export type ObservationProvenance = "DIRECT" | "DERIVED" | "DECLARED";
+export type CollectionOutcome = "OBSERVED" | "UNAVAILABLE" | "UNKNOWN";
+export type ObservationFreshness = "CURRENT" | "STALE" | "UNKNOWN";
+export type SemanticPermissibility = "ALLOW" | "WARN" | "BLOCK" | "UNKNOWN";
+export type OperationalReadiness = "READY" | "WARN" | "BLOCK" | "UNKNOWN";
+export type InformationAuthority = "SUFFICIENT" | "INSUFFICIENT" | "UNAVAILABLE" | "MALFORMED_INPUT" | "AUTHORITY_MISMATCH" | "NOT_APPLICABLE";
+export type Phase5ApplicabilityState = "APPLICABLE_AUTHENTICATED_PHASE5_JUDGMENT" | "NO_APPLICABLE_PHASE5_JUDGMENT" | "UNKNOWN_PHASE5_APPLICABILITY" | "STALE_PHASE5_AUTHORITY";
+export type OperationalFactKind = "REPOSITORY_BINDING" | "CWD_BINDING" | "PATH_CONTAINMENT" | "SYMLINK_CONTAINMENT" | "PROTECTED_WORKTREE_STATE" | "TOOLCHAIN_AVAILABILITY" | "EXECUTABLE_AVAILABILITY" | "SERVICE_AVAILABILITY" | "PORT_AVAILABILITY" | "PERMISSION_SUFFICIENCY";
+export type PermissionOperation = "CREATE_PATH" | "MODIFY_PATH" | "CONFIGURE_SCOPE" | "CONNECT_TARGET" | "DISCONNECT_TARGET" | "VERIFY_SUBJECT" | "EXECUTE_COMMAND_ATTEMPT";
+
+export const OPERATIONAL_FACT_KINDS: readonly OperationalFactKind[] = ["REPOSITORY_BINDING", "CWD_BINDING", "PATH_CONTAINMENT", "SYMLINK_CONTAINMENT", "PROTECTED_WORKTREE_STATE", "TOOLCHAIN_AVAILABILITY", "EXECUTABLE_AVAILABILITY", "SERVICE_AVAILABILITY", "PORT_AVAILABILITY", "PERMISSION_SUFFICIENCY"] as const;
+export const SEMANTIC_REASON_CODES = ["SEM_ALREADY_SATISFIED", "SEM_DUPLICATE_CAPABILITY", "SEM_OWNER_MISMATCH", "SEM_RUNTIME_HOME_MISMATCH", "SEM_DO_NOT_TOUCH_CONFLICT", "SEM_PHASE4_ACTION_INCOMPATIBLE", "SEM_DECLARED_INTENT_CONTRADICTION", "SEM_CONTINUITY_CONTRADICTION", "SEM_UNSUPPORTED_COMPLETION_INTENT"] as const;
+export const OPERATIONAL_REASON_CODES = ["OPS_REPOSITORY_MISMATCH", "OPS_CWD_MISMATCH", "OPS_EXECUTABLE_UNAVAILABLE", "OPS_TOOLCHAIN_UNAVAILABLE", "OPS_PROTECTED_DIRTY_STATE", "OPS_SERVICE_UNAVAILABLE", "OPS_PORT_UNAVAILABLE", "OPS_PERMISSION_INSUFFICIENT", "OPS_PATH_ESCAPE", "OPS_SYMLINK_ESCAPE"] as const;
+export const FRESHNESS_REASON_CODES = ["FRESH_PHASE4_STALE", "FRESH_PHASE5_STALE", "FRESH_OBSERVATION_STALE"] as const;
+export const INFORMATION_AUTHORITY_REASON_CODES = ["AUTH_PHASE4_MISMATCH", "AUTH_PHASE5_MISMATCH", "AUTH_CROSS_PROJECT_MIX", "AUTH_RULESET_MISMATCH", "AUTH_RULESET_DOWNGRADE", "PHASE4_NOT_APPLICABLE", "PHASE4_APPLICABILITY_UNKNOWN", "PHASE5_NOT_APPLICABLE", "PHASE5_APPLICABILITY_UNKNOWN", "OBSERVATION_UNAVAILABLE", "OBSERVATION_UNKNOWN", "INPUT_UNTRUSTED_CONTENT", "INPUT_MALFORMED", "INFO_INSUFFICIENT", "DIAGNOSTIC_REJECTED", "DIAGNOSTIC_SPOOFED", "OUTPUT_TAMPERED"] as const;
+export type SemanticReasonCode = typeof SEMANTIC_REASON_CODES[number];
+export type OperationalReasonCode = typeof OPERATIONAL_REASON_CODES[number];
+export type FreshnessReasonCode = typeof FRESHNESS_REASON_CODES[number];
+export type InformationAuthorityReasonCode = typeof INFORMATION_AUTHORITY_REASON_CODES[number];
+
+export interface BoundedActionProposal {
+  subject: "ONE_BOUNDED_PROPOSED_ACTION";
+  objective: string;
+  effectClass: EffectClass;
+  targetScope: {
+    capabilityId?: string;
+    ownerSubsystemId?: string;
+    runtimeHomeId?: string;
+    promiseId?: string;
+    repositoryIdentity?: string;
+    cwd?: string;
+    paths?: string[];
+    command?: string;
+    /** Unsupported policy-bearing fields are intentionally represented so they can be rejected. */
+    requiredObservationKeys?: string[];
+    requiredFacts?: unknown;
+    requiredChecks?: unknown;
+    expectedValue?: unknown;
+    expectedState?: unknown;
+    expectedPredicate?: unknown;
+    readinessPolicy?: unknown;
+    policyOverride?: unknown;
+    forceReady?: unknown;
+  };
+  references: string[];
+  payload: unknown;
+  actorClass?: string;
+}
+
+export type FactValue =
+  | { kind: "REPOSITORY_BINDING"; repositoryIdentity: string; repositoryRoot: string }
+  | { kind: "CWD_BINDING"; cwd: string }
+  | { kind: "PATH_CONTAINMENT"; path: string; containment: "CONTAINED" | "ESCAPES_ROOT" }
+  | { kind: "SYMLINK_CONTAINMENT"; path: string; resolution: "CONTAINED" | "ESCAPES_ROOT" | "UNRESOLVED" }
+  | { kind: "PROTECTED_WORKTREE_STATE"; state: "CLEAN" | "DIRTY" | "PROTECTED_CONFLICT"; protectedAuthorityIds: string[] }
+  | { kind: "TOOLCHAIN_AVAILABILITY"; toolchainId: string; state: "AVAILABLE" | "UNAVAILABLE" }
+  | { kind: "EXECUTABLE_AVAILABILITY"; executable: string; state: "AVAILABLE" | "UNAVAILABLE" }
+  | { kind: "SERVICE_AVAILABILITY"; serviceId: string; state: "AVAILABLE" | "UNAVAILABLE" }
+  | { kind: "PORT_AVAILABILITY"; port: number; state: "AVAILABLE" | "OCCUPIED" | "REACHABLE" | "UNREACHABLE" }
+  | { kind: "PERMISSION_SUFFICIENCY"; operation: PermissionOperation; scope: string; state: "SUFFICIENT" | "INSUFFICIENT" };
+
+export interface BoundedObservation {
+  observationKey: string;
+  normalizedValue?: FactValue;
+  /** Caller expectation is a forbidden structured policy-bearing field. */
+  expectedValue?: unknown;
+  observationProvenance: ObservationProvenance;
+  collectionOutcome: CollectionOutcome;
+  observationFreshness: ObservationFreshness;
+  dependencyKeys?: string[];
+  repositoryIdentity?: string;
+  repositoryRoot?: string;
+  cwd?: string;
+  boundedScope: string;
+  collectorIdentity: string;
+  sourceIdentity: string;
+  permissionBasis: string;
+  limitations?: string[];
+  observedAt: string;
+  presentEquivalenceVerified?: boolean;
+  /** Current bounded proposal association; missing association cannot qualify an observation. */
+  proposalIdentity?: string;
+}
+
+export interface GenericDiagnosticInput {
+  collectorIdentity: string;
+  sourceKind: string;
+  boundedScope: string;
+  records: Array<{ code: string; message: string; severity?: string }>;
+  observationProvenance: ObservationProvenance;
+  collectionOutcome: CollectionOutcome;
+  observationFreshness: ObservationFreshness;
+  permissionBasis: string;
+  observedAt: string;
+  limitations?: string[];
+  rejected?: boolean;
+  spoofed?: boolean;
+}
+
+export interface Phase5Input { state: Phase5ApplicabilityState; request?: Phase5ClaimRequest; result?: Phase5JudgeResult; }
+export interface Phase7AssessmentInput { model: CanonicalModel; proposal: BoundedActionProposal; phase4: Phase4DecisionReport; phase5: Phase5Input; observations: BoundedObservation[]; diagnostics?: GenericDiagnosticInput; }
+export interface Phase7ZeroEffectCounters { canonicalModelMutation: false; governedTargetSourceMutation: false; targetExecutionCount: 0; environmentWriteCount: 0; providerModelCallCount: 0; unauthorizedNetworkCallCount: 0; humanCommitmentImplied: false; executionPermissionImplied: false; }
+export interface Phase7Assessment {
+  kind: "HITO_PHASE7_PRE_EFFECT_ASSESSMENT";
+  assessmentId: string;
+  rulesetVersion: typeof PHASE7_RULESET_VERSION;
+  authority: typeof PHASE7_AUTHORITY;
+  proposalIdentity: string;
+  observationSetIdentity: string;
+  diagnosticSetIdentity: string | "ABSENT";
+  semanticPermissibility: SemanticPermissibility;
+  operationalReadiness: OperationalReadiness;
+  freshness: ObservationFreshness;
+  contradiction: "NONE" | "PRESENT" | "UNKNOWN";
+  informationAuthority: InformationAuthority;
+  phase4State: "AUTHENTICATED_APPLICABLE_PHASE4" | "STALE_PHASE4_AUTHORITY" | "AUTHORITY_MISMATCH" | "NOT_APPLICABLE" | "UNKNOWN";
+  phase5State: Phase5ApplicabilityState | "AUTHORITY_MISMATCH";
+  semanticReasonCodes: SemanticReasonCode[];
+  operationalReasonCodes: OperationalReasonCode[];
+  freshnessReasonCodes: FreshnessReasonCode[];
+  informationAuthorityReasonCodes: InformationAuthorityReasonCode[];
+  nextGovernedRoute: "HUMAN_REVIEW_REQUIRED" | "REFRESH_AUTHORITY_REQUIRED" | "RESOLVE_CONTRADICTION_REQUIRED" | "COLLECT_PERMITTED_OBSERVATION_REQUIRED" | "NOT_APPLICABLE";
+  source: { modelRevision: number; historySequence: number; evidenceSequence: number; phase4Identity: string; phase5IdentityOrState: string };
+  /** Present only after the authenticated applicable Phase-4 adapter invokes the W classifier. */
+  protectedAuthorityApplicability?: ProtectedAuthorityApplicability;
+  limitations: string[];
+  zeroEffectCounters: Phase7ZeroEffectCounters;
+}
+
+export type ProtectedApplicabilityState = "APPLIES" | "DOES_NOT_APPLY" | "UNKNOWN";
+export const PROTECTED_APPLICABILITY_BASIS_CODES = ["CAPABILITY_PROTECTED_EXACT", "RUNTIME_HOME_PROTECTED_EXACT", "CAPABILITY_EXPLICITLY_UNAFFECTED", "PATH_APPLICABILITY_UNREPRESENTABLE", "OWNER_APPLICABILITY_UNREPRESENTABLE", "NO_EXPLICIT_NEGATIVE_AUTHORITY", "AUTHORITY_CONFLICT", "NO_TARGET_ANCHOR", "MALFORMED_PROTECTED_AUTHORITY_IDENTIFIER"] as const;
+export type ProtectedApplicabilityBasisCode = typeof PROTECTED_APPLICABILITY_BASIS_CODES[number];
+export interface ProtectedAuthorityApplicability {
+  state: ProtectedApplicabilityState;
+  matchedScopeBasis: ProtectedApplicabilityBasisCode[];
+  expectedProtectedAuthorityIds: string[];
+}
+
+type Requirement = { id: string; kind: OperationalFactKind; path?: string; operation?: PermissionOperation; scope?: string; executable?: string; expectedProtectedAuthorityIds?: string[]; context?: ActionContext };
+type ActionContext = { repositoryIdentity: string; repositoryRoot: string; cwd: string; capabilityId: string; cwdRequired: boolean };
+type ProposalValidation = { valid: boolean; command?: NormalizedCommandSubject; paths: string[]; reason?: "INPUT_MALFORMED" };
+export type NormalizedCommandSubject = { kind: "NORMALIZED_COMMAND_SUBJECT"; executable: string; pathSubjects: string[]; cwdDependence: "REQUIRED" | "NOT_REQUIRED"; sourceKind: "STRUCTURED_COMMAND_REFERENCE" };
+
+const sortUnique = <T extends string>(items: readonly T[]): T[] => [...new Set(items)].sort((a, b) => a.localeCompare(b));
+const hash = (value: unknown): string => sha256Text(canonicalize(value));
+const normalizedText = (value: string): string => value.normalize("NFC").replaceAll("\r\n", "\n").trim();
+const zeroEffects = (): Phase7ZeroEffectCounters => ({ canonicalModelMutation: false, governedTargetSourceMutation: false, targetExecutionCount: 0, environmentWriteCount: 0, providerModelCallCount: 0, unauthorizedNetworkCallCount: 0, humanCommitmentImplied: false, executionPermissionImplied: false });
+const own = (value: object, key: string): boolean => Object.prototype.hasOwnProperty.call(value, key);
+
+function normalizeRelativePath(value: string): string | undefined {
+  const normalized = normalizedText(value).replaceAll("\\", "/").replace(/\/+/g, "/").replace(/^(\.\/)+/, "");
+  if (!normalized || normalized.startsWith("/") || normalized.startsWith("//") || /^[A-Za-z]:/.test(normalized) || normalized.split("/").some((segment) => segment === ".." || segment.length === 0)) return undefined;
+  return normalized;
+}
+function normalizeCwd(value: string): string | undefined {
+  const normalized = normalizedText(value).replaceAll("\\", "/").replace(/\/+/g, "/").replace(/^(\.\/)+/, "") || ".";
+  if (normalized.startsWith("/") || normalized.startsWith("//") || /^[A-Za-z]:/.test(normalized) || normalized.split("/").some((segment) => segment === "..")) return undefined;
+  return normalized;
+}
+function normalizeExecutable(value: string): string | undefined {
+  const normalized = normalizedText(value);
+  if (!/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(normalized) || /\.\.|\s|['"`;|&$><*?]/.test(normalized) || normalized.startsWith("/") || normalized.startsWith("//") || /^[A-Za-z]:/.test(normalized)) return undefined;
+  return normalized;
+}
+function normalizedIdentifier(value: unknown): value is string { return typeof value === "string" && normalizedText(value) === value && /^[A-Za-z0-9][A-Za-z0-9._:-]*$/.test(value); }
+function normalizedScope(value: unknown): value is string { return typeof value === "string" && normalizeRelativePath(value) === value; }
+function exactKeys(value: Record<string, unknown>, allowed: readonly string[]): boolean { return Object.keys(value).every((key) => allowed.includes(key)) && allowed.every((key) => own(value, key)); }
+function normalizedIdentifierSet(values: readonly string[]): string[] | undefined { return values.every(normalizedIdentifier) ? sortUnique(values) : undefined; }
+function unsupportedStructuredPolicy(value: unknown): boolean {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const forbidden = /^(requiredObservationKeys|requiredFacts|requiredChecks|expectedValue|expectedState|expectedPredicate|readinessPolicy|policyOverride|forceReady)$/i;
+  return Object.keys(value as Record<string, unknown>).some((key) => forbidden.test(key));
+}
+function currentRuntimeHome(model: CanonicalModel, capabilityId: string): string | undefined {
+  return model.runtimeHomes.filter((home) => home.capabilityId === capabilityId && home.effectiveFromRevision <= model.canonicalState.modelRevision && (home.effectiveToRevision === undefined || home.effectiveToRevision > model.canonicalState.modelRevision)).sort((a, b) => a.runtimeHomeId.localeCompare(b.runtimeHomeId))[0]?.runtimeHomeId;
+}
+function proposalValidation(proposal: BoundedActionProposal): ProposalValidation {
+  if (proposal.subject !== "ONE_BOUNDED_PROPOSED_ACTION" || !normalizedText(proposal.objective) || !proposal.targetScope || !Array.isArray(proposal.references)) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+  if (["MOVE", "REPLACE", "DELETE", "RECOVER", "MIGRATE", "OTHER_BOUNDED"].includes(proposal.effectClass) || unsupportedStructuredPolicy(proposal.targetScope)) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+  if ([proposal.targetScope.capabilityId, proposal.targetScope.ownerSubsystemId, proposal.targetScope.runtimeHomeId, proposal.targetScope.promiseId, proposal.targetScope.repositoryIdentity].some((identifier) => identifier !== undefined && !normalizedIdentifier(identifier))) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+  const paths = (proposal.targetScope.paths ?? []).map(normalizeRelativePath);
+  if (paths.some((path) => path === undefined)) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+  let command: NormalizedCommandSubject | undefined;
+  if (proposal.targetScope.command !== undefined) {
+    if (!["VERIFY", "EXECUTE_COMMAND"].includes(proposal.effectClass)) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+    const executable = normalizeExecutable(proposal.targetScope.command);
+    if (!executable) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+    command = { kind: "NORMALIZED_COMMAND_SUBJECT", executable, pathSubjects: sortUnique(paths.filter((path): path is string => path !== undefined)), cwdDependence: proposal.effectClass === "EXECUTE_COMMAND" ? "REQUIRED" : "NOT_REQUIRED", sourceKind: "STRUCTURED_COMMAND_REFERENCE" };
+  }
+  if (proposal.targetScope.cwd !== undefined && normalizeCwd(proposal.targetScope.cwd) === undefined) return { valid: false, paths: [], reason: "INPUT_MALFORMED" };
+  return { valid: true, paths: sortUnique(paths.filter((path): path is string => path !== undefined)), command };
+}
+
+export function proposalIdentity(proposal: BoundedActionProposal): string {
+  const validation = proposalValidation(proposal);
+  if (!validation.valid) throw new Error("INPUT_MALFORMED: no valid proposal identity");
+  return `proposal_${hash({ subject: proposal.subject, objective: normalizedText(proposal.objective), effectClass: proposal.effectClass, targetScope: { capabilityId: proposal.targetScope.capabilityId ?? null, ownerSubsystemId: proposal.targetScope.ownerSubsystemId ?? null, runtimeHomeId: proposal.targetScope.runtimeHomeId ?? null, promiseId: proposal.targetScope.promiseId ?? null, repositoryIdentity: proposal.targetScope.repositoryIdentity ?? null, cwd: proposal.targetScope.cwd ? normalizeCwd(proposal.targetScope.cwd) : null, paths: validation.paths, command: validation.command ?? null }, references: sortUnique(proposal.references.map(normalizedText)), payload: proposal.payload, contractVersion: PHASE7_CONTRACT_VERSION })}`;
+}
+function identityFactValue(value: FactValue | undefined): FactValue | null {
+  if (!value) return null;
+  if (value.kind === "PROTECTED_WORKTREE_STATE") {
+    const normalized = normalizedIdentifierSet(value.protectedAuthorityIds);
+    return normalized ? { ...value, protectedAuthorityIds: normalized } : value;
+  }
+  return value;
+}
+export function observationRecordContentIdentity(record: BoundedObservation, boundProposalIdentity: string): string {
+  return `observation_${hash({ proposalIdentity: boundProposalIdentity, observationKey: record.observationKey, normalizedValue: identityFactValue(record.normalizedValue), observationProvenance: record.observationProvenance, collectionOutcome: record.collectionOutcome, repositoryIdentity: record.repositoryIdentity ?? null, repositoryRoot: record.repositoryRoot ?? null, cwd: record.cwd ? normalizeCwd(record.cwd) : null, boundedScope: record.boundedScope, collectorIdentity: record.collectorIdentity, sourceIdentity: record.sourceIdentity, permissionBasis: record.permissionBasis, limitations: sortUnique(record.limitations ?? []), contractVersion: PHASE7_CONTRACT_VERSION })}`;
+}
+export function observationSetIdentity(proposal: BoundedActionProposal, observations: BoundedObservation[], boundProposalIdentity?: string): string {
+  const proposalId = boundProposalIdentity ?? proposalIdentity(proposal);
+  const records = observations.map((record) => ({ identity: observationRecordContentIdentity(record, proposalId), key: record.observationKey, collectorSource: `${record.collectorIdentity}:${record.sourceIdentity}`, permission: record.permissionBasis })).sort((a, b) => a.identity.localeCompare(b.identity));
+  return `observation_set_${hash({ proposalIdentity: proposalId, recordContentIdentities: sortUnique(records.map((record) => record.identity)), materialBindingKeys: sortUnique(records.map((record) => record.key)), collectorSourceBindings: sortUnique(records.map((record) => record.collectorSource)), permissionBindings: sortUnique(records.map((record) => record.permission)), contractVersion: PHASE7_CONTRACT_VERSION })}`;
+}
+export function diagnosticSetIdentity(input: GenericDiagnosticInput | undefined): string | "ABSENT" {
+  if (!input) return "ABSENT";
+  return `diagnostic_${hash({ collectorIdentity: input.collectorIdentity, sourceKind: input.sourceKind, boundedScope: input.boundedScope, records: [...input.records].sort((a, b) => canonicalize(a).localeCompare(canonicalize(b))), observationProvenance: input.observationProvenance, collectionOutcome: input.collectionOutcome, observationFreshness: input.observationFreshness, permissionBasis: input.permissionBasis, limitations: sortUnique(input.limitations ?? []), rejected: input.rejected === true, spoofed: input.spoofed === true, contractVersion: PHASE7_CONTRACT_VERSION })}`;
+}
+
+function phase4Adapter(model: CanonicalModel, supplied: Phase4DecisionReport, proposalCapabilityId?: string): { state: Phase7Assessment["phase4State"]; information: InformationAuthorityReasonCode[]; freshness: FreshnessReasonCode[] } {
+  if (supplied.kind !== "HITO_PHASE4_DECISION_REPORT" || supplied.source.derivedOutput.rulesetVersion !== PHASE4_RULESET_VERSION) {
+    const reason: InformationAuthorityReasonCode = /(?:v0|legacy|downgrade)/i.test(supplied.source.derivedOutput.rulesetVersion) ? "AUTH_RULESET_DOWNGRADE" : "AUTH_RULESET_MISMATCH";
+    return { state: "AUTHORITY_MISMATCH", information: ["AUTH_PHASE4_MISMATCH", reason], freshness: [] };
+  }
+  const staleness = evaluateStaleness(supplied.source.derivedOutput, derivedOutputInputsFromModel(model, PHASE4_RULESET_VERSION));
+  if (staleness !== "FRESH" || supplied.source.modelRevision !== model.canonicalState.modelRevision || supplied.source.historySequence !== model.canonicalState.historyHead.sequence || supplied.source.evidenceSequence !== model.canonicalState.evidenceHead.sequence) return { state: "STALE_PHASE4_AUTHORITY", information: [], freshness: ["FRESH_PHASE4_STALE"] };
+  if (canonicalize(derivePhase4Decision(model, supplied.request)) !== canonicalize(supplied)) return { state: "AUTHORITY_MISMATCH", information: ["AUTH_PHASE4_MISMATCH"], freshness: [] };
+  if (supplied.reconciliation.state === "NOT_FOUND") return { state: "NOT_APPLICABLE", information: ["PHASE4_NOT_APPLICABLE"], freshness: [] };
+  if (supplied.reconciliation.state === "UNKNOWN") return { state: "UNKNOWN", information: ["PHASE4_APPLICABILITY_UNKNOWN"], freshness: [] };
+  if (proposalCapabilityId !== undefined && ![...supplied.reconciliation.candidateCapabilityIds, ...supplied.reconciliation.relatedCapabilityIds].includes(proposalCapabilityId)) return { state: "NOT_APPLICABLE", information: ["PHASE4_NOT_APPLICABLE"], freshness: [] };
+  return { state: "AUTHENTICATED_APPLICABLE_PHASE4", information: [], freshness: [] };
+}
+function phase5Adapter(model: CanonicalModel, phase4: Phase4DecisionReport, input: Phase5Input, proposalCapabilityId?: string): { state: Phase7Assessment["phase5State"]; information: InformationAuthorityReasonCode[]; freshness: FreshnessReasonCode[]; result?: Phase5JudgeResult } {
+  if (input.state === "NO_APPLICABLE_PHASE5_JUDGMENT") return { state: input.state, information: ["PHASE5_NOT_APPLICABLE"], freshness: [] };
+  if (input.state === "UNKNOWN_PHASE5_APPLICABILITY") return { state: input.state, information: ["PHASE5_APPLICABILITY_UNKNOWN"], freshness: [] };
+  if (input.state === "STALE_PHASE5_AUTHORITY") return { state: input.state, information: [], freshness: ["FRESH_PHASE5_STALE"] };
+  if (!input.request || !input.result || input.result.kind !== "HITO_PHASE5_REALITY_JUDGE_RESULT" || input.result.rulesetVersion !== PHASE5_RULESET_VERSION || input.result.derivedOutput.rulesetVersion !== PHASE5_RULESET_VERSION) return { state: "AUTHORITY_MISMATCH", information: ["AUTH_PHASE5_MISMATCH", "AUTH_RULESET_MISMATCH"], freshness: [] };
+  if (evaluatePhase5JudgeStaleness(input.result, model) !== "FRESH" || input.result.sourceModelRevision !== model.canonicalState.modelRevision || input.result.sourceHistoryHead.sequence !== model.canonicalState.historyHead.sequence || input.result.sourceEvidenceHead.sequence !== model.canonicalState.evidenceHead.sequence) return { state: "STALE_PHASE5_AUTHORITY", information: [], freshness: ["FRESH_PHASE5_STALE"] };
+  if (canonicalize(derivePhase5RealityJudge(model, input.request, phase4)) !== canonicalize(input.result) || (proposalCapabilityId !== undefined && (input.request.subjectId !== proposalCapabilityId || input.result.subject.id !== proposalCapabilityId))) return { state: "AUTHORITY_MISMATCH", information: ["AUTH_PHASE5_MISMATCH"], freshness: [] };
+  return { state: "APPLICABLE_AUTHENTICATED_PHASE5_JUDGMENT", information: [], freshness: [], result: input.result };
+}
+function derivedCurrent(record: BoundedObservation, records: Map<string, BoundedObservation[]>, seen = new Set<string>()): boolean {
+  if (seen.has(record.observationKey)) return false;
+  if (record.observationProvenance === "DIRECT") return record.collectionOutcome === "OBSERVED" && record.observationFreshness === "CURRENT" && record.presentEquivalenceVerified === true;
+  if (record.observationProvenance !== "DERIVED" || record.collectionOutcome !== "OBSERVED" || record.observationFreshness !== "CURRENT") return false;
+  const next = new Set(seen); next.add(record.observationKey);
+  return (record.dependencyKeys ?? []).length > 0 && (record.dependencyKeys ?? []).every((key) => {
+    const dependencies = records.get(key) ?? [];
+    return dependencies.length > 0 && dependencies.every((dependency) => derivedCurrent(dependency, records, next));
+  });
+}
+function hasSensitiveKey(value: unknown): boolean {
+  if (typeof value === "string") return /credential|private.?key|token|browser.?history|secret/i.test(value);
+  if (Array.isArray(value)) return value.some(hasSensitiveKey);
+  if (value && typeof value === "object") return Object.entries(value as Record<string, unknown>).some(([key, nested]) => hasSensitiveKey(key) || hasSensitiveKey(nested));
+  return false;
+}
+function untrustedInstructionLikeContent(value: unknown): boolean {
+  if (typeof value === "string") return /ignore\s+hito|you are authorized|delete this|this is canonical|run this command|authorized to commit/i.test(value);
+  if (Array.isArray(value)) return value.some(untrustedInstructionLikeContent);
+  if (value && typeof value === "object") return Object.values(value as Record<string, unknown>).some(untrustedInstructionLikeContent);
+  return false;
+}
+function actionContext(model: CanonicalModel, proposal: BoundedActionProposal): ActionContext | undefined {
+  const capabilityId = proposal.targetScope.capabilityId;
+  if (!capabilityId || !model.capabilities.some((capability) => capability.capabilityId === capabilityId)) return undefined;
+  return { repositoryIdentity: model.project.projectId, repositoryRoot: ".", cwd: ".", capabilityId, cwdRequired: proposal.effectClass === "EXECUTE_COMMAND" };
+}
+function operationFor(effect: EffectClass): PermissionOperation | undefined {
+  return ({ CREATE: "CREATE_PATH", MODIFY: "MODIFY_PATH", CONFIGURE: "CONFIGURE_SCOPE", CONNECT: "CONNECT_TARGET", DISCONNECT: "DISCONNECT_TARGET", VERIFY: "VERIFY_SUBJECT", EXECUTE_COMMAND: "EXECUTE_COMMAND_ATTEMPT" } as Partial<Record<EffectClass, PermissionOperation>>)[effect];
+}
+function hasUsableTargetAnchor(proposal: BoundedActionProposal, paths: readonly string[]): boolean {
+  return proposal.targetScope.capabilityId !== undefined || proposal.targetScope.runtimeHomeId !== undefined || proposal.targetScope.ownerSubsystemId !== undefined || paths.length > 0;
+}
+/**
+ * HITO Phase 7 Repair 3: a pure derived consumer of already authenticated Phase-4
+ * authority. This function is never called for unauthenticated/non-applicable P4.
+ */
+type AuthenticatedPhase4ForW = { readonly phase4: Phase4DecisionReport; readonly authenticated: true };
+function deriveProtectedAuthorityApplicabilityInternal(authority: AuthenticatedPhase4ForW, proposal: BoundedActionProposal, validation: ProposalValidation): ProtectedAuthorityApplicability {
+  const boundary = authority.phase4.proposal.doNotTouch;
+  const consumedLists = [boundary.protectedCapabilityIds, boundary.unaffectedCapabilityIds, boundary.currentRuntimeHomeIds, boundary.stateAuthorities, boundary.eventAuthorities, boundary.persistenceAuthorities, boundary.evidenceAuthorityIds];
+  if (consumedLists.some((list) => normalizedIdentifierSet(list) === undefined)) return { state: "UNKNOWN", matchedScopeBasis: ["MALFORMED_PROTECTED_AUTHORITY_IDENTIFIER"], expectedProtectedAuthorityIds: [] };
+  const protectedCapabilities = new Set(boundary.protectedCapabilityIds);
+  const unaffectedCapabilities = new Set(boundary.unaffectedCapabilityIds);
+  const currentHomes = new Set(boundary.currentRuntimeHomeIds);
+  const capabilityId = proposal.targetScope.capabilityId;
+  const runtimeHomeId = proposal.targetScope.runtimeHomeId;
+  const globalAuthorityConflict = [...protectedCapabilities].some((id) => unaffectedCapabilities.has(id));
+  if (globalAuthorityConflict) return { state: "UNKNOWN", matchedScopeBasis: ["AUTHORITY_CONFLICT"], expectedProtectedAuthorityIds: [] };
+  const basis: ProtectedApplicabilityBasisCode[] = [];
+  if (capabilityId && protectedCapabilities.has(capabilityId)) basis.push("CAPABILITY_PROTECTED_EXACT");
+  if (runtimeHomeId && currentHomes.has(runtimeHomeId)) basis.push("RUNTIME_HOME_PROTECTED_EXACT");
+  if (basis.length > 0) return { state: "APPLIES", matchedScopeBasis: sortUnique(basis), expectedProtectedAuthorityIds: sortUnique([...boundary.protectedCapabilityIds, ...boundary.currentRuntimeHomeIds, ...boundary.stateAuthorities, ...boundary.eventAuthorities, ...boundary.persistenceAuthorities, ...boundary.evidenceAuthorityIds]) };
+  if (!hasUsableTargetAnchor(proposal, validation.paths)) return { state: "UNKNOWN", matchedScopeBasis: ["NO_TARGET_ANCHOR"], expectedProtectedAuthorityIds: [] };
+  if (proposal.targetScope.ownerSubsystemId !== undefined) return { state: "UNKNOWN", matchedScopeBasis: ["OWNER_APPLICABILITY_UNREPRESENTABLE"], expectedProtectedAuthorityIds: [] };
+  if (validation.paths.length > 0) return { state: "UNKNOWN", matchedScopeBasis: ["PATH_APPLICABILITY_UNREPRESENTABLE"], expectedProtectedAuthorityIds: [] };
+  if (runtimeHomeId !== undefined && !currentHomes.has(runtimeHomeId)) return { state: "UNKNOWN", matchedScopeBasis: ["NO_EXPLICIT_NEGATIVE_AUTHORITY"], expectedProtectedAuthorityIds: [] };
+  if (capabilityId && unaffectedCapabilities.has(capabilityId)) return { state: "DOES_NOT_APPLY", matchedScopeBasis: ["CAPABILITY_EXPLICITLY_UNAFFECTED"], expectedProtectedAuthorityIds: [] };
+  return { state: "UNKNOWN", matchedScopeBasis: ["NO_EXPLICIT_NEGATIVE_AUTHORITY"], expectedProtectedAuthorityIds: [] };
+}
+function wMaterial(effect: EffectClass): boolean { return ["CREATE", "MODIFY", "CONFIGURE", "CONNECT", "DISCONNECT"].includes(effect); }
+function deriveRequirements(model: CanonicalModel, proposal: BoundedActionProposal, validation: ProposalValidation, phase4State: Phase7Assessment["phase4State"], authenticatedPhase4?: Phase4DecisionReport): { requirements: Requirement[]; sufficient: boolean; context?: ActionContext; protectedAuthorityApplicability?: ProtectedAuthorityApplicability } {
+  const context = actionContext(model, proposal);
+  const operation = operationFor(proposal.effectClass);
+  if (!operation || !validation.valid) return { requirements: [], sufficient: false, context };
+  let protectedAuthorityApplicability: ProtectedAuthorityApplicability | undefined;
+  if (wMaterial(proposal.effectClass)) {
+    if (!context || proposal.targetScope.repositoryIdentity !== context.repositoryIdentity) return { requirements: [], sufficient: false, context };
+    if (phase4State !== "AUTHENTICATED_APPLICABLE_PHASE4" || !authenticatedPhase4) return { requirements: [], sufficient: false, context };
+    protectedAuthorityApplicability = deriveProtectedAuthorityApplicabilityInternal({ phase4: authenticatedPhase4, authenticated: true }, proposal, validation);
+  }
+  if (!context) return { requirements: [], sufficient: false, context, protectedAuthorityApplicability };
+  const requirements: Requirement[] = [
+    { id: "REPOSITORY_BINDING", kind: "REPOSITORY_BINDING", context },
+    { id: `PERMISSION_SUFFICIENCY:${operation}`, kind: "PERMISSION_SUFFICIENCY", operation, scope: context.capabilityId, context },
+  ];
+  for (const path of validation.paths) {
+    requirements.push({ id: `PATH_CONTAINMENT:${path}`, kind: "PATH_CONTAINMENT", path, context });
+    requirements.push({ id: `SYMLINK_CONTAINMENT:${path}`, kind: "SYMLINK_CONTAINMENT", path, context });
+  }
+  if (wMaterial(proposal.effectClass)) {
+    const w = protectedAuthorityApplicability;
+    if (!w) return { requirements, sufficient: false, context };
+    if (w.state === "APPLIES") requirements.push({ id: "PROTECTED_WORKTREE_STATE", kind: "PROTECTED_WORKTREE_STATE", expectedProtectedAuthorityIds: w.expectedProtectedAuthorityIds, context });
+    if (w.state === "UNKNOWN") return { requirements, sufficient: false, context, protectedAuthorityApplicability: w };
+  }
+  if (validation.command) {
+    requirements.push({ id: `EXECUTABLE_AVAILABILITY:${validation.command.executable}`, kind: "EXECUTABLE_AVAILABILITY", executable: validation.command.executable, context });
+    if (context.cwdRequired && validation.command.cwdDependence === "REQUIRED") requirements.push({ id: "CWD_BINDING", kind: "CWD_BINDING", context });
+  }
+  return { requirements, sufficient: requirements.length > 0, context, protectedAuthorityApplicability };
+}
+function matchingObservations(requirement: Requirement, observations: BoundedObservation[], proposalId: string): BoundedObservation[] {
+  return observations.filter((record) => {
+    const value = record.normalizedValue;
+    if (!value || value.kind !== requirement.kind) return false;
+    if (requirement.path && "path" in value && value.path !== requirement.path) return false;
+    if (requirement.operation && value.kind === "PERMISSION_SUFFICIENCY" && (value.operation !== requirement.operation || value.scope !== requirement.scope)) return false;
+    if (requirement.executable && value.kind === "EXECUTABLE_AVAILABILITY" && value.executable !== requirement.executable) return false;
+    return true;
+  }).sort((a, b) => observationRecordContentIdentity(a, proposalId).localeCompare(observationRecordContentIdentity(b, proposalId)));
+}
+export function isClosedFactValue(value: unknown): value is FactValue {
+  if (!value || typeof value !== "object" || Array.isArray(value) || !own(value as object, "kind")) return false;
+  const candidate = value as Record<string, unknown>;
+  if (unsupportedStructuredPolicy(candidate)) return false;
+  switch (candidate.kind) {
+    case "REPOSITORY_BINDING": return exactKeys(candidate, ["kind", "repositoryIdentity", "repositoryRoot"]) && normalizedIdentifier(candidate.repositoryIdentity) && typeof candidate.repositoryRoot === "string" && normalizeCwd(candidate.repositoryRoot) === candidate.repositoryRoot;
+    case "CWD_BINDING": return exactKeys(candidate, ["kind", "cwd"]) && typeof candidate.cwd === "string" && normalizeCwd(candidate.cwd) === candidate.cwd;
+    case "PATH_CONTAINMENT": return exactKeys(candidate, ["kind", "path", "containment"]) && typeof candidate.path === "string" && normalizeRelativePath(candidate.path) === candidate.path && (candidate.containment === "CONTAINED" || candidate.containment === "ESCAPES_ROOT");
+    case "SYMLINK_CONTAINMENT": return exactKeys(candidate, ["kind", "path", "resolution"]) && typeof candidate.path === "string" && normalizeRelativePath(candidate.path) === candidate.path && (candidate.resolution === "CONTAINED" || candidate.resolution === "ESCAPES_ROOT" || candidate.resolution === "UNRESOLVED");
+    case "PROTECTED_WORKTREE_STATE": return exactKeys(candidate, ["kind", "state", "protectedAuthorityIds"]) && (candidate.state === "CLEAN" || candidate.state === "DIRTY" || candidate.state === "PROTECTED_CONFLICT") && Array.isArray(candidate.protectedAuthorityIds) && candidate.protectedAuthorityIds.every(normalizedIdentifier);
+    case "TOOLCHAIN_AVAILABILITY": return exactKeys(candidate, ["kind", "toolchainId", "state"]) && normalizedIdentifier(candidate.toolchainId) && (candidate.state === "AVAILABLE" || candidate.state === "UNAVAILABLE");
+    case "EXECUTABLE_AVAILABILITY": return exactKeys(candidate, ["kind", "executable", "state"]) && typeof candidate.executable === "string" && normalizeExecutable(candidate.executable) === candidate.executable && (candidate.state === "AVAILABLE" || candidate.state === "UNAVAILABLE");
+    case "SERVICE_AVAILABILITY": return exactKeys(candidate, ["kind", "serviceId", "state"]) && normalizedIdentifier(candidate.serviceId) && (candidate.state === "AVAILABLE" || candidate.state === "UNAVAILABLE");
+    case "PORT_AVAILABILITY": return exactKeys(candidate, ["kind", "port", "state"]) && Number.isInteger(candidate.port) && (candidate.port as number) >= 1 && (candidate.port as number) <= 65535 && (candidate.state === "AVAILABLE" || candidate.state === "OCCUPIED" || candidate.state === "REACHABLE" || candidate.state === "UNREACHABLE");
+    case "PERMISSION_SUFFICIENCY": return exactKeys(candidate, ["kind", "operation", "scope", "state"]) && ["CREATE_PATH", "MODIFY_PATH", "CONFIGURE_SCOPE", "CONNECT_TARGET", "DISCONNECT_TARGET", "VERIFY_SUBJECT", "EXECUTE_COMMAND_ATTEMPT"].includes(String(candidate.operation)) && normalizedScope(candidate.scope) && (candidate.state === "SUFFICIENT" || candidate.state === "INSUFFICIENT");
+    default: return false;
+  }
+}
+function coherentObservation(requirement: Requirement, record: BoundedObservation, context: ActionContext, proposalId: string): boolean {
+  if (record.proposalIdentity !== proposalId || record.repositoryIdentity !== context.repositoryIdentity || record.repositoryRoot !== context.repositoryRoot || record.boundedScope !== context.capabilityId) return false;
+  if (!normalizedIdentifier(record.collectorIdentity) || !normalizedIdentifier(record.sourceIdentity) || !normalizedIdentifier(record.permissionBasis)) return false;
+  if (requirement.kind === "CWD_BINDING" && record.cwd !== context.cwd) return false;
+  return true;
+}
+function predicateFailure(requirement: Requirement, record: BoundedObservation): OperationalReasonCode | undefined {
+  const value = record.normalizedValue;
+  if (!value || !isClosedFactValue(value) || value.kind !== requirement.kind) return undefined;
+  const context = requirement.context;
+  if (!context) return undefined;
+  switch (value.kind) {
+    case "REPOSITORY_BINDING": return value.repositoryIdentity === context.repositoryIdentity && value.repositoryRoot === context.repositoryRoot ? undefined : "OPS_REPOSITORY_MISMATCH";
+    case "CWD_BINDING": return value.cwd === context.cwd ? undefined : "OPS_CWD_MISMATCH";
+    case "PATH_CONTAINMENT": return value.containment === "CONTAINED" ? undefined : "OPS_PATH_ESCAPE";
+    case "SYMLINK_CONTAINMENT": return value.resolution === "CONTAINED" ? undefined : value.resolution === "ESCAPES_ROOT" ? "OPS_SYMLINK_ESCAPE" : undefined;
+    case "PROTECTED_WORKTREE_STATE": {
+      const expected = requirement.expectedProtectedAuthorityIds;
+      const observed = normalizedIdentifierSet(value.protectedAuthorityIds);
+      return value.state === "CLEAN" && expected !== undefined && observed !== undefined && canonicalize(observed) === canonicalize(expected) ? undefined : "OPS_PROTECTED_DIRTY_STATE";
+    }
+    case "TOOLCHAIN_AVAILABILITY": return value.state === "AVAILABLE" ? undefined : "OPS_TOOLCHAIN_UNAVAILABLE";
+    case "EXECUTABLE_AVAILABILITY": return value.state === "AVAILABLE" ? undefined : "OPS_EXECUTABLE_UNAVAILABLE";
+    case "SERVICE_AVAILABILITY": return value.state === "AVAILABLE" ? undefined : "OPS_SERVICE_UNAVAILABLE";
+    case "PORT_AVAILABILITY": return ["AVAILABLE", "REACHABLE"].includes(value.state) ? undefined : "OPS_PORT_UNAVAILABLE";
+    case "PERMISSION_SUFFICIENCY": return value.state === "SUFFICIENT" ? undefined : "OPS_PERMISSION_INSUFFICIENT";
+  }
+}
+
+export function assessPhase7PreEffect(input: Phase7AssessmentInput): Phase7Assessment {
+  assertValidModel(input.model);
+  const before = canonicalize(input.model);
+  const validation = proposalValidation(input.proposal);
+  const proposalId = validation.valid ? proposalIdentity(input.proposal) : `proposal_malformed_no_valid_identity_${hash({ subject: input.proposal.subject, effectClass: input.proposal.effectClass, objective: input.proposal.objective, contractVersion: PHASE7_CONTRACT_VERSION })}`;
+  const observationId = observationSetIdentity(input.proposal, input.observations, proposalId);
+  const diagnosticId = diagnosticSetIdentity(input.diagnostics);
+  const semantic: SemanticReasonCode[] = [];
+  const operational: OperationalReasonCode[] = [];
+  const freshness: FreshnessReasonCode[] = [];
+  const information: InformationAuthorityReasonCode[] = [];
+  const limitations: string[] = ["Derived advisory assessment", "HITO-owned readiness policy", "No target execution", "No environment write", "No commitment or execution authority"];
+  const phase4 = phase4Adapter(input.model, input.phase4, input.proposal.targetScope.capabilityId);
+  const phase5 = phase5Adapter(input.model, input.phase4, input.phase5, input.proposal.targetScope.capabilityId);
+  information.push(...phase4.information, ...phase5.information); freshness.push(...phase4.freshness, ...phase5.freshness);
+  if (!validation.valid) information.push("INPUT_MALFORMED");
+  if (input.observations.some((record) => unsupportedStructuredPolicy(record))) information.push("INPUT_MALFORMED");
+  if (untrustedInstructionLikeContent(input.proposal.payload)) information.push("INPUT_UNTRUSTED_CONTENT");
+  if (input.proposal.targetScope.repositoryIdentity !== undefined && input.proposal.targetScope.repositoryIdentity !== input.model.project.projectId) information.push("AUTH_CROSS_PROJECT_MIX");
+  if (hasSensitiveKey(input.diagnostics?.records ?? [])) information.push("DIAGNOSTIC_REJECTED");
+  if (input.diagnostics?.spoofed === true) information.push("DIAGNOSTIC_SPOOFED");
+  if (input.diagnostics?.rejected === true) information.push("DIAGNOSTIC_REJECTED");
+
+  const capability = input.proposal.targetScope.capabilityId ? input.model.capabilities.find((item) => item.capabilityId === input.proposal.targetScope.capabilityId) : undefined;
+  if (capability) {
+    if (input.proposal.targetScope.ownerSubsystemId && input.proposal.targetScope.ownerSubsystemId !== capability.owningSubsystemId) semantic.push("SEM_OWNER_MISMATCH");
+    if (input.proposal.targetScope.runtimeHomeId && input.proposal.targetScope.runtimeHomeId !== currentRuntimeHome(input.model, capability.capabilityId)) semantic.push("SEM_RUNTIME_HOME_MISMATCH");
+    if (input.proposal.targetScope.promiseId && !capability.promiseIds.includes(input.proposal.targetScope.promiseId)) semantic.push("SEM_DECLARED_INTENT_CONTRADICTION");
+    if (input.proposal.effectClass === "CREATE") semantic.push("SEM_DUPLICATE_CAPABILITY");
+    if (/already satisfied/i.test(input.proposal.objective)) semantic.push("SEM_ALREADY_SATISFIED");
+  }
+  if (validation.paths.some((path) => path === ".maat" || path.startsWith(".maat/"))) semantic.push("SEM_DO_NOT_TOUCH_CONFLICT");
+  if (phase4.state === "AUTHENTICATED_APPLICABLE_PHASE4") {
+    if (input.phase4.contradictions.some((item) => item.code === "DO_NOT_TOUCH_CONFLICT")) semantic.push("SEM_DO_NOT_TOUCH_CONFLICT");
+    if (input.phase4.contradictions.some((item) => item.code === "COMPETING_RUNTIME_HOME")) semantic.push("SEM_CONTINUITY_CONTRADICTION");
+    if (input.phase4.noDoubleWork.action === "BLOCKED") semantic.push("SEM_PHASE4_ACTION_INCOMPATIBLE");
+  }
+  if (/complete|done|verified|ready/i.test(input.proposal.objective) && phase5.result && !["VERIFIED_CONTINUITY", "VERIFIED_WITH_OBSERVATIONS"].includes(phase5.result.verdict)) semantic.push("SEM_UNSUPPORTED_COMPLETION_INTENT");
+  if (phase5.state === "UNKNOWN_PHASE5_APPLICABILITY") limitations.push("Phase 5 applicability remains UNKNOWN");
+  if (phase5.state === "NO_APPLICABLE_PHASE5_JUDGMENT") limitations.push("No applicable Phase 5 judgment was supplied or required");
+
+  const records = new Map<string, BoundedObservation[]>();
+  for (const record of input.observations) {
+    const existing = records.get(record.observationKey) ?? [];
+    existing.push(record);
+    records.set(record.observationKey, existing);
+  }
+  const policy = information.includes("INPUT_MALFORMED") ? { requirements: [] as Requirement[], sufficient: false, context: undefined as ActionContext | undefined, protectedAuthorityApplicability: undefined as ProtectedAuthorityApplicability | undefined } : deriveRequirements(input.model, input.proposal, validation, phase4.state, input.phase4);
+  if (!information.includes("INPUT_MALFORMED") && !policy.sufficient) information.push("INFO_INSUFFICIENT");
+  if (policy.protectedAuthorityApplicability?.state === "UNKNOWN") limitations.push(`Protected authority applicability UNKNOWN: ${policy.protectedAuthorityApplicability.matchedScopeBasis.join(",")}`);
+  for (const requirement of policy.requirements) {
+    const matches = matchingObservations(requirement, input.observations, proposalId);
+    if (!matches.length || !policy.context) { information.push("OBSERVATION_UNKNOWN"); continue; }
+    for (const observation of matches) {
+      if (observation.collectionOutcome === "UNAVAILABLE") { information.push("OBSERVATION_UNAVAILABLE"); continue; }
+      if (observation.collectionOutcome === "UNKNOWN") { information.push("OBSERVATION_UNKNOWN"); continue; }
+      if (observation.observationFreshness === "STALE") { freshness.push("FRESH_OBSERVATION_STALE"); continue; }
+      if (observation.observationFreshness === "UNKNOWN") { information.push("OBSERVATION_UNKNOWN"); continue; }
+      const closed = isClosedFactValue(observation.normalizedValue);
+      const coherent = closed && derivedCurrent(observation, records) && coherentObservation(requirement, observation, policy.context, proposalId);
+      const selectedProtectedWorktree = requirement.kind === "PROTECTED_WORKTREE_STATE" && policy.protectedAuthorityApplicability?.state === "APPLIES";
+      if (!closed || !coherent) {
+        if (selectedProtectedWorktree) operational.push("OPS_PROTECTED_DIRTY_STATE");
+        else information.push("OBSERVATION_UNKNOWN");
+        continue;
+      }
+      const failure = predicateFailure(requirement, observation);
+      if (failure) operational.push(failure);
+      if (observation.normalizedValue && observation.normalizedValue.kind === "SYMLINK_CONTAINMENT" && observation.normalizedValue.resolution === "UNRESOLVED") information.push("OBSERVATION_UNKNOWN");
+    }
+  }
+  const semanticPermissibility: SemanticPermissibility = semantic.length > 0 ? "BLOCK" : information.includes("AUTH_PHASE4_MISMATCH") || information.includes("AUTH_PHASE5_MISMATCH") || information.includes("PHASE4_APPLICABILITY_UNKNOWN") || information.includes("PHASE5_APPLICABILITY_UNKNOWN") ? "UNKNOWN" : "ALLOW";
+  const operationalReadiness: OperationalReadiness = operational.length > 0 ? "BLOCK" : freshness.includes("FRESH_OBSERVATION_STALE") || information.includes("INPUT_MALFORMED") || information.includes("INFO_INSUFFICIENT") || information.includes("OBSERVATION_UNAVAILABLE") || information.includes("OBSERVATION_UNKNOWN") ? "UNKNOWN" : "READY";
+  const freshnessState: ObservationFreshness = information.includes("INPUT_MALFORMED") ? "UNKNOWN" : freshness.length > 0 ? "STALE" : information.includes("OBSERVATION_UNKNOWN") || phase4.state === "UNKNOWN" || phase5.state === "UNKNOWN_PHASE5_APPLICABILITY" ? "UNKNOWN" : "CURRENT";
+  const informationAuthority: InformationAuthority = information.includes("INPUT_MALFORMED") ? "MALFORMED_INPUT" : information.some((code) => code.startsWith("AUTH_")) ? "AUTHORITY_MISMATCH" : information.includes("OBSERVATION_UNAVAILABLE") ? "UNAVAILABLE" : information.includes("PHASE4_NOT_APPLICABLE") || information.includes("PHASE5_NOT_APPLICABLE") ? "NOT_APPLICABLE" : information.length > 0 ? "INSUFFICIENT" : "SUFFICIENT";
+  const contradiction: Phase7Assessment["contradiction"] = semantic.some((code) => ["SEM_DO_NOT_TOUCH_CONFLICT", "SEM_CONTINUITY_CONTRADICTION", "SEM_PHASE4_ACTION_INCOMPATIBLE"].includes(code)) ? "PRESENT" : semanticPermissibility === "UNKNOWN" ? "UNKNOWN" : "NONE";
+  const nextGovernedRoute: Phase7Assessment["nextGovernedRoute"] = semanticPermissibility === "BLOCK" ? "RESOLVE_CONTRADICTION_REQUIRED" : informationAuthority === "AUTHORITY_MISMATCH" || freshnessState === "STALE" ? "REFRESH_AUTHORITY_REQUIRED" : operationalReadiness === "UNKNOWN" ? "COLLECT_PERMITTED_OBSERVATION_REQUIRED" : informationAuthority === "NOT_APPLICABLE" ? "NOT_APPLICABLE" : "HUMAN_REVIEW_REQUIRED";
+  const result: Phase7Assessment = {
+    kind: "HITO_PHASE7_PRE_EFFECT_ASSESSMENT", assessmentId: `assessment_${hash({ proposalId, modelRevision: input.model.canonicalState.modelRevision, history: input.model.canonicalState.historyHead, evidence: input.model.canonicalState.evidenceHead, phase4: input.phase4.source.derivedOutput.derivedOutputId, phase5: phase5.result?.judgeResultId ?? phase5.state, observationId, diagnosticId, ruleset: PHASE7_RULESET_VERSION, contract: PHASE7_CONTRACT_VERSION })}`,
+    rulesetVersion: PHASE7_RULESET_VERSION, authority: PHASE7_AUTHORITY, proposalIdentity: proposalId, observationSetIdentity: observationId, diagnosticSetIdentity: diagnosticId, semanticPermissibility, operationalReadiness, freshness: freshnessState, contradiction, informationAuthority, phase4State: phase4.state, phase5State: phase5.state,
+    semanticReasonCodes: sortUnique(semantic), operationalReasonCodes: sortUnique(operational), freshnessReasonCodes: sortUnique(freshness), informationAuthorityReasonCodes: sortUnique(information), nextGovernedRoute,
+    source: { modelRevision: input.model.canonicalState.modelRevision, historySequence: input.model.canonicalState.historyHead.sequence, evidenceSequence: input.model.canonicalState.evidenceHead.sequence, phase4Identity: input.phase4.source.derivedOutput.derivedOutputId, phase5IdentityOrState: phase5.result?.judgeResultId ?? phase5.state }, protectedAuthorityApplicability: policy.protectedAuthorityApplicability, limitations: sortUnique(limitations), zeroEffectCounters: zeroEffects(),
+  };
+  if (canonicalize(input.model) !== before) throw new Error("Phase 7 assessment mutated canonical HITO model");
+  return result;
+}
+/** Test-scoped normalized authenticated fixture; production callers use assessPhase7PreEffect. */
+export function __testOnlyDeriveProtectedAuthorityApplicability(phase4: Phase4DecisionReport, proposal: BoundedActionProposal, validation: ProposalValidation): ProtectedAuthorityApplicability {
+  return deriveProtectedAuthorityApplicabilityInternal({ phase4, authenticated: true }, proposal, validation);
+}
+/** Recomputes immutable advisory output; a non-equal supplied result is explicitly untrusted. */
+export function verifyPhase7AssessmentOutput(input: Phase7AssessmentInput, supplied: Phase7Assessment): { valid: boolean; reasonCodes: InformationAuthorityReasonCode[] } {
+  const expected = assessPhase7PreEffect(input);
+  return canonicalize(expected) === canonicalize(supplied) ? { valid: true, reasonCodes: [] } : { valid: false, reasonCodes: ["OUTPUT_TAMPERED"] };
+}

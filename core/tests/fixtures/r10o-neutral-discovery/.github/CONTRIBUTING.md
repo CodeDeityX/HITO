@@ -1,0 +1,3 @@
+# Contributing
+
+Synthetic development notes.

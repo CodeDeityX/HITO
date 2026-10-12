@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maat.local/schema/canonical-model/0.1.0",
+  "title": "MAAT Canonical Model",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "project", "intent", "releaseContract", "requirements", "phases", "subsystems", "capabilities", "runtimeHomes", "interfaces", "edges", "configurationItems", "claims", "evidenceRefs", "releaseGates", "derivedOutputRefs", "findingRefs", "findingGovernance", "scans", "decisions", "mutations", "capabilityLineage", "canonicalState", "provenance"],
+  "properties": {
+    "schemaVersion": { "$ref": "#/$defs/nonEmpty" },
+    "project": { "$ref": "#/$defs/project" },
+    "intent": { "type": "array", "items": { "$ref": "#/$defs/intent" } },
+    "releaseContract": { "$ref": "#/$defs/nonEmpty" },
+    "requirements": { "type": "array", "items": { "$ref": "#/$defs/requirement" } },
+    "phases": { "type": "array", "items": { "$ref": "#/$defs/phase" } },
+    "subsystems": { "type": "array", "items": { "$ref": "#/$defs/subsystem" } },
+    "capabilities": { "type": "array", "items": { "$ref": "#/$defs/capability" } },
+    "runtimeHomes": { "type": "array", "items": { "$ref": "#/$defs/runtimeHome" } },
+    "interfaces": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+    "configurationItems": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+    "claims": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+    "evidenceRefs": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+    "releaseGates": { "type": "array", "items": { "$ref": "#/$defs/releaseGate" } },
+    "derivedOutputRefs": { "type": "array", "items": { "$ref": "#/$defs/derivedOutputRef" } },
+    "findingRefs": { "type": "array", "items": { "$ref": "#/$defs/findingRef" } },
+    "findingGovernance": { "type": "array", "items": { "$ref": "#/$defs/findingGovernance" } },
+    "scans": { "type": "array", "items": { "$ref": "#/$defs/scan" } },
+    "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } },
+    "mutations": { "type": "array", "items": { "$ref": "#/$defs/mutation" } },
+    "capabilityLineage": { "type": "array", "items": { "$ref": "#/$defs/lineageEvent" } },
+    "reconciliationTrace": { "$ref": "#/$defs/reconciliationTrace" },
+    "canonicalState": { "$ref": "#/$defs/canonicalState" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "nonEmpty": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "idArray": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["observationClass", "source", "confidence", "observedAt", "modelRevision"],
+      "properties": {
+        "observationClass": { "enum": ["EXPLICIT", "OBSERVED", "RECONCILED", "INFERRED", "UNKNOWN"] },
+        "source": { "$ref": "#/$defs/nonEmpty" }, "sourceRef": { "$ref": "#/$defs/nonEmpty" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "observedAt": { "$ref": "#/$defs/timestamp" }, "modelRevision": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "authorityProof": {
+      "type": "object", "additionalProperties": false,
+      "required": ["proofId", "kind", "confirmedBy", "confirmedAt", "sourceRecordId", "lineageEventIds"],
+      "properties": {
+        "proofId": { "$ref": "#/$defs/nonEmpty" }, "kind": { "enum": ["OWNER_CONFIRMATION", "RECOVERED_AUTHORITY"] },
+        "confirmedBy": { "$ref": "#/$defs/nonEmpty" }, "confirmedAt": { "$ref": "#/$defs/timestamp" },
+        "sourceRecordId": { "$ref": "#/$defs/nonEmpty" }, "lineageEventIds": { "$ref": "#/$defs/idArray" }
+      }
+    },
+    "project": {
+      "type": "object", "additionalProperties": false,
+      "required": ["projectId", "name", "root", "projectType", "health", "provenance"],
+      "properties": {
+        "projectId": { "$ref": "#/$defs/nonEmpty" }, "name": { "$ref": "#/$defs/nonEmpty" }, "root": { "$ref": "#/$defs/nonEmpty" },
+        "repository": { "$ref": "#/$defs/nonEmpty" }, "projectType": { "$ref": "#/$defs/nonEmpty" },
+        "health": { "$ref": "#/$defs/health" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "intent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["promiseId", "projectId", "statement", "authority", "requirements", "constraints", "provenance"],
+      "properties": {
+        "promiseId": { "$ref": "#/$defs/nonEmpty" }, "projectId": { "$ref": "#/$defs/nonEmpty" }, "statement": { "$ref": "#/$defs/nonEmpty" },
+        "authority": { "enum": ["DECLARED_INTENT", "EXTRACTED_INTENT_CANDIDATE"] }, "requirements": { "$ref": "#/$defs/idArray" },
+        "constraints": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "authorityProof": { "$ref": "#/$defs/authorityProof" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "requirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["requirementId", "promiseId", "statement", "capabilityIds", "provenance"],
+      "properties": {
+        "requirementId": { "$ref": "#/$defs/nonEmpty" }, "promiseId": { "$ref": "#/$defs/nonEmpty" }, "statement": { "$ref": "#/$defs/nonEmpty" },
+        "phaseId": { "$ref": "#/$defs/nonEmpty" }, "capabilityIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "phase": {
+      "type": "object", "additionalProperties": false,
+      "required": ["phaseId", "projectId", "name", "status", "capabilityIds", "entryCriteria", "exitCriteria", "provenance"],
+      "properties": {
+        "phaseId": { "$ref": "#/$defs/nonEmpty" }, "projectId": { "$ref": "#/$defs/nonEmpty" }, "name": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "$ref": "#/$defs/lifecycle" }, "capabilityIds": { "$ref": "#/$defs/idArray" },
+        "entryCriteria": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "exitCriteria": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+        "lockVerdict": { "$ref": "#/$defs/nonEmpty" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "subsystem": {
+      "type": "object", "additionalProperties": false,
+      "required": ["subsystemId", "projectId", "name", "responsibility", "capabilityIds", "provenance"],
+      "properties": {
+        "subsystemId": { "$ref": "#/$defs/nonEmpty" }, "projectId": { "$ref": "#/$defs/nonEmpty" }, "name": { "$ref": "#/$defs/nonEmpty" },
+        "responsibility": { "$ref": "#/$defs/nonEmpty" }, "capabilityIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "runtimeHome": {
+      "type": "object", "additionalProperties": false,
+      "required": ["runtimeHomeId", "capabilityId", "kind", "locator", "entryPoints", "effectiveFromRevision", "status", "provenance"],
+      "properties": {
+        "runtimeHomeId": { "$ref": "#/$defs/nonEmpty" }, "capabilityId": { "$ref": "#/$defs/nonEmpty" },
+        "kind": { "enum": ["PROCESS", "SERVICE", "MODULE", "WORKER", "FUNCTION", "OTHER"] }, "locator": { "$ref": "#/$defs/nonEmpty" },
+        "entryPoints": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "stateOwner": { "$ref": "#/$defs/nonEmpty" },
+        "eventOwner": { "$ref": "#/$defs/nonEmpty" }, "persistenceOwner": { "$ref": "#/$defs/nonEmpty" },
+        "effectiveFromRevision": { "type": "integer", "minimum": 1 }, "effectiveToRevision": { "type": "integer", "minimum": 1 },
+        "status": { "$ref": "#/$defs/lifecycle" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "edge": {
+      "type": "object", "additionalProperties": false,
+      "required": ["edgeId", "sourceId", "targetId", "relationship", "status", "provenance", "evidenceIds"],
+      "properties": {
+        "edgeId": { "$ref": "#/$defs/nonEmpty" }, "sourceId": { "$ref": "#/$defs/nonEmpty" }, "targetId": { "$ref": "#/$defs/nonEmpty" },
+        "relationship": { "enum": ["FULFILLS", "REQUIRES", "OWNS", "HOMES", "IMPLEMENTS", "EXPOSES", "CALLS", "CONSUMES", "PRODUCES", "PERSISTS", "EMITS", "VALIDATES", "GOVERNS", "PROJECTS", "DEPENDS_ON", "BLOCKS", "RECOVERS", "SUPERSEDES", "EVIDENCED_BY"] },
+        "status": { "$ref": "#/$defs/lifecycle" }, "provenance": { "$ref": "#/$defs/provenance" }, "evidenceIds": { "$ref": "#/$defs/idArray" }
+      }
+    },
+    "capability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capabilityId", "name", "purpose", "questionAnswered", "promiseIds", "requirementIds", "owningSubsystemId", "runtimeHomeId", "runtimeGap", "historicalRuntimeHomeIds", "implementationRefs", "dependencies", "dependents", "lifecycleStatus", "health", "verificationState", "runtimeTruthLevel", "evidenceIds", "claimBoundary", "lineageEventIds", "derivedOutputRefs", "aliases", "provenance"],
+      "properties": {
+        "capabilityId": { "$ref": "#/$defs/nonEmpty" }, "name": { "$ref": "#/$defs/nonEmpty" }, "purpose": { "$ref": "#/$defs/nonEmpty" }, "questionAnswered": { "$ref": "#/$defs/nonEmpty" },
+        "promiseIds": { "$ref": "#/$defs/idArray" }, "requirementIds": { "$ref": "#/$defs/idArray" }, "owningSubsystemId": { "$ref": "#/$defs/nonEmpty" },
+        "runtimeHomeId": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/nonEmpty" }] }, "runtimeGap": { "type": "boolean" }, "historicalRuntimeHomeIds": { "$ref": "#/$defs/idArray" },
+        "implementationRefs": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "dependencies": { "$ref": "#/$defs/idArray" }, "dependents": { "$ref": "#/$defs/idArray" },
+        "lifecycleStatus": { "$ref": "#/$defs/lifecycle" }, "health": { "$ref": "#/$defs/health" },
+        "verificationState": { "enum": ["UNVERIFIED", "SOURCE_VERIFIED", "BUILD_VERIFIED", "TEST_VERIFIED", "NATIVE_RUNTIME_VERIFIED", "EXTERNALLY_REVIEWED", "PRODUCTION_VERIFIED"] },
+        "runtimeTruthLevel": { "$ref": "#/$defs/runtimeTruth" }, "evidenceIds": { "$ref": "#/$defs/idArray" }, "claimBoundary": { "$ref": "#/$defs/nonEmpty" },
+        "phaseId": { "$ref": "#/$defs/nonEmpty" }, "lineageEventIds": { "$ref": "#/$defs/idArray" }, "derivedOutputRefs": { "$ref": "#/$defs/idArray" },
+        "nextSafeMutationRef": { "$ref": "#/$defs/nonEmpty" }, "aliases": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "claim": {
+      "type": "object", "additionalProperties": false,
+      "required": ["claimId", "subjectId", "statement", "location", "claimType", "audience", "environment", "evidenceRequirement", "truthBoundary", "limitations", "status", "requiredAction", "evidenceIds", "provenance"],
+      "properties": {
+        "claimId": { "$ref": "#/$defs/nonEmpty" }, "subjectId": { "$ref": "#/$defs/nonEmpty" }, "statement": { "$ref": "#/$defs/nonEmpty" }, "location": { "$ref": "#/$defs/nonEmpty" },
+        "claimType": { "$ref": "#/$defs/nonEmpty" }, "promiseId": { "$ref": "#/$defs/nonEmpty" }, "capabilityId": { "$ref": "#/$defs/nonEmpty" },
+        "audience": { "$ref": "#/$defs/nonEmpty" }, "environment": { "$ref": "#/$defs/nonEmpty" }, "evidenceRequirement": { "$ref": "#/$defs/nonEmpty" }, "truthBoundary": { "$ref": "#/$defs/nonEmpty" },
+        "limitations": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "status": { "enum": ["PROVEN", "PARTIALLY_PROVEN", "BETA_SAFE", "ROADMAP_ONLY", "UNSUPPORTED", "UNSAFE", "REMOVE"] },
+        "requiredAction": { "$ref": "#/$defs/nonEmpty" }, "reviewer": { "$ref": "#/$defs/nonEmpty" }, "evidenceIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evidenceId", "subjectId", "source", "environment", "verificationLevel", "capturedAt", "contentHash", "available", "truthBoundary", "reproducibility", "provenance"],
+      "properties": {
+        "evidenceId": { "$ref": "#/$defs/nonEmpty" }, "subjectId": { "$ref": "#/$defs/nonEmpty" }, "source": { "$ref": "#/$defs/nonEmpty" }, "environment": { "$ref": "#/$defs/nonEmpty" },
+        "artifactPath": { "$ref": "#/$defs/nonEmpty" }, "verificationLevel": { "$ref": "#/$defs/runtimeTruth" }, "capturedAt": { "$ref": "#/$defs/timestamp" },
+        "contentHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }, "available": { "type": "boolean" }, "truthBoundary": { "$ref": "#/$defs/nonEmpty" },
+        "reproducibility": { "$ref": "#/$defs/nonEmpty" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "releaseGate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["gateId", "name", "criterion", "status", "evidenceIds", "blocker", "promiseIds", "provenance"],
+      "properties": {
+        "gateId": { "$ref": "#/$defs/nonEmpty" }, "name": { "$ref": "#/$defs/nonEmpty" }, "criterion": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "enum": ["OPEN", "PASSED", "BLOCKED", "UNKNOWN"] }, "evidenceIds": { "$ref": "#/$defs/idArray" }, "blocker": { "type": "boolean" },
+        "promiseIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "derivedOutputRef": {
+      "type": "object", "additionalProperties": false, "required": ["derivedOutputId", "kind", "sourceModelRevision", "stalenessState"],
+      "properties": {
+        "derivedOutputId": { "$ref": "#/$defs/nonEmpty" }, "kind": { "enum": ["PROJECT_PULSE", "MRI_VERDICT", "DRIFT_REPORT", "NEXT_SAFE_MUTATION"] },
+        "sourceModelRevision": { "type": "integer", "minimum": 1 }, "stalenessState": { "$ref": "#/$defs/staleness" }
+      }
+    },
+    "findingRef": {
+      "type": "object", "additionalProperties": false, "required": ["findingId", "derivedOutputId", "sourceModelRevision", "status"],
+      "properties": {
+        "findingId": { "$ref": "#/$defs/nonEmpty" }, "derivedOutputId": { "$ref": "#/$defs/nonEmpty" }, "sourceModelRevision": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["CURRENT", "STALE", "SUPERSEDED"] }
+      }
+    },
+    "findingGovernance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["findingGovernanceId", "findingId", "derivedOutputId", "decision", "reason", "scope", "authority", "evidenceIds", "effectiveRevision", "historyEventIds", "provenance"],
+      "properties": {
+        "findingGovernanceId": { "$ref": "#/$defs/nonEmpty" }, "findingId": { "$ref": "#/$defs/nonEmpty" }, "derivedOutputId": { "$ref": "#/$defs/nonEmpty" },
+        "decision": { "enum": ["ACKNOWLEDGED", "ACCEPTED_DIAGNOSIS", "SUPPRESSED", "ESCALATED", "RESOLVED"] }, "reason": { "$ref": "#/$defs/nonEmpty" },
+        "scope": { "$ref": "#/$defs/nonEmpty" }, "authority": { "$ref": "#/$defs/nonEmpty" }, "evidenceIds": { "$ref": "#/$defs/idArray" },
+        "effectiveRevision": { "type": "integer", "minimum": 1 }, "historyEventIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "derivedFinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["findingId", "category", "summary", "severity", "confidence", "evidenceIds", "affectedEntityIds", "rulesetVersion", "derivedOutputId", "provenance"],
+      "properties": {
+        "findingId": { "$ref": "#/$defs/nonEmpty" },
+        "category": { "enum": ["DRIFT", "DUPLICATE", "RUNTIME_GAP", "EVIDENCE_GAP", "CLAIM_SAFETY", "OTHER"] },
+        "summary": { "$ref": "#/$defs/nonEmpty" },
+        "severity": { "enum": ["INFO", "WARNING", "HIGH", "CRITICAL"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidenceIds": { "$ref": "#/$defs/idArray" },
+        "affectedEntityIds": { "$ref": "#/$defs/idArray" },
+        "requiredAction": { "$ref": "#/$defs/nonEmpty" },
+        "rulesetVersion": { "$ref": "#/$defs/nonEmpty" },
+        "derivedOutputId": { "$ref": "#/$defs/nonEmpty" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "derivedOutput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["derivedOutputId", "kind", "sourceModelRevision", "sourceHistoryHead", "sourceEvidenceHead", "rulesetVersion", "generatedAt", "generatingVersion", "provenance", "stalenessState"],
+      "properties": {
+        "derivedOutputId": { "$ref": "#/$defs/nonEmpty" },
+        "kind": { "enum": ["PROJECT_PULSE", "MRI_VERDICT", "DRIFT_REPORT", "NEXT_SAFE_MUTATION"] },
+        "sourceModelRevision": { "type": "integer", "minimum": 1 },
+        "sourceHistoryHead": { "type": "object", "additionalProperties": false, "required": ["sequence", "eventHash"], "properties": { "sequence": { "type": "integer", "minimum": 0 }, "eventHash": { "$ref": "#/$defs/nonEmpty" } } },
+        "sourceEvidenceHead": { "type": "object", "additionalProperties": false, "required": ["sequence", "manifestHash"], "properties": { "sequence": { "type": "integer", "minimum": 0 }, "manifestHash": { "$ref": "#/$defs/nonEmpty" } } },
+        "rulesetVersion": { "$ref": "#/$defs/nonEmpty" },
+        "generatedAt": { "$ref": "#/$defs/timestamp" },
+        "generatingVersion": { "$ref": "#/$defs/nonEmpty" },
+        "provenance": { "type": "object", "additionalProperties": false, "required": ["inputEntityIds", "evidenceIds", "ruleIds", "derivationSteps"], "properties": { "inputEntityIds": { "$ref": "#/$defs/idArray" }, "evidenceIds": { "$ref": "#/$defs/idArray" }, "ruleIds": { "$ref": "#/$defs/idArray" }, "derivationSteps": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "minItems": 1 } } },
+        "stalenessState": { "$ref": "#/$defs/staleness" },
+        "findings": { "type": "array", "items": { "$ref": "#/$defs/derivedFinding" } },
+        "nextSafeMutation": { "$ref": "#/$defs/mutation" }
+      }
+    },
+    "scan": {
+      "type": "object", "additionalProperties": false, "required": ["scanId", "scope", "adapterIds", "status", "startedAt", "evidenceIds", "provenance"],
+      "properties": {
+        "scanId": { "$ref": "#/$defs/nonEmpty" }, "scope": { "$ref": "#/$defs/nonEmpty" }, "adapterIds": { "$ref": "#/$defs/idArray" },
+        "status": { "enum": ["PLANNED", "COMPLETED", "INDETERMINATE", "FAILED"] }, "startedAt": { "$ref": "#/$defs/timestamp" }, "completedAt": { "$ref": "#/$defs/timestamp" },
+        "evidenceIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false, "required": ["decisionId", "context", "options", "selectedOutcome", "rationale", "affectedEntityIds", "effectiveRevision", "provenance"],
+      "properties": {
+        "decisionId": { "$ref": "#/$defs/nonEmpty" }, "context": { "$ref": "#/$defs/nonEmpty" }, "options": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } },
+        "selectedOutcome": { "$ref": "#/$defs/nonEmpty" }, "rationale": { "$ref": "#/$defs/nonEmpty" }, "affectedEntityIds": { "$ref": "#/$defs/idArray" },
+        "effectiveRevision": { "type": "integer", "minimum": 1 }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "mutation": {
+      "type": "object", "additionalProperties": false, "required": ["mutationId", "reason", "affectedEntityIds", "expectedEffect", "proposal", "risk", "rollbackPath", "proofPlan", "status", "evidenceIds", "provenance"],
+      "properties": {
+        "mutationId": { "$ref": "#/$defs/nonEmpty" }, "reason": { "$ref": "#/$defs/nonEmpty" }, "affectedEntityIds": { "$ref": "#/$defs/idArray" },
+        "expectedEffect": { "$ref": "#/$defs/nonEmpty" }, "proposal": { "$ref": "#/$defs/nonEmpty" }, "risk": { "$ref": "#/$defs/nonEmpty" }, "rollbackPath": { "$ref": "#/$defs/nonEmpty" },
+        "proofPlan": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" } }, "status": { "enum": ["PROPOSED", "APPROVED", "REJECTED", "COMPLETED", "ABORTED"] },
+        "evidenceIds": { "$ref": "#/$defs/idArray" }, "effectiveRevision": { "type": "integer", "minimum": 1 }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "lineageEvent": {
+      "type": "object", "additionalProperties": false, "required": ["eventId", "capabilityId", "type", "fromCapabilityIds", "toCapabilityIds", "reason", "authority", "effectiveRevision", "evidenceIds", "provenance"],
+      "properties": {
+        "eventId": { "$ref": "#/$defs/nonEmpty" }, "capabilityId": { "$ref": "#/$defs/nonEmpty" }, "type": { "enum": ["INTRODUCED", "RENAME", "MOVE", "MERGED_INTO", "SPLIT_INTO", "SUPERSEDES", "RETIRED", "RESTORED"] },
+        "fromCapabilityIds": { "$ref": "#/$defs/idArray" }, "toCapabilityIds": { "$ref": "#/$defs/idArray" }, "previousRuntimeHomeId": { "$ref": "#/$defs/nonEmpty" }, "nextRuntimeHomeId": { "$ref": "#/$defs/nonEmpty" },
+        "reason": { "$ref": "#/$defs/nonEmpty" }, "authority": { "enum": ["EXPLICIT", "RECONCILED"] }, "effectiveRevision": { "type": "integer", "minimum": 1 },
+        "evidenceIds": { "$ref": "#/$defs/idArray" }, "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "reconciliationTrace": {
+      "type": "object", "additionalProperties": false, "required": ["traceId", "scanFingerprint", "modelRevision", "candidates", "ambiguities", "conflicts", "provenance"],
+      "properties": {
+        "traceId": { "$ref": "#/$defs/nonEmpty" },
+        "scanFingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "modelRevision": { "type": "integer", "minimum": 1 },
+        "candidates": { "type": "array", "items": { "$ref": "#/$defs/reconciliationCandidate" } },
+        "ambiguities": { "type": "array", "items": { "$ref": "#/$defs/reconciliationAmbiguity" } },
+        "conflicts": { "type": "array", "items": { "$ref": "#/$defs/reconciliationConflict" } },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "reconciliationCandidate": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "candidateId", "anchor", "label", "status", "sourcePaths", "provenance"],
+      "properties": {
+        "kind": { "enum": ["PROJECT", "SUBSYSTEM", "CAPABILITY", "RUNTIME_HOME"] },
+        "candidateId": { "$ref": "#/$defs/nonEmpty" }, "anchor": { "$ref": "#/$defs/nonEmpty" }, "label": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "enum": ["MATCHED", "INTRODUCED", "AMBIGUOUS", "CONFLICT", "HISTORICAL"] },
+        "sourcePaths": { "type": "array", "items": { "$ref": "#/$defs/nonEmpty" }, "uniqueItems": true },
+        "matchedPriorId": { "$ref": "#/$defs/nonEmpty" }, "alternatives": { "$ref": "#/$defs/idArray" },
+        "provenance": { "$ref": "#/$defs/provenance" }
+      }
+    },
+    "reconciliationAmbiguity": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "anchor", "candidateIds", "reason"],
+      "properties": {
+        "kind": { "enum": ["PROJECT", "SUBSYSTEM", "CAPABILITY", "RUNTIME_HOME"] }, "anchor": { "$ref": "#/$defs/nonEmpty" },
+        "candidateIds": { "$ref": "#/$defs/idArray" }, "reason": { "enum": ["AMBIGUOUS_SUCCESSOR", "AMBIGUOUS_PROJECT"] }
+      }
+    },
+    "reconciliationConflict": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "anchor", "candidateIds", "reason"],
+      "properties": {
+        "kind": { "enum": ["PROJECT", "SUBSYSTEM", "CAPABILITY", "RUNTIME_HOME"] }, "anchor": { "$ref": "#/$defs/nonEmpty" },
+        "candidateIds": { "$ref": "#/$defs/idArray" }, "reason": { "const": "RUNTIME_HOME_CONFLICT" }
+      }
+    },
+    "canonicalState": {
+      "type": "object", "additionalProperties": false, "required": ["modelRevision", "historyHead", "evidenceHead", "integrity"],
+      "properties": {
+        "modelRevision": { "type": "integer", "minimum": 1 },
+        "historyHead": { "type": "object", "additionalProperties": false, "required": ["sequence", "eventHash"], "properties": { "sequence": { "type": "integer", "minimum": 0 }, "eventHash": { "$ref": "#/$defs/nonEmpty" } } },
+        "evidenceHead": { "type": "object", "additionalProperties": false, "required": ["sequence", "manifestHash"], "properties": { "sequence": { "type": "integer", "minimum": 0 }, "manifestHash": { "$ref": "#/$defs/nonEmpty" } } },
+        "integrity": { "type": "object", "additionalProperties": false, "required": ["modelHash", "historyHash", "evidenceManifestHash"], "properties": { "modelHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "historyHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "evidenceManifestHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" } } }
+      }
+    },
+    "lifecycle": { "enum": ["PROPOSED", "APPROVED", "IMPLEMENTING", "LIVE", "PARTIAL", "BLOCKED", "DEGRADED", "UNKNOWN", "NOT_FOUND", "DEPRECATED", "SUPERSEDED", "RETIRED"] },
+    "health": { "enum": ["HEALTHY", "HEALTHY_WITH_OBSERVATIONS", "RECONCILIATION_REQUIRED", "REPAIR_REQUIRED", "BLOCKED", "INDETERMINATE"] },
+    "runtimeTruth": { "enum": ["SOURCE_ONLY", "BUILD_VERIFIED", "TEST_VERIFIED", "NATIVE_RUNTIME_VERIFIED", "EXTERNAL_RUNTIME_VERIFIED", "PRODUCTION_VERIFIED"] },
+    "staleness": { "enum": ["FRESH", "STALE_MODEL", "STALE_HISTORY", "STALE_EVIDENCE", "STALE_RULESET", "INVALID"] }
+  }
+}

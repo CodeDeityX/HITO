@@ -1,0 +1,25 @@
+{
+  "name": "@hito/core",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "hito": "bin/hito.cjs"
+  },
+  "scripts": {
+    "test": "node tests/r8-provenance-tests.cjs && node tests/r9b-story.cjs && node tests/r9b-r1-tests.cjs && node tests/r9b-r2-tests.cjs && node tests/r9b-control-ledger.cjs && node tests/r9d-tests.cjs && node tests/r9d-control-ledger.cjs && node tests/r9f-tests.cjs && node tests/r9f-r3-detached-tests.cjs && node tests/r9f-r5-tests.cjs && node tests/r9f-r6-tests.cjs && node tests/r9f-r7-tests.cjs && node tests/r9f-r9-tests.cjs && node tests/r9f-control-ledger.cjs && node tests/r10b-tests.cjs && node tests/r10d-tests.cjs && node tests/r10f-tests.cjs && node tests/r10h-tests.cjs && node tests/r10j-tests.cjs && node tests/r10j-ci-tests.cjs && node tests/canonical-integration-release-gate.cjs && node tests/r10m-tests.cjs && node tests/r10m-cb-tests.cjs && node tests/r10o-tests.cjs && node tests/r10o-e1-tests.cjs && node tests/r10o-e2-tests.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "Apache-2.0",
+  "description": "HITO semantic continuity core and CLI.",
+  "author": {
+    "name": "CodeDeityX",
+    "url": "https://github.com/CodeDeityX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeDeityX/HITO.git",
+    "directory": "core"
+  }
+}
