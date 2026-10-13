@@ -1,2 +1,8 @@
 blank_issues_enabled: true
-contact_links: []
+contact_links:
+  - name: HITO Quick Start and limitations
+    url: https://github.com/CodeDeityX/HITO/blob/main/docs/QUICKSTART.md
+    about: Please read the bounded release scope before reporting a problem.
+  - name: Security reporting
+    url: https://github.com/CodeDeityX/HITO/blob/main/SECURITY.md
+    about: Do not disclose sensitive findings or private code in public issues.

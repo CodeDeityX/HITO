@@ -11,14 +11,14 @@ For the first public release candidate:
 From the HITO repository root:
 
 ```powershell
-npm install
+npm ci --ignore-scripts
 npm test
 ```
 
 Initialize an explicit project:
 
 ```powershell
-node .\core\bin\hito.cjs init "C:\Projects\example"
+node .\core\bin\hito.cjs init --root "C:\Projects\example"
 ```
 
 Initial canonical admission:
@@ -48,6 +48,7 @@ Expected output:
 dist-release/hito-0.1.0-rc.1.vsix
 ```
 
-The final public push is gated on a fresh install/regression, a real VS Code
-human acceptance check, and replacement of the temporary glyph with the
-canonical HITO Frog asset.
+The first public release candidate has passed its bounded regression and VS Code
+human-acceptance gates. Structural coverage remains intentionally limited.
+When trying HITO for the first time, prefer a controlled or disposable project.
+Do not upload private or sensitive source code as a public issue reproduction.

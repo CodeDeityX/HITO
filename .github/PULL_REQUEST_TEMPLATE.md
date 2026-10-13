@@ -1,27 +1,25 @@
-## What changes?
+## Problem and change
 
-Describe the bounded change.
+What concrete, bounded problem does this PR solve? What changed?
 
-## Why?
+## Evidence and regression
 
-What concrete problem does this solve?
+Provide reproduction steps, test commands, evidence sources, and before/after results.
 
-## Evidence
+## Authority and continuity boundaries
 
-What evidence supports the change?
+- [ ] No UNKNOWN was turned into unearned certainty.
+- [ ] No hidden execution, network, or provider requirement was introduced.
+- [ ] Existing semantic truth / authority boundaries are preserved or explicitly reviewed.
+- [ ] A nonprivate fixture or safe reproduction is included where appropriate.
 
-## Tests
+## Limitations and review
 
-List exact tests executed.
+What remains unverified? What observations would falsify the claimed improvement?
 
-## Limitations
+## Contributor checklist
 
-What remains unproven or UNKNOWN?
-
-## Checklist
-
-- [ ] No secrets or private project data included.
-- [ ] No hidden provider/network requirement introduced.
-- [ ] UNKNOWN is not replaced by speculation.
-- [ ] Tests were added or updated where behavior changed.
-- [ ] Documentation was updated where public behavior changed.
+- [ ] Relevant documentation updated.
+- [ ] Tests added or updated for behavior changes.
+- [ ] No secrets, private project contents, or personal paths included.
+- [ ] I have read CONTRIBUTING.md and CODE_OF_CONDUCT.md.

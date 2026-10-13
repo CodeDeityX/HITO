@@ -1,0 +1,27 @@
+name: Research proposal / RFC
+description: Propose and challenge a change to acquisition, continuity, or authority
+title: '[RFC] '
+labels:
+  - research
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Concrete problem and expected benefit
+      description: Describe a reproducible gap rather than only a desired implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: invariants
+    attributes:
+      label: Semantic, evidence, and execution boundaries
+      description: Which HITO authority boundaries must remain unchanged?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and falsification plan
+      description: What evidence would show this proposal is unsafe, ineffective, or unnecessary?
+    validations:
+      required: true

@@ -1,0 +1,27 @@
+name: Bounded structural gap
+description: Report a safe reproducible mismatch in acquired project structure
+title: '[Structural gap] '
+labels:
+  - bug
+body:
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Public or synthetic fixture
+      description: Never attach confidential source or sensitive metadata.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected versus observed structure
+      description: Include node/edge scope, unsupported edges, and evidence class.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Unknowns and semantic authority boundary
+      description: Explain what must remain unknown and why this is structural rather than semantic authority.
+    validations:
+      required: true
