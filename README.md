@@ -105,6 +105,10 @@ Install the generated `dist-release/hito-0.1.0-rc.1.vsix` using **VS Code → Ex
 
 The extension provides **Guided Project, Engineer Detail, Forensic Detail, Project Overview, and Agent Context**. All remain projections of the same bounded truth; the interface does not grant execution authority.
 
+### Experimental Visual Project Explorer (not shipped)
+
+A bounded **Windows laboratory** trial of the Visual Project Explorer reached an R3E GUI verification milestone: selected physical files, exact-source semantic fact links, scoped coverage, and one static `CONFIGURES` relationship with seven explicit UNKNOWN observations were rendered in an isolated VS Code development host. **These experimental modules are not included in `main` or `v0.1.0-rc.1`, and no public R3E VSIX is available.** See [the bounded R3E development report](docs/EXPERIMENTAL_VISUAL_EXPLORER_R3E.md). Do not interpret the trial as runtime understanding or full-repository semantic coverage.
+
 ## See the boundary
 
 HITO can show a **partial semantic observation** while leaving project health undetermined, HOW unknown, and the next safe action unavailable. That is the intended behavior, not a missing promise: evidence must come before certainty.
